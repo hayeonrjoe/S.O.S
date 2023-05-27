@@ -1,0 +1,49 @@
+.register_form {
+    text-align: center;
+}
+
+.man_register_title {
+    margin-top: 38px;
+}
+
+table {
+    margin-top: 66px;
+}
+
+.input {
+    width: 413px;
+    height: 44px;
+    font-size: 20px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+b {
+    color: red;
+}
+
+hr {
+    margin-top: 45px;
+    font-size: 15px;
+}
+
+.register_sub {
+    width: 395px;
+    height: 51px;
+    background: #1290FF;
+    border-radius: 10px;
+    margin-top: 39px;
+    border: none;
+    color: white;
+    font-size: 20px;
+}
+
+.register_comment {
+    width: 500px;
+    height: 44px;
+    margin-top: 19px;
+    color: #787575;
+}

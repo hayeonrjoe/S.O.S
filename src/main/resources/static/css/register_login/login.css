@@ -1,0 +1,37 @@
+.login {
+    text-align: center;
+    margin-top: 36px;
+}
+
+.login_form {
+    margin-top: 125px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 12px;
+}
+
+.input {
+    width: 413px;
+    height: 44px;
+    font-size: 20px;
+    border: 1px solid #D9D9D9;
+}
+
+.login_sub {
+    width: 395px;
+    height: 51px;
+    margin-top: 145px;
+    border-radius: 10px;
+    border: none;
+    background: #1290FF;
+    color: white;
+    font-size: 20px;
+}
+
+.man_register {
+    text-decoration: none;
+    color: #787575;
+}

@@ -42,27 +42,28 @@
 /* main */
 .main {
     text-align: center;
+    height: 100%;
 }
 
 .main_title {
-    margin-top: 10%;
-    font-size: 70px;
+    margin-top: 15%;
+    font-size: 90px;
     color: #1290FF;
     font-weight: bold;
 }
 
 .main_title_small {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: normal;
     font-family: 'Nanum Pen Script', cursive;
 }
 
 .main_menu_small {
-    margin-top: 5%;
+    margin-top: 10%;
 }
 
 .main_menu_small a {
-    font-size: 13px;
+    font-size: 15px;
     text-decoration: none;
     color: #1290FF;
     margin-left: 20px;
@@ -70,7 +71,7 @@
 }
 
 .main_menu_large {
-    margin-top: 5%;
+    margin-top: 10%;
     justify-content: space-between;
     word-spacing: 50px;
 }
@@ -83,15 +84,15 @@
 }
 
 .main_image {
-    margin-top: 5%;
+    margin-top: 10%;
 }
 
 .siren_image {
-    margin-top: 5%;
+    margin-top: 20%;
 }
 
 .siren_image img {
-    width: 30px;
+    width: 50px;
     height: auto;
     position: sticky;
     margin-left: 80%;

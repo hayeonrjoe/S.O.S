@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../static/css/main.css">
+    <link rel="stylesheet" href="../../../static/css/online_complaint_form.css">
+    <title>S.O.S</title>
+</head>
+<body>
+<div class="header">
+    <div class="title_menu">
+        S<small class="small_title">peak</small>.O<small class="small_title">ut</small>.S<small class="small_title">afely</small>
+        <a href="#" class="top_menu_chat">채팅</a>
+        <a href="#" class="top_menu">상담사 연결</a>
+        <a href="#" class="top_menu">정보</a>
+        <a href="#" class="top_menu">상담</a>
+        <a href="#" class="top_menu">회원가입</a>
+    </div>
+</div>
+<div class="oc_title">
+    <div class="oc_title_back">
+        <a href="#"><img src="../../../static/images/back_arrow.png" alt="back arrow"></a>
+        <a href="#">신고 목록</a>
+    </div>
+    <div class="oc_title_menu">
+        신고
+    </div>
+</div>
+<div class="oc_form">
+    <form action="post">
+        <table class="oc_table">
+            <thead>
+            <tr>
+                <th colspan="5"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="oc_form_title">비밀번호<b>*</b></td>
+                <td colspan="4"><input type="password" class="oc_form_input" placeholder="영문대소문자/숫자/특수문자 10자 이내"
+                                       required></td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="oc_form_title">제목<b>*</b></td>
+                <td colspan="4"><input type="text" class="oc_form_input" placeholder="예시) 학교폭력 사건 관련하여 법률 도움이 필요합니다."
+                                       required></td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="oc_form_title" colspan="5" style="text-align: center">내용<b>*</b></td>
+            </tr>
+            <tr>
+                <td><textarea class="textarea_content" rows="10">신고 내용 입력해 주세요.</textarea></td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="oc_form_title">첨부파일</td>
+                <td>
+                    <input type="file" id="myFile" name="filename">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="oc_menu_line" style="margin-top: 5%">
+            <img src="../../../static/images/line.png" alt="line">
+        </div>
+
+        <table class="oc_table">
+            <thead>
+            <tr>
+                <th colspan="5"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="oc_form_title" colspan="5" style="text-align: center">신고자 정보</td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="oc_form_title">신고자 이름<b>*</b></td>
+                <td colspan="4"><input type="text" class="oc_form_input" required></td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="oc_form_title">연락처</td>
+                <td colspan="4"><input type="tel" class="oc_form_input"></td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="oc_menu_line" style="margin-top: 5%">
+            <img src="../../../static/images/line.png" alt="line">
+        </div>
+
+        <table class="oc_table">
+            <thead>
+            <tr>
+                <th colspan="5"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="oc_form_title" colspan="5" style="text-align: center">피해자 정보</td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="oc_form_title">이름</td>
+                <td colspan="4"><input type="text" class="oc_form_input"></td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="oc_form_title">나이</td>
+                <td colspan="4"><input type="text" class="oc_form_input"></td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="oc_form_title">연락처</td>
+                <td colspan="4"><input type="tel" class="oc_form_input"></td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="oc_form_title" colspan="5" style="text-align: center">기타 정보</td>
+            </tr>
+            <tr>
+                <td><textarea class="textarea_content" rows="10"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="oc_menu_line" style="margin-top: 5%">
+            <img src="../../../static/images/line.png" alt="line">
+        </div>
+
+        <table class="oc_table">
+            <thead>
+            <tr>
+                <th colspan="5"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="oc_form_title" colspan="5" style="text-align: center">가해자 정보</td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="oc_form_title">이름</td>
+                <td colspan="4"><input type="text" class="oc_form_input"></td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="oc_form_title">피해자와의<br>관계</td>
+                <td colspan="4"><input type="text" class="oc_form_input"></td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="oc_form_title">나이</td>
+                <td colspan="4"><input type="text" class="oc_form_input"></td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="oc_form_title">연락처</td>
+                <td colspan="4"><input type="tel" class="oc_form_input"></td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="oc_form_title" colspan="5" style="text-align: center">기타 정보</td>
+            </tr>
+            <tr>
+                <td><textarea class="textarea_content" rows="10"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="submit_section">
+            <button type="submit" class="submit_button">확인</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

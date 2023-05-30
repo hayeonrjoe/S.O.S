@@ -126,3 +126,49 @@ b {
 .oc_response {
     margin-top: 5%;
 }
+
+.search_section {
+    margin-top: 5%;
+    display: flex;
+    width: 700px;
+    justify-items: flex-end;
+    align-items: baseline;
+}
+
+.search_title {
+    width: 100px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.search_button {
+    width: 100px;
+    height: 40px;
+    background: black;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-size: 15px;
+}
+
+.oc_register_button {
+    width: 100px;
+    height: 40px;
+    background: #1290FF;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-size: 15px;
+}
+
+.list_section {
+    margin-top: 5%;
+}
+
+.data_list {
+    margin-top: 5%;
+}
+
+.pagination {
+    margin-top: 5%;
+}

@@ -122,3 +122,7 @@ b {
     width: 700px;
     justify-items: flex-end;
 }
+
+.oc_response {
+    margin-top: 5%;
+}

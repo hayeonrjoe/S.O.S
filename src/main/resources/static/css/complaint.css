@@ -1,44 +1,44 @@
-.oc_menu {
+.c_menu {
     margin-top: 5%;
     justify-content: space-evenly;
     text-align: center;
     display: flex;
 }
 
-.oc_menu a {
+.c_menu a {
     font-size: 20px;
     text-decoration: none;
     color: black;
     font-weight: bold;
 }
 
-.oc_menu_line img {
+.c_menu_line img {
     margin-bottom: -4px;
 }
 
-.oc_menu_triangle img {
+.c_menu_triangle img {
     margin-top: 0;
     height: 15px;
     width: auto;
     margin-left: 23%;
 }
 
-.oc_title {
+.c_title {
     margin-top: 5%;
     display: flex;
 }
 
-.oc_title_back {
+.c_title_back {
     justify-content: flex-start;
 }
 
-.oc_title_back img {
+.c_title_back img {
     width: 30px;
     height: auto;
     position: sticky;
 }
 
-.oc_title_back a {
+.c_title_back a {
     font-size: 10px;
     text-decoration: none;
     color: black;
@@ -46,33 +46,33 @@
     vertical-align: middle;
 }
 
-.oc_title_menu {
+.c_title_menu {
     justify-content: center;
     font-size: 20px;
     font-weight: bold;
 }
 
-.oc_form {
+.c_form {
     margin-top: 30px;
 }
 
-.oc_table {
+.c_table {
     table-layout: fixed;
     width: 700px;
 }
 
-.oc_table_tr {
+.c_table_tr {
     margin-top: 20px;
 }
 
-.oc_form_input {
+.c_form_input {
     width: 550px;
     height: 20px;
     font-size: 15px;
     padding: 5px;
 }
 
-.oc_form_input_advisor {
+.c_form_input_advisor {
     width: 350px;
     height: 20px;
     font-size: 15px;
@@ -90,7 +90,7 @@
     vertical-align: middle;
 }
 
-.oc_form_title {
+.c_form_title {
     width: 100px;
     font-size: 20px;
     font-weight: bold;
@@ -123,7 +123,7 @@ b {
     justify-items: flex-end;
 }
 
-.oc_response {
+.c_response {
     margin-top: 5%;
 }
 
@@ -151,7 +151,7 @@ b {
     font-size: 15px;
 }
 
-.oc_register_button {
+.c_register_button {
     width: 100px;
     height: 40px;
     background: #1290FF;
@@ -171,4 +171,18 @@ b {
 
 .pagination {
     margin-top: 5%;
+}
+
+.uploaded_files {
+    list-style-type: none;
+}
+
+.uploaded_files li::before {
+    content: "\1F5CB";
+    padding: 0 10px 0 0;
+}
+
+.uploaded_files a {
+    text-decoration: none;
+    color: #1290FF;
 }

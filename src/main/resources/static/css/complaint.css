@@ -236,3 +236,12 @@ b {
     height: 80px;
     width: auto;
 }
+
+.calendar {
+    margin-top: 5%;
+    width: 300px;
+    text-align: center;
+    font-size: 17px;
+    color: gray;
+    height: 27px;
+}

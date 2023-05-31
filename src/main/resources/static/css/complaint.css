@@ -23,6 +23,13 @@
     margin-left: 23%;
 }
 
+.c_menu_triangle_counseling img {
+    margin-top: 0;
+    height: 15px;
+    width: auto;
+    margin-left: 73%;
+}
+
 .c_title {
     margin-top: 5%;
     display: flex;
@@ -82,6 +89,15 @@
 }
 
 .advisor_option {
+    width: 150px;
+    height: 30px;
+    font-size: 15px;
+    padding: 5px;
+    color: gray;
+    vertical-align: middle;
+}
+
+.appointment_option {
     width: 150px;
     height: 30px;
     font-size: 15px;
@@ -185,4 +201,38 @@ b {
 .uploaded_files a {
     text-decoration: none;
     color: #1290FF;
+}
+
+.info {
+    margin-top: 40%;
+    font-size: 15px;
+    text-align: center;
+}
+
+.counseling_info {
+    border: 1px solid black;
+    padding: 40px;
+    margin-top: 7%;
+    word-break: keep-all;
+    line-height: 1.5;
+    width: 500px;
+    height: auto;
+}
+
+.counseling_info p {
+    font-size: 15px;
+}
+
+.counseling_info b {
+    color: black;
+}
+
+.counseling_image {
+    margin-top: 5%;
+    text-align: center;
+}
+
+.counseling_image img {
+    height: 80px;
+    width: auto;
 }

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/complaint.css">
+    <title>S.O.S</title>
+
+</head>
+<body>
+<div class="header">
+    <div class="title_menu">
+        S<small class="small_title">peak</small>.O<small class="small_title">ut</small>.S<small class="small_title">afely</small>
+        <a href="#" class="top_menu_chat">채팅</a>
+        <a href="#" class="top_menu">상담사 연결</a>
+        <a href="#" class="top_menu">정보</a>
+        <a href="#" class="top_menu">상담</a>
+        <a href="#" class="top_menu">회원가입</a>
+    </div>
+</div>
+<div class="c_menu">
+    <div>
+        <a href="#">비공개</a><br>
+        <a href="#">온라인 상담</a>
+    </div>
+    <div>
+        <a href="#">방문 상담</a>
+    </div>
+</div>
+<div class="c_menu_line">
+    <img src="../static/images/line.png" alt="line">
+</div>
+<div class="c_menu_triangle_counseling">
+    <img src="../static/images/triangle.png" alt="triangle">
+</div>
+<div class="c_title">
+    <div class="c_title_menu" style="text-align: center">
+        예약
+    </div>
+</div>
+<div class="c_form">
+    <form action="post">
+        <table class="c_table">
+            <thead>
+            <tr>
+                <th colspan="5"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="c_form_title">이름<b>*</b></td>
+                <td colspan="4"><input type="text" class="c_form_input" required></td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="c_form_title">연락처<b>*</b></td>
+                <td colspan="4"><input type="tel" class="c_form_input" required></td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="c_form_title">지역<b>*</b></td>
+                <td colspan="2">
+                    <select class="appointment_option">
+                        <option value="">-선택해주세요.-</option>
+                        <option value="seoul">서울</option>
+                        <option value="incheon">인천</option>
+                        <option value="ulsan">울산</option>
+                        <option value="gangwon">강원</option>
+                        <option value="chungbuk">충북</option>
+                        <option value="jeonbuk">전북</option>
+                        <option value="gyeongbuk">경북</option>
+                        <option value="daegu">대구</option>
+                        <option value="gwangju">광주</option>
+                        <option value="daejeon">대전</option>
+                        <option value="gyeonggi">경기</option>
+                        <option value="gyeongnam">경남</option>
+                        <option value="jeju">제주</option>
+                        <option value="jeonnam">전남</option>
+                        <option value="chungnam">충남</option>
+                        <option value="busan">부산</option>
+                    </select>
+                </td>
+                <td class="c_form_title">장소<b>*</b></td>
+                <td>
+                    <p>Data</p>
+                </td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="c_form_title">날짜<b>*</b></td>
+                <td><input type="datetime-local" class="calendar"></td>
+            </tr>
+            <tr style="height:2px">
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><p style="font-size: 13px; color: gray"><i>*예약 확인 문자는 입력하신 연락처로 발송됩니다.</i></p></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="submit_section">
+            <button type="submit" class="submit_button">확인</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

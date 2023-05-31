@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>참조사례</title>
+    <link rel="stylesheet" href="../../static/css/main.css">
+    <link rel="stylesheet" href="../../static/css/information/information.css">
+</head>
+<body>
+    <div class="header">
+        <div class="title_menu">
+          S<small class="small_title">peack</small>.O<small class="small_title">ut</small>.S<small class="small_title">afley</small>
+          <a href="#" class="top_menu_chat">채팅</a>
+          <a href="#" class="top_menu">상담사 연결</a>
+          <a href="#" class="top_menu">정보</a>
+          <a href="#" class="top_menu">상담</a>
+          <a href="#" class="top_menu">회원가입</a>
+        </div>
+    </div>
+    <div class="category_button">
+        <button class="category2" onclick="location.href='school_violence.html'">학교폭력</button>
+        <button class="category2_active" onclick="location.href='reference_case.html'">참조사례</button>
+        <button class="category2" onclick="location.href='legal_information.html'">법률정보</button>
+        <button class="category2_1" onclick="location.href='report_penalty.html'">신고&처벌 기준</button>
+    </div>
+    <form class="search_form">
+        <table class="search_table">
+            <tr>
+                <td class="write_date_title">&nbsp;작성일</td>
+                <td class="date">
+                    <input type="date" class="write_date1" id="write_date_start"> ~
+                    <input type="date" class="write_date2" id="write_date_end">
+                </td>
+                <td class="search">
+                    <select class="search_select">
+                        <option value="0">전체</option>
+                        <option value="1">제목</option>
+                        <option value="2">작성자</option>
+                    </select>
+                </td>
+                <td class="text">
+                    <input type="text" class="search_text" />
+                    <input type="submit" class="search_sub" />
+                </td>
+            </tr>
+        </table>
+    </form>
+    <table class="list">
+        <tr class="line">
+            <td class="num">번호</td>
+            <td class="title">제목</td>
+            <td class="date_title">작성일</td>
+            <td class="file">첨부파일</td>
+        </tr>
+        <tr class="line">
+            <td class="num" id="num">1</td>
+            <td class="title" id="title">제목1</td>
+            <td class="date_title" id="date">23/05/25</td>
+            <td class="file"><img src="../../static/image/file.png" class="file_img"></td>
+        </tr>
+        <tr class="line">
+            <td class="num" id="num">2</td>
+            <td class="title" id="title">제목2</td>
+            <td class="date_title" id="date">23/05/25</td>
+            <td class="file"></td>
+        </tr>
+    </table>
+</body>
+</html>

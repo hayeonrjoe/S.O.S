@@ -1,7 +1,11 @@
 package com.sos.signal.user.service;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.sos.signal.user.dto.KakaoDTO;
+import com.sos.signal.user.repository.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -67,5 +71,55 @@ public class MemberService {
             e.printStackTrace();
         }
         return access_Token;
+    }
+
+    // 클래스 주입.
+    @Autowired
+    private MemberRepository mr;
+
+    // 메서드 리턴타입 KakaoDTO로 변경 및 import.
+    public KakaoDTO getUserInfo(String access_Token) {
+        String reqURL = "https://kapi.kakao.com/v2/user/me";
+        KakaoDTO kakaoDTO = null;
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+            int responseCode = conn.getResponseCode();
+            System.out.println("responseCode : " + responseCode);
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = "";
+            String result = "";
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            System.out.println("response body : " + result);
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(result);
+            JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+            String age_range =kakao_account.getAsJsonObject().get("age_range").getAsString();
+            String email = kakao_account.getAsJsonObject().get("email").getAsString();
+            kakaoDTO = new KakaoDTO();
+            kakaoDTO.setU_email(email);
+            kakaoDTO.setU_age_range(age_range);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // catch 아래 코드 추가.
+        KakaoDTO result = mr.findkakao(kakaoDTO.getU_email());
+        // 위 코드는 먼저 정보가 저장되있는지 확인하는 코드.
+        System.out.println("S:" + result);
+        if(result==null) {
+            // result가 null이면 정보가 저장이 안되있는거므로 정보를 저장.
+            mr.kakaoinsert(kakaoDTO);
+            // 위 코드가 정보를 저장하기 위해 Repository로 보내는 코드임.
+            result = mr.findkakao(kakaoDTO.getU_email());
+            // 위 코드는 정보 저장 후 컨트롤러에 정보를 보내는 코드임.
+            //  result를 리턴으로 보내면 null이 리턴되므로 위 코드를 사용.
+        }
+        return result;
     }
 }

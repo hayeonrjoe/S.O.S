@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
-    <link rel="stylesheet" href="../../static/css/main.css">
-    <link rel="stylesheet" href="../../static/css/register_login/register.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/register_login/register.css">
 </head>
 <body>
     <div class="header">
@@ -14,7 +14,7 @@
             <a href="#" class="top_menu">상담사 연결</a>
             <a href="#" class="top_menu">정보</a>
             <a href="#" class="top_menu">상담</a>
-            <a href="#" class="top_menu"><b>회원가입</b></a>
+            <a href="register.html" class="top_menu"><b>회원가입</b></a>
         </div>
     </div>
     <div class="register">
@@ -23,7 +23,9 @@
         <p class="com_register_comment">
             일반 회원으로 가입하시면 채팅을 이용할 수 있습니다.
         </p>
-        <img src="../../static/images/kakao_login_large_wide.png" class="kakao_login">
+        <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=d52eb1fa182c6d476ac8b1e6b2b73099&redirect_uri=http://localhost:8080/login&response_type=code">
+            <img src="/images/kakao_login_large_wide.png" class="kakao_login">
+        </a>
 
         <hr class="register_br" />
 

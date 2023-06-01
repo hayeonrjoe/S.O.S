@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member">
+    <select id="findKakao" parameterType="String"  resultType="com.sos.signal.user.dto.KakaoDTO">
+        select u_id, u_email, u_age_range from user where u_email = #{email}
+    </select>
+
+    <insert id="kakaoInsert" parameterType="com.sos.signal.user.dto.KakaoDTO">
+        insert into user(u_email, u_age_range)
+        values(#{u_email}, #{u_age_range})
+    </insert>
+ </mapper>

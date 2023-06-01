@@ -75,7 +75,7 @@
 .c_form_input {
     width: 550px;
     height: 20px;
-    font-size: 15px;
+    font-size: 10px;
     padding: 5px;
 }
 
@@ -89,11 +89,9 @@
 }
 
 .advisor_option {
-    width: 150px;
+    width: 30px;
     height: 30px;
     font-size: 15px;
-    padding: 5px;
-    color: gray;
     vertical-align: middle;
 }
 
@@ -119,7 +117,6 @@ b {
 .textarea_content {
     font-size: 15px;
     padding: 5px;
-    color: gray;
 }
 
 .submit_button {

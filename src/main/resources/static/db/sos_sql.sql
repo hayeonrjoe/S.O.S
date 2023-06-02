@@ -45,7 +45,7 @@ CREATE TABLE  Admin  (
 	 a_contact 	Varchar(30)	NOT NULL,
 	 a_email 	Varchar(50)	NOT NULL,
 	 a_pw 	Varchar(10)	NOT NULL,
-	 a_admin_type 	Integer	NOT NULL	COMMENT '0: 경찰 / 1:  상담사 / 2: 변호사',
+	 a_admin_type 	Varchar(50)	NOT NULL DEFAULT '경찰'	COMMENT '경찰 / 상담사 / 변호사',
 	 a_company_name 	Varchar(50)	NOT NULL,
 	 a_company_contact 	Varchar(30)	NOT NULL,
 	 a_company_address 	Varchar(100)	NOT NULL,

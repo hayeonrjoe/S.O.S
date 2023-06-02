@@ -8,33 +8,33 @@
 </head>
 <body>
 <div class="header">
-  <div class="title_menu">
-    S<small class="small_title">peak</small>.O<small class="small_title">ut</small>.S<small class="small_title">afely</small>
-    <a href="#" class="top_menu_chat">채팅</a>
-    <a href="#" class="top_menu">상담사 연결</a>
-    <a href="#" class="top_menu">정보</a>
-    <a href="#" class="top_menu">상담</a>
-    <a href="#" class="top_menu">회원가입</a>
-  </div>
+    <div class="title_menu">
+        S<small class="small_title">peak</small>.O<small class="small_title">ut</small>.S<small class="small_title">afely</small>
+        <a href="#" class="top_menu_chat">채팅</a>
+        <a href="#" class="top_menu">상담사 연결</a>
+        <a href="#" class="top_menu">정보</a>
+        <a href="#" class="top_menu">상담</a>
+        <a href="#" class="top_menu"><b style="color: #1290FF">회원가입</b></a>
+    </div>
 </div>
 <div class="c_menu">
-  <div>
-    <a href="#">비공개</a><br>
-    <a href="#">온라인 상담</a>
-  </div>
-  <div>
-    <a href="#">방문 상담</a>
-  </div>
+    <div>
+        <a href="#">비공개</a><br>
+        <a href="#">온라인 상담</a>
+    </div>
+    <div>
+        <a href="/counseling-appointment-form">방문 상담</a>
+    </div>
 </div>
 <div class="c_menu_line">
-  <img src="../../static/images/line.png" alt="line">
+  <img src="/images/line.png" alt="line">
 </div>
 <div class="c_menu_triangle">
-  <img src="../../static/images/triangle.png" alt="triangle">
+  <img src="/images/triangle.png" alt="triangle">
 </div>
 <div class="c_title">
   <div class="c_title_back">
-    <a href="#"><img src="../../static/images/back_arrow.png" alt="back arrow"></a>
+    <a href="#"><img src="/images/back_arrow.png" alt="back arrow"></a>
     <a href="#">상담 목록</a>
   </div>
   <div class="c_title_menu">
@@ -42,70 +42,80 @@
   </div>
 </div>
 <div class="c_form">
-  <form action="post">
-    <table class="c_table">
-      <thead>
-      <tr>
-        <th colspan="5"></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td class="c_form_title">비밀번호<b>*</b></td>
-        <td colspan="4"><input type="password" class="c_form_input" placeholder="영문대소문자/숫자/특수문자 10자 이내"
-                               required></td>
-      </tr>
-      <tr style="height:15px">
-        <td></td>
-      </tr>
-      <tr>
-        <td class="c_form_title">이름<b>*</b></td>
-        <td colspan="4"><input type="text" class="c_form_input" required></td>
-      </tr>
-      <tr style="height:15px">
-        <td></td>
-      </tr>
-      <tr>
-        <td class="c_form_title">연락처</td>
-        <td colspan="4"><input type="tel" class="c_form_input"></td>
-      </tr>
-      <tr style="height:15px">
-        <td></td>
-      </tr>
-      <tr>
-        <td class="c_form_title">도움 받고<br> 싶은 사람<b>*</b></td>
-        <td colspan="4"><input type="text" class="c_form_input_advisor" required>
-          <select class="advisor_option" multiple>
-            <option value="">-선택해주세요.-</option>
-            <option value="counselor">상담사</option>
-            <option value="lawyer">변호사</option>
-            <option value="police">경찰</option>
-          </select>
-        </td>
-      </tr>
-      <tr style="height:15px">
-        <td></td>
-      </tr>
-      <tr>
-        <td class="c_form_title">제목<b>*</b></td>
-        <td colspan="4"><input type="text" class="c_form_input" placeholder="예시) 학교폭력 사건 관련하여 법률 도움이 필요합니다."
-                               required></td>
-      </tr>
-      <tr style="height:15px">
-        <td></td>
-      </tr>
-      <tr>
-        <td class="c_form_title" colspan="5" style="text-align: center">내용<b>*</b></td>
-      </tr>
-      <tr>
-        <td><textarea class="textarea_content" rows="10">상담 받으실 내용 입력해 주세요.</textarea></td>
-      </tr>
-      </tbody>
-    </table>
-    <div class="submit_section">
-      <button type="submit" class="submit_button">확인</button>
-    </div>
-  </form>
+    <form action="/online-complaint/submit" method="POST">
+        <table class="c_table">
+            <thead>
+            <tr>
+                <th colspan="5"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="c_form_title">비밀번호<b>*</b></td>
+                <td colspan="4">
+                    <input type="password" name="oc_pw" class="c_form_input" style="font-size:13px" placeholder="8~16자 이내 영문 대소문자, 숫자, 특수문자 조합으로 작성해주세요. (특수문자: !@#$%^&*)"
+                           required minlength="8" maxlength="16"
+                           pattern="^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$">
+                </td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="c_form_title">이름<b>*</b></td>
+                <td colspan="4"><input type="text" name="oc_name" class="c_form_input" required></td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="c_form_title">연락처</td>
+                <td colspan="4"><input type="tel" name="oc_contact" class="c_form_input"></td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="c_form_title">도움 받고<br> 싶은 사람<b>*</b></td>
+                <td colspan="4">
+                    <input type="checkbox" name="oc_advisor" id="advisor-counselor" class="advisor_option"
+                           value="상담사">
+                    <label for="advisor-counselor">상담사</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="oc_advisor" id="advisor-lawyer" class="advisor_option" value="변호사">
+                    <label for="advisor-lawyer">변호사</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="oc_advisor" id="advisor-police" class="advisor_option" value="경찰">
+                    <label for="advisor-police">경찰</label>
+                </td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="c_form_title">제목<b>*</b></td>
+                <td colspan="4">
+                    <input type="text" name="oc_title" class="c_form_input" style="font-size:14px" placeholder="예시) 학교폭력 사건 관련하여 법률 도움이 필요합니다."
+                           required>
+                </td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="c_form_title" colspan="5" style="text-align: center">내용<b>*</b></td>
+            </tr>
+            <tr>
+                <td><textarea name="oc_content" class="textarea_content" rows="10" placeholder="상담 받으실 내용 입력해 주세요."
+                              required></textarea>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="submit_section">
+            <button type="submit" class="submit_button" id="submitBtn">확인</button>
+        </div>
+    </form>
 </div>
 </body>
 </html>

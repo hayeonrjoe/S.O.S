@@ -20,31 +20,31 @@
 
   <div class="register_form">
     <h1 class="man_register_title">관리자 회원가입</h1>
-    <form action="POST">
+    <form method="post" action="/register-form/signup">
       <table>
         <tr>
           <td class="title">이름<b>*</b></td>
-          <td><input type="text" class="input" id="name"/></td>
+          <td><input type="text" class="input" id="name" name="a_name"/></td>
         </tr>
         <tr style="height: 11px;"><td></td><td></td></tr>
         <tr>
           <td class="title">연락처<b>*</b></td>
-          <td><input type="text" class="input" id="tel"/></td>
+          <td><input type="text" class="input" id="contact" name="a_contact"/></td>
         </tr>
         <tr style="height: 11px;"><td></td><td></td></tr>
         <tr>
           <td class="title">이메일<b>*</b></td>
-          <td><input type="text" class="input" id="email"/></td>
+          <td><input type="text" class="input" id="email" name="a_email"/></td>
         </tr>
         <tr style="height: 11px;"><td></td><td></td></tr>
         <tr>
           <td class="title">비밀번호<b>*</b></td>
-          <td><input type="text" class="input" id="password"/></td>
+          <td><input type="text" class="input" id="pw" name="a_pw"/></td>
         </tr>
         <tr style="height: 11px;"><td></td><td></td></tr>
         <tr>
           <td class="title">비밀번호 확인<b>*</b></td>
-          <td><input type="text" class="input" id="password_ok"/></td>
+          <td><input type="text" class="input" id="pw_ok" name="pw_ok"/></td>
         </tr>
       </table>
       <hr/>
@@ -52,23 +52,23 @@
         <tr>
           <td class="title">관리자 형태<b>*</b></td>
           <td>
-            <select id="manage" class="input">
-              <option value="0">상담사</option>
-              <option value="1">변호사</option>
-              <option value="2">경찰</option>
+            <select id="admin_type" class="input" name="a_admin_type">
+              <option value="상담사" name="a_admin_type">상담사</option>
+              <option value="변호사" name="a_admin_type">변호사</option>
+              <option value="경찰" name="a_admin_type">경찰</option>
             </select>
           </td>
         </tr>
         <tr style="height: 11px;"><td></td><td></td></tr>
         <tr>
           <td class="title">직장명<b>*</b></td>
-          <td><input type="text" class="input" id="work_name"/></td>
+          <td><input type="text" class="input" id="company_name" name="a_company_name"/></td>
         </tr>
         <tr style="height: 11px;"><td></td><td></td></tr>
         <tr>
           <td class="title">직장 연락처<b>*</b></td>
           <td>
-            <input type="text" class="input" id="work_tel"/>
+            <input type="text" class="input" id="company_contact" name="a_company_contact"/>
             <br/>
           </td>
         </tr>
@@ -76,7 +76,7 @@
         <tr>
           <td class="title">직장 주소<b>*</b></td>
           <td>
-            <input type="text" class="input" id="work_address"/>
+            <input type="text" class="input" name="a_company_address" required/>
             <br/>
           </td>
         </tr>

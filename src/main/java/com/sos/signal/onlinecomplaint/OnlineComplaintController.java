@@ -67,9 +67,6 @@ public class OnlineComplaintController {
         // Save the complaint using the repository
         onlineComplaintRepository.save(onlineComplaint);
 
-//        // Save the complaint using the service
-//        onlineComplaintService.saveOnlineComplaint(onlineComplaint);
-
         return ResponseEntity.ok("비공개 온라인 상담 신청이 완료되었습니다.");
     }
 }

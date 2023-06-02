@@ -39,7 +39,7 @@ public class MemberController {
         return "common/main";
     }
 
-    @RequestMapping(value = "/adminlogin", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin-login", method = RequestMethod.GET)
     public String adminLogin() {
         return "member/login_form";
     }

@@ -12,9 +12,6 @@ public class PoliceComplaint {
     @Column(name = "pc_id")
     private Integer pc_id;
 // foreign keys
-    @Column(name = "pc_file_id")
-    private Integer pc_file_id;
-
     @Column(name = "a_id")
     private Integer a_id;
 //    required
@@ -40,6 +37,8 @@ public class PoliceComplaint {
     @Column(name = "pc_response_status", nullable = false, columnDefinition = "VARCHAR(10) DEFAULT '답변대기'")
     private String pc_response_status;
     private String pc_response_content;
+
+    private String pc_file_ids;
 
     public PoliceComplaint() { }
 
@@ -194,6 +193,27 @@ public class PoliceComplaint {
         this.pc_response_content = pc_response_content;
     }
 
+    public PoliceComplaint(String pc_pw, String pc_title, String pc_content, String pc_name, String pc_contact, String pc_victim_name, String pc_victim_age, String pc_victim_contact, String pc_victim_other, String pc_bully_name, String pc_bully_relationship, String pc_bully_age, String pc_bully_contact, String pc_bully_other, LocalDateTime pc_date, String pc_response_status, String pc_response_content, String pc_file_ids) {
+        this.pc_pw = pc_pw;
+        this.pc_title = pc_title;
+        this.pc_content = pc_content;
+        this.pc_name = pc_name;
+        this.pc_contact = pc_contact;
+        this.pc_victim_name = pc_victim_name;
+        this.pc_victim_age = pc_victim_age;
+        this.pc_victim_contact = pc_victim_contact;
+        this.pc_victim_other = pc_victim_other;
+        this.pc_bully_name = pc_bully_name;
+        this.pc_bully_relationship = pc_bully_relationship;
+        this.pc_bully_age = pc_bully_age;
+        this.pc_bully_contact = pc_bully_contact;
+        this.pc_bully_other = pc_bully_other;
+        this.pc_date = pc_date;
+        this.pc_response_status = pc_response_status;
+        this.pc_response_content = pc_response_content;
+        this.pc_file_ids = pc_file_ids;
+    }
+
     public PoliceComplaint(Integer a_id, String pc_pw, String pc_title, String pc_content, String pc_name, String pc_response_content) {
         this.a_id = a_id;
         this.pc_pw = pc_pw;
@@ -209,14 +229,6 @@ public class PoliceComplaint {
 
     public void setPc_id(Integer pc_id) {
         this.pc_id = pc_id;
-    }
-
-    public Integer getPc_file_id() {
-        return pc_file_id;
-    }
-
-    public void setPc_file_id(Integer pc_file_id) {
-        this.pc_file_id = pc_file_id;
     }
 
     public Integer getA_id() {
@@ -361,5 +373,13 @@ public class PoliceComplaint {
 
     public void setPc_response_content(String pc_response_content) {
         this.pc_response_content = pc_response_content;
+    }
+
+    public String getPc_file_ids() {
+        return pc_file_ids;
+    }
+
+    public void setPc_file_ids(String pc_file_ids) {
+        this.pc_file_ids = pc_file_ids;
     }
 }

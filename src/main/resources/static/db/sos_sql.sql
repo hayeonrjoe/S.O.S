@@ -70,7 +70,7 @@ CREATE TABLE  Online_Complaint  (
 
 CREATE TABLE  Police_Complaint  (
 	 pc_id 	Integer	NOT NULL	AUTO_INCREMENT,
-	 pc_file_id 	Integer	NULL,
+	 pc_file_ids 	Varchar(100) NULL,
 	 a_id 	Integer	NULL,
 	 pc_pw 	Varchar(10)	NOT NULL,
 	 pc_title 	Varchar(50)	NOT NULL,
@@ -90,6 +90,5 @@ CREATE TABLE  Police_Complaint  (
 	 pc_response_status 	Varchar(10)	NOT NULL DEFAULT '답변대기',
 	 pc_response_content 	Varchar(500)	NULL,
 	 PRIMARY KEY (pc_id),
-	 FOREIGN KEY (pc_file_id) REFERENCES Attachment_File(pc_file_id),
 	 FOREIGN KEY (a_id) REFERENCES Admin(a_id)
 ); 

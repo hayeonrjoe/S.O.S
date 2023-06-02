@@ -25,9 +25,8 @@ CREATE TABLE  Counseling_Appointment  (
 	 ca_name 	Varchar(10)	NOT NULL,
 	 ca_contact 	Varchar(30)	NOT NULL,
 	 ca_area 	Varchar(30)	NOT NULL,
-	 ca_place 	Varchar(50)	NOT NULL,
-	 ca_scheduled_date 	Date	NOT NULL,
-	 ca_scheduled_time 	Varchar(30)	NOT NULL,
+	 ca_place 	Varchar(100)	NOT NULL,
+	 ca_scheduled_date 	Datetime	NOT NULL,
 	 ca_response_status Varchar(10)	NOT NULL DEFAULT '답변대기',
 	 ca_date 	Datetime	NOT NULL	DEFAULT NOW(),
 	 PRIMARY KEY (ca_id)

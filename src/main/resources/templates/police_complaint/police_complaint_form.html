@@ -27,7 +27,7 @@
     </div>
 </div>
 <div class="c_form">
-    <form action="post">
+    <form action="/police-complaint-form/submit" method="POST">
         <table class="c_table">
             <thead>
             <tr>
@@ -37,7 +37,7 @@
             <tbody>
             <tr>
                 <td class="c_form_title">비밀번호<b>*</b></td>
-                <td colspan="4"><input type="password" class="c_form_input" placeholder="8~16자 이내 영문 대소문자, 숫자, 특수문자 조합으로 작성해주세요. (특수문자: !@#$%^&*)"
+                <td colspan="4"><input type="password" name="pc_pw" class="c_form_input" placeholder="8~16자 이내 영문 대소문자, 숫자, 특수문자 조합으로 작성해주세요. (특수문자: !@#$%^&*)"
                                        required minlength="8" maxlength="16"
                                        pattern="^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$"></td>
             </tr>
@@ -46,7 +46,7 @@
             </tr>
             <tr>
                 <td class="c_form_title">제목<b>*</b></td>
-                <td colspan="4"><input type="text" class="c_form_input" placeholder="예시) 학교폭력 사건 관련하여 법률 도움이 필요합니다."
+                <td colspan="4"><input type="text" name="pc_title" class="c_form_input" placeholder="예시) 학교폭력 사건 관련하여 법률 도움이 필요합니다."
                                        required></td>
             </tr>
             <tr style="height:15px">
@@ -56,7 +56,7 @@
                 <td class="c_form_title" colspan="5" style="text-align: center">내용<b>*</b></td>
             </tr>
             <tr>
-                <td><textarea class="textarea_content" rows="10" placeholder="신고 내용 입력해 주세요."></textarea></td>
+                <td><textarea name="pc_content" class="textarea_content" rows="10" placeholder="신고 내용 입력해 주세요." required></textarea></td>
             </tr>
             <tr style="height:15px">
                 <td></td>
@@ -92,14 +92,14 @@
             </tr>
             <tr>
                 <td class="c_form_title">신고자 이름<b>*</b></td>
-                <td colspan="4"><input type="text" class="c_form_input" required></td>
+                <td colspan="4"><input type="text" name="pc_name" class="c_form_input" required></td>
             </tr>
             <tr style="height:15px">
                 <td></td>
             </tr>
             <tr>
                 <td class="c_form_title">연락처</td>
-                <td colspan="4"><input type="tel" class="c_form_input" maxlength="11" pattern="[0-9]*" placeholder="(-) 없이 숫자만 입력하세요."></td>
+                <td colspan="4"><input type="tel" name="pc_contact" class="c_form_input" maxlength="11" pattern="[0-9]*" placeholder="(-) 없이 숫자만 입력하세요."></td>
             </tr>
             <tr style="height:15px">
                 <td></td>
@@ -129,21 +129,21 @@
             </tr>
             <tr>
                 <td class="c_form_title">이름</td>
-                <td colspan="4"><input type="text" class="c_form_input"></td>
+                <td colspan="4"><input type="text" name="pc_victim_name" class="c_form_input"></td>
             </tr>
             <tr style="height:15px">
                 <td></td>
             </tr>
             <tr>
                 <td class="c_form_title">나이</td>
-                <td colspan="4"><input type="text" class="c_form_input"></td>
+                <td colspan="4"><input type="text" name="pc_victim_age" class="c_form_input"></td>
             </tr>
             <tr style="height:15px">
                 <td></td>
             </tr>
             <tr>
                 <td class="c_form_title">연락처</td>
-                <td colspan="4"><input type="tel" class="c_form_input" maxlength="11" pattern="[0-9]*" placeholder="(-) 없이 숫자만 입력하세요."></td>
+                <td colspan="4"><input type="tel" name="pc_victim_contact" class="c_form_input" maxlength="11" pattern="[0-9]*" placeholder="(-) 없이 숫자만 입력하세요."></td>
             </tr>
             <tr style="height:15px">
                 <td></td>
@@ -152,7 +152,7 @@
                 <td class="c_form_title" colspan="5" style="text-align: center">기타 정보</td>
             </tr>
             <tr>
-                <td><textarea class="textarea_content" rows="10"></textarea></td>
+                <td><textarea name="pc_victim_other" class="textarea_content" rows="10"></textarea></td>
             </tr>
             </tbody>
         </table>
@@ -179,28 +179,28 @@
             </tr>
             <tr>
                 <td class="c_form_title">이름</td>
-                <td colspan="4"><input type="text" class="c_form_input"></td>
+                <td colspan="4"><input type="text" name="pc_bully_name" class="c_form_input"></td>
             </tr>
             <tr style="height:15px">
                 <td></td>
             </tr>
             <tr>
                 <td class="c_form_title">피해자와의<br>관계</td>
-                <td colspan="4"><input type="text" class="c_form_input"></td>
+                <td colspan="4"><input type="text" name="pc_bully_relationship" class="c_form_input"></td>
             </tr>
             <tr style="height:15px">
                 <td></td>
             </tr>
             <tr>
                 <td class="c_form_title">나이</td>
-                <td colspan="4"><input type="text" class="c_form_input"></td>
+                <td colspan="4"><input type="text" name="pc_bully_age" class="c_form_input"></td>
             </tr>
             <tr style="height:15px">
                 <td></td>
             </tr>
             <tr>
                 <td class="c_form_title">연락처</td>
-                <td colspan="4"><input type="tel" class="c_form_input" maxlength="11" pattern="[0-9]*" placeholder="(-) 없이 숫자만 입력하세요."></td>
+                <td colspan="4"><input type="tel" name="pc_bully_contact" class="c_form_input" maxlength="11" pattern="[0-9]*" placeholder="(-) 없이 숫자만 입력하세요."></td>
             </tr>
             <tr style="height:15px">
                 <td></td>
@@ -209,7 +209,7 @@
                 <td class="c_form_title" colspan="5" style="text-align: center">기타 정보</td>
             </tr>
             <tr>
-                <td><textarea class="textarea_content" rows="10"></textarea></td>
+                <td><textarea name="pc_bully_other" class="textarea_content" rows="10"></textarea></td>
             </tr>
             </tbody>
         </table>

@@ -1,12 +1,15 @@
 package com.sos.signal.policecomplaint;
 
+import org.aspectj.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
@@ -16,6 +19,9 @@ public class PoliceComplaintController {
 
     @Autowired
     private PoliceComplaintRepository policeComplaintRepository;
+
+    @Autowired
+    private AttachmentFileRepository attachmentFileRepository;
 
     @Autowired
     private ResourceLoader resourceLoader;
@@ -31,7 +37,26 @@ public class PoliceComplaintController {
     }
 
     @PostMapping("/submit")
-    public ResponseEntity<String> submitPoliceComplaint(@ModelAttribute PoliceComplaint policeComplaint) {
+    public ResponseEntity<String> submitPoliceComplaint(@ModelAttribute PoliceComplaint policeComplaint, @RequestPart(value = "file", required = false) MultipartFile[] files) {
+        try {
+            if (files != null) {
+                String fileids = "";
+                for (MultipartFile file : files) {
+                    if (!file.isEmpty()) {
+                        AttachmentFile afile = new AttachmentFile();
+                        afile.setAf_file_name(file.getOriginalFilename());
+                        afile.setAf_upload_path("c:/sos/upload/");
+                        attachmentFileRepository.save(afile);
+                        File dfile = new File(afile.getAf_upload_path() + afile.getPc_file_id());
+                        file.transferTo(dfile);
+                        fileids += afile.getPc_file_id()+"-";
+                    }
+                }
+                policeComplaint.setPc_file_ids(fileids);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
 
         // Perform validation on the onlineComplaint object and ocAdvisors
         // password

@@ -27,7 +27,7 @@
     </div>
 </div>
 <div class="c_form">
-    <form action="/police-complaint-form/submit" method="POST">
+    <form action="/police-complaint-form/submit" method="POST" enctype="multipart/form-data">
         <table class="c_table">
             <thead>
             <tr>
@@ -64,7 +64,7 @@
             <tr>
                 <td class="c_form_title">첨부파일</td>
                 <td>
-                    <input type="file" name="file[]" multiple>
+                    <input type="file" name="file" multiple>
                 </td>
             </tr>
             </tbody>

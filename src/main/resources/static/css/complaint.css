@@ -242,3 +242,40 @@ b {
     color: gray;
     height: 27px;
 }
+
+.form_submit {
+    margin-top: 15%;
+    display: block;
+    text-align: center;
+}
+
+.form_submit img {
+    height: 200px;
+    width: auto;
+}
+
+.form_submit h1 {
+    margin-top: 6%;
+}
+
+.form_submit p {
+    margin-top: 3%;
+    font-size: 18px;
+}
+
+.form_submit_button {
+    width: 300px;
+    height: 51px;
+    background: #1290FF;
+    border-radius: 10px;
+    margin-top: 10%;
+    border: none;
+    color: white;
+    font-size: 20px;
+}
+
+.form_submit_section {
+    text-align: center;
+    display: flex;
+    width: 700px;
+}

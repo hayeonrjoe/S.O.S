@@ -1,0 +1,62 @@
+.container {
+    width: 500px;
+    margin: 0 auto;
+    padding: 25px;
+}
+
+.container h1 {
+    text-align: left;
+    margin-bottom: 36px;
+    color: #1290FF;
+}
+
+.roomContainer {
+    width: 500px;
+    height: 500px;
+}
+
+.roomList {
+    border: none;
+}
+
+.roomList th {
+    border: 1px solid #1290FF;
+    background-color: #fff;
+    color: #1290FF;
+}
+
+.roomList td {
+    border: 1px solid #1290FF;
+    background-color: #fff;
+    text-align: left;
+    color: #1290FF;
+}
+
+.roomList .num {
+    width: 75px;
+    text-align: center;
+}
+
+.roomList .go {
+    width: 71px;
+    text-align: center;
+}
+
+button {
+    background-color: #1290FF;
+    font-size: 14px;
+    color: #fff;
+    border: 1px solid #1290FF;
+    border-radius: 5px;
+    padding: 3px;
+    margin: 3px;
+}
+
+.inputTable th {
+    padding: 5px;
+}
+
+.inputTable input {
+    width: 330px;
+    height: 25px;
+}

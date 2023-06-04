@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -22,7 +23,7 @@ public class AdminController {
     private ResourceLoader resourceLoader;
 
     @ResponseBody
-    @GetMapping
+    @GetMapping("/admin-register")
     public ResponseEntity<Resource> joinform() throws IOException {
         Resource resource = resourceLoader.getResource("classpath:templates/member/register_form.html");
         if (resource.exists()) {
@@ -32,6 +33,7 @@ public class AdminController {
         }
     }
 
+
     @PostMapping("/signup")
     public String join(@ModelAttribute Admin admin,  @RequestParam("a_admin_type") String a_admin_type) {
         admin.setA_admin_type(a_admin_type);
@@ -40,12 +42,11 @@ public class AdminController {
     }
 
     @PostMapping("/admin-signin")
-    public String signIn(String email, String pw) {
-//        log.info("a_email: {}, a_pw: {}", a_email, a_pw);
-        adminRepository.findMember(email, pw);
-        if (adminRepository != null) {
-            return "common/main";
+    public String signIn(@RequestParam("email") String email, @RequestParam("pw") String pw) {
+        List<Admin> admins = adminRepository.findMembers(email, pw);
+        if (!admins.isEmpty()) {
+            return "/common/main";
         }
-        return "member/login_form";
+        return "/member/login_form";
     }
 }

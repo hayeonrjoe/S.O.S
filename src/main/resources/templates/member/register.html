@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
@@ -10,11 +10,12 @@
     <div class="header">
         <div class="title_menu">
             S<small class="small_title">peak</small>.O<small class="small_title">ut</small>.S<small class="small_title">afely</small>
-            <a href="#" class="top_menu_chat">채팅</a>
+            <a href="/room" class="top_menu_chat">채팅</a>
             <a href="#" class="top_menu">상담사 연결</a>
             <a href="#" class="top_menu">정보</a>
             <a href="#" class="top_menu">상담</a>
-            <a href="register.html" class="top_menu"><b style="color: #1290FF">회원가입</b></a>
+            <a th:href="@{/login}" class="top_menu" th:if="${#httpServletRequest.userPrincipal == null}"><b style="color: #1290FF">로그인</b></a>
+            <a th:href="@{/logout}" class="top_menu" th:if="${#httpServletRequest.userPrincipal != null}"><b style="color: #1290FF">로그아웃</b></a>
         </div>
     </div>
     <div class="register">

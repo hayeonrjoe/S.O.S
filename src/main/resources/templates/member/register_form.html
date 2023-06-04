@@ -1,20 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>관리자 회원가입</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/register_login/register_form.css">
+    <script>
+      function checkPassword() {
+        var password = document.getElementById('pw').value;
+        var confirmPassword = document.getElementById('pw_ok').value;
+
+        if (password !== confirmPassword) {
+          alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+        }
+      }
+    </script>
 </head>
 <body>
   <div class="header">
     <div class="title_menu">
       S<small class="small_title">peak</small>.O<small class="small_title">ut</small>.S<small class="small_title">afely</small>
-      <a href="#" class="top_menu_chat">채팅</a>
+      <a href="/room" class="top_menu_chat">채팅</a>
       <a href="#" class="top_menu">상담사 연결</a>
       <a href="#" class="top_menu">정보</a>
       <a href="#" class="top_menu">상담</a>
-      <a href="#" class="top_menu"><b style="color: #1290FF">회원가입</b></a>
+      <a href="#" class="top_menu"><b style="color: #1290FF">로그인</b></a>
     </div>
   </div>
 
@@ -24,27 +34,27 @@
       <table>
         <tr>
           <td class="title">이름<b>*</b></td>
-          <td><input type="text" class="input" id="name" name="a_name"/></td>
+          <td><input type="text" class="input" id="name" name="a_name" required/></td>
         </tr>
         <tr style="height: 11px;"><td></td><td></td></tr>
         <tr>
           <td class="title">연락처<b>*</b></td>
-          <td><input type="text" class="input" id="contact" name="a_contact"/></td>
+          <td><input type="text" class="input" id="contact" name="a_contact" required/></td>
         </tr>
         <tr style="height: 11px;"><td></td><td></td></tr>
         <tr>
           <td class="title">이메일<b>*</b></td>
-          <td><input type="text" class="input" id="email" name="a_email"/></td>
+          <td><input type="text" class="input" id="email" name="a_email" required/></td>
         </tr>
         <tr style="height: 11px;"><td></td><td></td></tr>
         <tr>
           <td class="title">비밀번호<b>*</b></td>
-          <td><input type="text" class="input" id="pw" name="a_pw"/></td>
+          <td><input type="password" class="input" id="pw" name="a_pw" required/></td>
         </tr>
         <tr style="height: 11px;"><td></td><td></td></tr>
         <tr>
           <td class="title">비밀번호 확인<b>*</b></td>
-          <td><input type="text" class="input" id="pw_ok" name="pw_ok"/></td>
+          <td><input type="password" class="input" id="pw_ok" name="pw_ok" required onblur="checkPassword()"/></td>
         </tr>
       </table>
       <hr/>
@@ -52,7 +62,7 @@
         <tr>
           <td class="title">관리자 형태<b>*</b></td>
           <td>
-            <select id="admin_type" class="input" name="a_admin_type">
+            <select id="admin_type" class="input" name="a_admin_type" required>
               <option value="상담사" name="a_admin_type">상담사</option>
               <option value="변호사" name="a_admin_type">변호사</option>
               <option value="경찰" name="a_admin_type">경찰</option>
@@ -62,13 +72,13 @@
         <tr style="height: 11px;"><td></td><td></td></tr>
         <tr>
           <td class="title">직장명<b>*</b></td>
-          <td><input type="text" class="input" id="company_name" name="a_company_name"/></td>
+          <td><input type="text" class="input" id="company_name" name="a_company_name" required/></td>
         </tr>
         <tr style="height: 11px;"><td></td><td></td></tr>
         <tr>
           <td class="title">직장 연락처<b>*</b></td>
           <td>
-            <input type="text" class="input" id="company_contact" name="a_company_contact"/>
+            <input type="text" class="input" id="company_contact" name="a_company_contact" required/>
             <br/>
           </td>
         </tr>
@@ -76,12 +86,13 @@
         <tr>
           <td class="title">직장 주소<b>*</b></td>
           <td>
-            <input type="text" class="input" name="a_company_address" required/>
+            <input type="text" class="input" name="a_company_address" required />
             <br/>
           </td>
         </tr>
       </table>
 
+      <div id="liveAlertPlaceholder"></div>
       <button class="register_sub">관리자 회원가입</button>
       <p class="register_comment">
         관리자 회원가입은 신원 확인 후 계정 사용이 가능합니다.

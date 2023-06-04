@@ -5,9 +5,14 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -45,8 +50,25 @@ public class AdminController {
     public String signIn(@RequestParam("email") String email, @RequestParam("pw") String pw) {
         List<Admin> admins = adminRepository.findMembers(email, pw);
         if (!admins.isEmpty()) {
-            return "/common/main";
+            Authentication authentication = new UsernamePasswordAuthenticationToken(admins.get(0), null, null);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            return "common/main";
         }
-        return "/member/login_form";
+        return "member/login_form";
+    }
+
+    @GetMapping("/register-form/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        SecurityContextHolder.clearContext();
+        return "common/main";
+    }
+
+    @GetMapping("/home")
+    public String home() {
+        return "common/main";
     }
 }

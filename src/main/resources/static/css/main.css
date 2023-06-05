@@ -39,6 +39,11 @@
     margin-left: 25px;
 }
 
+.logo_main {
+    text-decoration: none;
+    color: #1290FF;
+}
+
 /* main */
 .main {
     text-align: center;

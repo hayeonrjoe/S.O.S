@@ -33,10 +33,11 @@ CREATE TABLE  Counseling_Appointment  (
 );
 
 CREATE TABLE  Attachment_File  (
-	 pc_file_id 	Integer	NULL	AUTO_INCREMENT,
+	 af_file_id 	Integer	NULL	AUTO_INCREMENT,
 	 af_file_name 	Varchar(50)	NOT NULL,
+	 af_file_extension VARCHAR(50) NOT NULL,
 	 af_upload_path 	Varchar(100)	NOT NULL,
-	 PRIMARY KEY (pc_file_id)
+	 PRIMARY KEY (af_file_id)
 );
 
 CREATE TABLE  Admin  (

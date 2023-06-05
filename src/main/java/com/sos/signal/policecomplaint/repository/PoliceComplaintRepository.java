@@ -1,5 +1,6 @@
-package com.sos.signal.policecomplaint;
+package com.sos.signal.policecomplaint.repository;
 
+import com.sos.signal.policecomplaint.dto.PoliceComplaint;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 // Repository interface for database operations

@@ -6,6 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 public class PoliceComplaintController {
@@ -23,14 +26,20 @@ public class PoliceComplaintController {
     }
 
     @RequestMapping(value = "/police-complaint-form/submit", method = RequestMethod.POST)
-    public String submitPoliceComplaintForm(@ModelAttribute("policeComplaint") PoliceComplaint policeComplaint, BindingResult bindingResult) {
+    public String submitPoliceComplaintForm(@ModelAttribute("policeComplaint") PoliceComplaint policeComplaint,
+                                            BindingResult bindingResult, @RequestParam("files") MultipartFile[] files) {
         policeComplaintService.validatePoliceComplaint(policeComplaint, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "police_complaint/police_complaint_form";
         }
 
-        policeComplaintService.savePoliceComplaint(policeComplaint);
+        try {
+            policeComplaintService.savePoliceComplaint(policeComplaint, files);
+        } catch (IOException e) {
+            // Handle the exception appropriately
+            return "police_complaint/police_complaint_form";
+        }
 
         // Redirect to the success page
         return "redirect:/police-complaint-form/submit-success";

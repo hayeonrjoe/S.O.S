@@ -14,9 +14,10 @@ public class AttachmentFile {
 //    auto_increment
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pc_file_id")
-    private Integer pc_file_id;
+    @Column(name = "af_file_id")
+    private Integer af_file_id;
 
     private String af_file_name;
+    private String af_file_extension;
     private String af_upload_path;
 }

@@ -17,7 +17,7 @@
 </div>
 <div class="c_title">
     <div class="c_title_back">
-        <a href="#"><img src="/images/back_arrow.png" alt="back arrow"></a>
+        <a href="#"><img src="/images/back_arrow.svg" alt="back arrow"></a>
         <a href="#">신고 목록</a>
     </div>
     <div class="c_title_menu">
@@ -59,9 +59,11 @@
                 <td class="c_form_title">첨부파일</td>
                 <td>
                     <ul class="uploaded_files">
-                        <li><a href="/path/to/file1.pdf" target="_blank">file1.pdf</a></li>
-                        <li><a href="/path/to/file2.jpg" target="_blank">file2.jpg</a></li>
-                        <li><a href="/path/to/file3.txt" target="_blank">file3.txt</a></li>
+                        <th:block th:each="file : ${files}">
+                            <li class="nav-item">
+                                <a th:href="download/${file.num}"/>${file.name}</a>
+                            </li>
+                        </th:block>
                     </ul>
                 </td>
             </tr>

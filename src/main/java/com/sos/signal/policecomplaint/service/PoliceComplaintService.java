@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -61,18 +62,21 @@ public class PoliceComplaintService {
     }
 
     public List<PoliceComplaint> searchPoliceComplaintsByTitle(String query) {
-        return policeComplaintRepository.findByPcTitleContainingIgnoreCase(query);
+        List<PoliceComplaint> complaints = policeComplaintRepository.findByPcTitleContainingIgnoreCase(query);
+        for (PoliceComplaint complaint : complaints) {
+            if (complaint.getPcDateFormatted() == null) {
+                LocalDateTime pcDateTime = complaint.getPcDate();
+                LocalDate pcDate = pcDateTime.toLocalDate();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String formattedDate = pcDate.format(formatter);
+                complaint.setPcDateFormatted(formattedDate);
+                policeComplaintRepository.save(complaint);
+            }
+        }
+        return complaints;
     }
 
-    public PoliceComplaint updateAndRetrievePoliceComplaint(PoliceComplaint policeComplaint) {
-        String pcDateFormatted = policeComplaint.getPcDateFormatted();
-        if (pcDateFormatted == null) {
-            LocalDateTime pcDate = policeComplaint.getPcDate();
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            pcDateFormatted = pcDate.format(dateFormatter);
-            policeComplaint.setPcDateFormatted(pcDateFormatted);
-            policeComplaintRepository.save(policeComplaint);
-        }
-        return policeComplaint;
+    public List<PoliceComplaint> getLatestResults() {
+        return policeComplaintRepository.findLatestResults();
     }
 }

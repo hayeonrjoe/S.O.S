@@ -58,6 +58,17 @@ public class PoliceComplaint {
     @Column(name = "pc_date_formatted")
     private String pcDateFormatted;
 
+    public PoliceComplaint(String pcPw, Integer pcId, String pcTitle, String pcName,
+                      String pcDateFormatted, String pcResponseStatus) {
+        // Assign the constructor arguments to the corresponding fields
+        this.pcPw = pcPw;
+        this.pcId = pcId;
+        this.pcTitle = pcTitle;
+        this.pcName = pcName;
+        this.pcDateFormatted = pcDateFormatted;
+        this.pcResponseStatus = pcResponseStatus;
+    }
+
     public void setPcDate(LocalDateTime pcDate) {
         if (pcDate == null) {
             this.pcDate = LocalDateTime.now();

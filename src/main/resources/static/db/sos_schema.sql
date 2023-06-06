@@ -1,4 +1,4 @@
-﻿CREATE DATABASE sos DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE sos DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 USE sos;
 
@@ -56,15 +56,15 @@ CREATE TABLE  Admin  (
 CREATE TABLE  Online_Complaint  (
 	 oc_id 	Integer	NOT NULL	AUTO_INCREMENT,
 	 a_id 	Integer	NULL,
-	 oc_pw 	Varchar(10)	NOT NULL,
+	 oc_pw 	VARCHAR(50)	NOT NULL,
 	 oc_title 	Varchar(50)	NOT NULL,
-	 oc_content 	Varchar(500)	NOT NULL,
+	 oc_content 	VARCHAR(1000)	NOT NULL,
 	 oc_name 	Varchar(10)	NOT NULL,
 	 oc_advisor 	Varchar(30)	NOT NULL,
 	 oc_contact 	Varchar(30)	NULL,
 	 oc_date 	Datetime	NULL	DEFAULT NOW(),
 	 oc_response_status 	Varchar(10)	NOT NULL DEFAULT '답변대기',
-	 oc_response_content 	Varchar(500)	NULL,
+	 oc_response_content 	VARCHAR(1000)	NULL,
 	 PRIMARY KEY (oc_id),
 	 FOREIGN KEY (a_id) REFERENCES Admin(a_id)
 ); 
@@ -73,9 +73,9 @@ CREATE TABLE  Police_Complaint  (
 	 pc_id 	Integer	NOT NULL	AUTO_INCREMENT,
 	 pc_file_ids 	Varchar(100) NULL,
 	 a_id 	Integer	NULL,
-	 pc_pw 	Varchar(10)	NOT NULL,
+	 pc_pw 	VARCHAR(50)	NOT NULL,
 	 pc_title 	Varchar(50)	NOT NULL,
-	 pc_content 	Varchar(500)	NOT NULL,
+	 pc_content 	VARCHAR(1000)	NOT NULL,
 	 pc_name 	Varchar(10)	NOT NULL,
 	 pc_contact 	Varchar(30)	NULL,
 	 pc_victim_name 	Varchar(10)	NULL,
@@ -89,7 +89,7 @@ CREATE TABLE  Police_Complaint  (
 	 pc_bully_other 	Varchar(100)	NULL,
 	 pc_date 	Datetime	NOT NULL	DEFAULT NOW(),
 	 pc_response_status 	Varchar(10)	NOT NULL DEFAULT '답변대기',
-	 pc_response_content 	Varchar(500)	NULL,
+	 pc_response_content 	VARCHAR(1000)	NULL,
 	 PRIMARY KEY (pc_id),
 	 FOREIGN KEY (a_id) REFERENCES Admin(a_id)
 ); 

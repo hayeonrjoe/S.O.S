@@ -25,6 +25,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         var result = searchResults[i];
                         var row = document.createElement("tr");
 
+                        // Set the height of the table row
+                        row.style.height = "2.5em"; // Adjust the height value as needed
+                        // Set the font size of the table row
+                        row.style.fontSize = "15px";
+
                         // Create and populate each table cell
                         var idCell = document.createElement("td");
                         idCell.textContent = result.pcId;

@@ -26,7 +26,7 @@
         신고 목록
     </div>
 </div>
-<form id="searchForm" action="/police-complaint/search" method="GET">
+<form id="searchForm" action="/police-complaint/search" method="GET" data-load-action="/police-complaint/load-latest">
     <div class="search_section">
         <table>
             <thead>
@@ -45,7 +45,7 @@
     </div>
     <div id="searchResultsContainer">
         <div class="list_section">
-            <table class="table">
+            <table>
                 <thead>
                 <tr>
                     <th style="text-align: start">번호</th>
@@ -60,9 +60,12 @@
                         <img src="/images/line.png" alt="line">
                     </th>
                 </tr>
+                <tr style="height:10px">
+                    <th></th>
+                </tr>
                 </thead>
                 <tbody id="tbody">
-                <tr>
+                <tr class="table-row">
                     <td></td>
                     <td class="truncate"></td>
                     <td></td>
@@ -73,14 +76,21 @@
             </table>
         </div>
     </div>
+    <div class="c_menu_line">
+        <!--    <img src="../../static/images/line.png" alt="line">-->
+        <img src="/images/line.png" alt="line">
+    </div>
+    <div id="paginationContainer" class="paginationContainer">
+        <div id="pagination">
+            <!-- Pagination links will be dynamically populated here -->
+        </div>
+    </div>
 </form>
-<div class="pagination">
-    page numbers
-</div>
-<div class="form_submit_section" style="margin-top: 5%">
+<div class="form_submit_section" style="margin-top: 7%">
     <form action="/police-complaint-form" method="get">
         <button type="submit" class="c_register_button">신고</button>
     </form>
 </div>
+<script src="/js/police_complaint_list.js"></script>
 </body>
 </html>

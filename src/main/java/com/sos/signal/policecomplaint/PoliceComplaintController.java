@@ -54,31 +54,30 @@ public class PoliceComplaintController {
 
     @RequestMapping(value = "/police-complaint", method = RequestMethod.GET)
     public String showPoliceComplaintList(Model model) {
-        model.addAttribute("policeComplaint", new PoliceComplaint());
+
+        // Fetch the latest results from the service for the specified page
+        List<PoliceComplaint> latestResults = policeComplaintService.getLatestResults();
+
+        // Add the latest results to the model
+        model.addAttribute("latestResults", latestResults);
+
         return "police_complaint/police_complaint_list";
+    }
+
+
+    @RequestMapping(value = "/police-complaint/latest-results", method = RequestMethod.GET)
+    @ResponseBody
+    public List<PoliceComplaint> getLatestResults() {
+
+        // Fetch the latest results from the service for the specified page
+        return policeComplaintService.getLatestResults();
+
     }
 
     @RequestMapping(value = "/police-complaint/search", method = RequestMethod.GET)
     @ResponseBody
     public List<PoliceComplaint> searchPoliceComplaintsByTitle(@RequestParam("query") String query) {
-        // Perform the search operation in the database based on the query
-        List<PoliceComplaint> searchResults = policeComplaintService.searchPoliceComplaintsByTitle(query);
-
-        // Iterate through the search results and apply the desired formatting
-        for (PoliceComplaint complaint : searchResults) {
-            String pcName = complaint.getPcName();
-            if (pcName != null && pcName.length() > 1) {
-                String firstLetter = pcName.substring(0, 1);
-                String maskedName = firstLetter + "**";
-                complaint.setPcName(maskedName);
-            }
-
-            // Update and retrieve the PoliceComplaint with the formatted pcDateFormatted
-            PoliceComplaint updatedComplaint = policeComplaintService.updateAndRetrievePoliceComplaint(complaint);
-            complaint.setPcDateFormatted(updatedComplaint.getPcDateFormatted());
-        }
-
-        return searchResults;
+        return policeComplaintService.searchPoliceComplaintsByTitle(query);
     }
 
 }

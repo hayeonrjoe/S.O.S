@@ -51,6 +51,17 @@ public class OnlineComplaint {
     @Column(name = "oc_date_formatted")
     private String ocDateFormatted;
 
+    public OnlineComplaint(String ocPw, Integer ocId, String ocTitle, String ocAdvisor, String ocName, String ocDateFormatted, String ocResponseStatus) {
+        // Assign the constructor arguments to the corresponding fields
+        this.ocPw = ocPw;
+        this.ocId = ocId;
+        this.ocTitle = ocTitle;
+        this.ocAdvisor = ocAdvisor;
+        this.ocName = ocName;
+        this.ocDateFormatted = ocDateFormatted;
+        this.ocResponseStatus = ocResponseStatus;
+    }
+
     public void setOcDate(LocalDateTime ocDate) {
         if (ocDate == null) {
             this.ocDate = LocalDateTime.now();

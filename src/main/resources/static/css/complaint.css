@@ -141,7 +141,7 @@ b {
 }
 
 .search_section {
-    margin-top: 5%;
+    margin-top: 7%;
     display: flex;
     width: 700px;
     justify-items: flex-end;
@@ -175,14 +175,14 @@ b {
 }
 
 .list_section {
-    margin-top: 5%;
+    margin-top: 7%;
 }
 
 .data_list {
     margin-top: 5%;
 }
 
-.pagination {
+.paginationContainer {
     margin-top: 5%;
 }
 

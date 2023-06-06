@@ -3,8 +3,10 @@ package com.sos.signal.onlinecomplaint;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -47,22 +49,43 @@ public class OnlineComplaintService {
         onlineComplaintRepository.save(onlineComplaint);
     }
 
-
     public List<OnlineComplaint> searchOnlineComplaintsByTitle(String query) {
-        return onlineComplaintRepository.findByOcTitleContainingIgnoreCase(query);
+        List<OnlineComplaint> complaints = onlineComplaintRepository.findByOcTitleContainingIgnoreCase(query);
+        for (OnlineComplaint complaint : complaints) {
+            if (complaint.getOcDateFormatted() == null) {
+                LocalDateTime ocDateTime = complaint.getOcDate();
+                LocalDate ocDate = ocDateTime.toLocalDate();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String formattedDate = ocDate.format(formatter);
+                complaint.setOcDateFormatted(formattedDate);
+                onlineComplaintRepository.save(complaint);
+            }
+        }
+        return complaints;
+    }
+//////////////////////////////////////////////////////////////////////
+//    Without Pagination
+    public List<OnlineComplaint> getLatestResults() {
+        return onlineComplaintRepository.findLatestResults();
     }
 
-    public OnlineComplaint updateAndRetrieveOnlineComplaint(OnlineComplaint onlineComplaint) {
-        String ocDateFormatted = onlineComplaint.getOcDateFormatted();
-        if (ocDateFormatted == null) {
-            LocalDateTime ocDate = onlineComplaint.getOcDate();
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            ocDateFormatted = ocDate.format(dateFormatter);
-            onlineComplaint.setOcDateFormatted(ocDateFormatted);
-            onlineComplaintRepository.save(onlineComplaint);
-        }
-        return onlineComplaint;
-    }
+//////////////////////////////////////////////////////////////////////
+//    Pagination
+//    public List<OnlineComplaint> getLatestResults(int pageNumber, int pageSize) {
+//        int startIndex = pageNumber * pageSize;
+//        int endIndex = startIndex + pageSize;
+//
+//        List<OnlineComplaint> results = onlineComplaintRepository.findLatestResults();
+//
+//        if (startIndex >= results.size()) {
+//            return Collections.emptyList();
+//        }
+//
+//        // Adjust the end index if it exceeds the actual number of results
+//        endIndex = Math.min(endIndex, results.size());
+//
+//        return results.subList(startIndex, endIndex);
+//    }
 
 
 }

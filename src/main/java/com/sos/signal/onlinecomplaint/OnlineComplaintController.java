@@ -5,9 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -16,7 +13,7 @@ public class OnlineComplaintController {
 
     private final OnlineComplaintService onlineComplaintService;
 
-    public OnlineComplaintController(OnlineComplaintService onlineComplaintService){
+    public OnlineComplaintController(OnlineComplaintService onlineComplaintService) {
         this.onlineComplaintService = onlineComplaintService;
     }
 
@@ -46,33 +43,66 @@ public class OnlineComplaintController {
         return "online_complaint/online_complaint_form_submit_success";
     }
 
+//////////////////////////////////////////////////////////////////////
+//    Without Pagination
     @RequestMapping(value = "/online-complaint", method = RequestMethod.GET)
     public String showOnlineComplaintList(Model model) {
-        model.addAttribute("onlineComplaint", new OnlineComplaint());
+
+        // Fetch the latest results from the service for the specified page
+        List<OnlineComplaint> latestResults = onlineComplaintService.getLatestResults();
+
+        // Add the latest results to the model
+        model.addAttribute("latestResults", latestResults);
+
         return "online_complaint/online_complaint_list";
     }
+
+    @RequestMapping(value = "/online-complaint/latest-results", method = RequestMethod.GET)
+    @ResponseBody
+    public List<OnlineComplaint> getLatestResults() {
+
+        // Fetch the latest results from the service for the specified page
+        return onlineComplaintService.getLatestResults();
+
+    }
+
+//////////////////////////////////////////////////////////////////////
+//    Pagination
+//@RequestMapping(value = "/online-complaint", method = RequestMethod.GET)
+//public String showOnlineComplaintList(@RequestParam(defaultValue = "1") int pageNumber, Model model) {
+//    int pageSize = 5; // Set the desired page size
+//
+//    // Adjust the page number to 0-based index
+//    int adjustedPageNumber = pageNumber - 1;
+//
+//    // Fetch the latest results from the service for the specified page
+//    List<OnlineComplaint> latestResults = onlineComplaintService.getLatestResults(adjustedPageNumber, pageSize);
+//
+//    // Add the latest results to the model
+//    model.addAttribute("latestResults", latestResults);
+//
+//    return "online_complaint/online_complaint_list";
+//}
+
+//    @RequestMapping(value = "/online-complaint/latest-results", method = RequestMethod.GET)
+//    @ResponseBody
+//    public List<OnlineComplaint> getLatestResults(@RequestParam(defaultValue = "1") int pageNumber) {
+//        int pageSize = 5; // Set the desired page size
+//
+//        // Adjust the page number to 0-based index
+//        int adjustedPageNumber = pageNumber - 1;
+//
+//        // Fetch the latest results from the service for the specified page
+//        List<OnlineComplaint> latestResults = onlineComplaintService.getLatestResults(adjustedPageNumber, pageSize);
+//
+//        return latestResults;
+//    }
+
 
     @RequestMapping(value = "/online-complaint/search", method = RequestMethod.GET)
     @ResponseBody
     public List<OnlineComplaint> searchOnlineComplaintsByTitle(@RequestParam("query") String query) {
-        // Perform the search operation in the database based on the query
-        List<OnlineComplaint> searchResults = onlineComplaintService.searchOnlineComplaintsByTitle(query);
-
-        // Iterate through the search results and apply the desired formatting
-        for (OnlineComplaint complaint : searchResults) {
-            String ocName = complaint.getOcName();
-            if (ocName != null && ocName.length() > 1) {
-                String firstLetter = ocName.substring(0, 1);
-                String maskedName = firstLetter + "**";
-                complaint.setOcName(maskedName);
-            }
-
-            // Update and retrieve the OnlineComplaint with the formatted ocDateFormatted
-            OnlineComplaint updatedComplaint = onlineComplaintService.updateAndRetrieveOnlineComplaint(complaint);
-            complaint.setOcDateFormatted(updatedComplaint.getOcDateFormatted());
-        }
-
-        return searchResults;
+        return onlineComplaintService.searchOnlineComplaintsByTitle(query);
     }
 
 }

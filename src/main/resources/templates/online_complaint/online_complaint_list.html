@@ -45,7 +45,7 @@
         상담 목록
     </div>
 </div>
-<form id="searchForm" action="/online-complaint/search" method="GET">
+<form id="searchForm" action="/online-complaint/search" method="GET" data-load-action="/online-complaint/load-latest">
     <div class="search_section">
         <table>
             <thead>
@@ -62,46 +62,56 @@
             </tr>
         </table>
     </div>
-<div id="searchResultsContainer">
-    <div class="list_section">
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th style="text-align: start">번호</th>
-                <th style="text-align: start">제목</th>
-                <th style="text-align: start">도움 받고<br> 싶은 사람</th>
-                <th style="text-align: start">작성자</th>
-                <th style="text-align: start">작성일</th>
-                <th style="text-align: start">답변여부</th>
-            </tr>
-            <tr>
-                <th colspan="6">
-                    <!--                    <img src="../../static/images/line.png" alt="line">-->
-                    <img src="/images/line.png" alt="line">
-                </th>
-            </tr>
-            </thead>
-            <tbody id="tbody">
-            <tr>
-                <td></td>
-                <td class="truncate"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            </tbody>
-        </table>
+    <div id="searchResultsContainer">
+        <div class="list_section">
+            <table>
+                <thead>
+                <tr>
+                    <th style="text-align: start">번호</th>
+                    <th style="text-align: start">제목</th>
+                    <th style="text-align: start">도움 받고<br> 싶은 사람</th>
+                    <th style="text-align: start">작성자</th>
+                    <th style="text-align: start">작성일</th>
+                    <th style="text-align: start">답변여부</th>
+                </tr>
+                <tr>
+                    <th colspan="6">
+                        <!--                    <img src="../../static/images/line.png" alt="line">-->
+                        <img src="/images/line.png" alt="line">
+                    </th>
+                </tr>
+                <tr style="height:10px">
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                <tr class="table-row">
+                    <td></td>
+                    <td class="truncate"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+    <div class="c_menu_line">
+        <!--    <img src="../../static/images/line.png" alt="line">-->
+        <img src="/images/line.png" alt="line">
+    </div>
+    <div id="paginationContainer" class="paginationContainer">
+        <div id="pagination">
+            <!-- Pagination links will be dynamically populated here -->
+        </div>
+    </div>
 </form>
-<div class="pagination">
-    page numbers
-</div>
-<div class="form_submit_section" style="margin-top: 5%">
+<div class="form_submit_section" style="margin-top: 7%">
     <form action="/online-complaint-form" method="get">
         <button type="submit" class="c_register_button">상담 신청</button>
     </form>
 </div>
+<script src="/js/online_complaint_list_and_pagination.js"></script>
 </body>
 </html>

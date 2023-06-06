@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,24 +18,49 @@ public class OnlineComplaint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "oc_id")
-    private Integer oc_id;
+    private Integer ocId;
 
     @Column(name = "a_id")
     private Integer a_id;
     //    required
-    private String oc_pw;
-    private String oc_title;
+    @Column(name = "oc_pw")
+    private String ocPw;
+
+    @Column(name = "oc_title")
+    private String ocTitle;
+
     private String oc_content;
-    private String oc_name;
-    private String oc_advisor;
+
+    @Column(name = "oc_name")
+    private String ocName;
+
+    @Column(name = "oc_advisor")
+    private String ocAdvisor;
+
     @Column(name = "oc_response_status", nullable = false, columnDefinition = "VARCHAR(10) DEFAULT '답변대기'")
-    private String oc_response_status;
+    private String ocResponseStatus;
+
     //    optional
     private String oc_contact;
-    private LocalDateTime oc_date;
+
+    @Column(name = "oc_date")
+    private LocalDateTime ocDate;
+
     private String oc_response_content;
 
-    public void setOc_date(LocalDateTime oc_date) {
-        this.oc_date = LocalDateTime.now();
+    @Column(name = "oc_date_formatted")
+    private String ocDateFormatted;
+
+    public void setOcDate(LocalDateTime ocDate) {
+        if (ocDate == null) {
+            this.ocDate = LocalDateTime.now();
+        } else {
+            this.ocDate = ocDate;
+        }
+
+        // Format the ocDate into a string representation
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        this.ocDateFormatted = this.ocDate.format(dateFormatter);
     }
+
 }

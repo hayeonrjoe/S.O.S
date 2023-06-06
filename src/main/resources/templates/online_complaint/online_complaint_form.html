@@ -16,14 +16,14 @@
         <a href="/room" class="top_menu_chat">채팅</a>
         <a href="#" class="top_menu">상담사 연결</a>
         <a href="#" class="top_menu">정보</a>
-        <a href="#" class="top_menu">상담</a>
+        <a href="/online-complaint" class="top_menu">상담</a>
         <a href="/loginform" class="top_menu"><b style="color: #1290FF">로그인</b></a>
     </div>
 </div>
 <div class="c_menu">
     <div>
-        <a href="/online-complaint-form">비공개</a><br>
-        <a href="/online-complaint-form">온라인 상담</a>
+        <a href="/online-complaint">비공개</a><br>
+        <a href="/online-complaint">온라인 상담</a>
     </div>
     <div>
         <a href="/counseling-appointment-form">방문 상담</a>
@@ -56,7 +56,7 @@
             <tr>
                 <td class="c_form_title">비밀번호<b>*</b></td>
                 <td colspan="4">
-                    <input type="password" name="oc_pw" class="c_form_input"
+                    <input type="password" name="ocPw" class="c_form_input"
                            placeholder="8~16자 이내 영문 대소문자, 숫자, 특수문자(!@#$%^&*) 조합으로 작성해주세요."
                            required minlength="8" maxlength="16"
                            pattern="^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$">
@@ -67,7 +67,7 @@
             </tr>
             <tr>
                 <td class="c_form_title">이름<b>*</b></td>
-                <td colspan="4"><input type="text" name="oc_name" class="c_form_input" required></td>
+                <td colspan="4"><input type="text" name="ocName" class="c_form_input" required></td>
             </tr>
             <tr style="height:15px">
                 <td></td>
@@ -82,14 +82,14 @@
             <tr>
                 <td class="c_form_title">도움 받고<br> 싶은 사람<b>*</b></td>
                 <td colspan="4">
-                    <input type="checkbox" name="oc_advisor" id="advisor-counselor" class="advisor_option"
+                    <input type="checkbox" name="ocAdvisor" id="advisor-counselor" class="advisor_option"
                            value="상담사">
                     <label for="advisor-counselor">상담사</label>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="checkbox" name="oc_advisor" id="advisor-lawyer" class="advisor_option" value="변호사">
+                    <input type="checkbox" name="ocAdvisor" id="advisor-lawyer" class="advisor_option" value="변호사">
                     <label for="advisor-lawyer">변호사</label>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="checkbox" name="oc_advisor" id="advisor-police" class="advisor_option" value="경찰">
+                    <input type="checkbox" name="ocAdvisor" id="advisor-police" class="advisor_option" value="경찰">
                     <label for="advisor-police">경찰</label>
                 </td>
             </tr>
@@ -99,7 +99,7 @@
             <tr>
                 <td class="c_form_title">제목<b>*</b></td>
                 <td colspan="4">
-                    <input type="text" name="oc_title" class="c_form_input" style="font-size:14px" placeholder="예시) 학교폭력 사건 관련하여 법률 도움이 필요합니다."
+                    <input type="text" name="ocTitle" class="c_form_input" style="font-size:14px" placeholder="예시) 학교폭력 사건 관련하여 법률 도움이 필요합니다."
                            required>
                 </td>
             </tr>

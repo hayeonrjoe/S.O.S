@@ -2,9 +2,10 @@ package com.sos.signal.onlinecomplaint;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 public class OnlineComplaintService {
@@ -16,17 +17,17 @@ public class OnlineComplaintService {
     }
 
     public void validateOnlineComplaint(OnlineComplaint onlineComplaint, BindingResult bindingResult) {
-        if (onlineComplaint.getOc_pw() == null || onlineComplaint.getOc_pw().isEmpty()) {
-            bindingResult.rejectValue("oc_pw", "error.oc_pw", "비밀번호가 필요합니다.");
+        if (onlineComplaint.getOcPw() == null || onlineComplaint.getOcPw().isEmpty()) {
+            bindingResult.rejectValue("ocPw", "error.ocPw", "비밀번호가 필요합니다.");
         }
-        if (onlineComplaint.getOc_name() == null || onlineComplaint.getOc_name().isEmpty()) {
-            bindingResult.rejectValue("oc_name", "error.oc_name", "이름이 필요합니다.");
+        if (onlineComplaint.getOcName() == null || onlineComplaint.getOcName().isEmpty()) {
+            bindingResult.rejectValue("ocName", "error.ocName", "이름이 필요합니다.");
         }
-        if (onlineComplaint.getOc_advisor() == null || onlineComplaint.getOc_advisor().isEmpty()) {
-            bindingResult.rejectValue("oc_advisor", "error.oc_advisor", "도움 받고 싶은 사람을 선택해 주세요.");
+        if (onlineComplaint.getOcAdvisor() == null || onlineComplaint.getOcAdvisor().isEmpty()) {
+            bindingResult.rejectValue("ocAdvisor", "error.ocAdvisor", "도움 받고 싶은 사람을 선택해 주세요.");
         }
-        if (onlineComplaint.getOc_title() == null || onlineComplaint.getOc_title().isEmpty()) {
-            bindingResult.rejectValue("oc_title", "error.oc_title", "제목이 필요합니다.");
+        if (onlineComplaint.getOcTitle() == null || onlineComplaint.getOcTitle().isEmpty()) {
+            bindingResult.rejectValue("ocTitle", "error.ocTitle", "제목이 필요합니다.");
         }
         if (onlineComplaint.getOc_content() == null || onlineComplaint.getOc_content().isEmpty()) {
             bindingResult.rejectValue("oc_content", "error.oc_content", "내용이 필요합니다.");
@@ -35,8 +36,33 @@ public class OnlineComplaintService {
     }
 
     public void saveOnlineComplaint(OnlineComplaint onlineComplaint) {
-        onlineComplaint.setOc_response_status("답변대기");
-        onlineComplaint.setOc_date(LocalDateTime.now());
+        onlineComplaint.setOcResponseStatus("답변대기");
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        onlineComplaint.setOcDate(currentDateTime);
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = currentDateTime.format(dateFormatter);
+        onlineComplaint.setOcDateFormatted(formattedDate);
+
         onlineComplaintRepository.save(onlineComplaint);
     }
+
+
+    public List<OnlineComplaint> searchOnlineComplaintsByTitle(String query) {
+        return onlineComplaintRepository.findByOcTitleContainingIgnoreCase(query);
+    }
+
+    public OnlineComplaint updateAndRetrieveOnlineComplaint(OnlineComplaint onlineComplaint) {
+        String ocDateFormatted = onlineComplaint.getOcDateFormatted();
+        if (ocDateFormatted == null) {
+            LocalDateTime ocDate = onlineComplaint.getOcDate();
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            ocDateFormatted = ocDate.format(dateFormatter);
+            onlineComplaint.setOcDateFormatted(ocDateFormatted);
+            onlineComplaintRepository.save(onlineComplaint);
+        }
+        return onlineComplaint;
+    }
+
+
 }

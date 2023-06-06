@@ -2,10 +2,12 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <!--    <link rel="stylesheet" href="../../static/css/main.css">-->
+    <!--    <link rel="stylesheet" href="../../static/css/complaint.css">-->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/complaint.css">
     <title>S.O.S</title>
-
+    <script src="/js/online_complaint_search.js"></script>
 </head>
 <body>
 <div class="header">
@@ -17,23 +19,25 @@
         <a href="/room" class="top_menu_chat">채팅</a>
         <a href="#" class="top_menu">상담사 연결</a>
         <a href="#" class="top_menu">정보</a>
-        <a href="#" class="top_menu">상담</a>
+        <a href="/online-complaint" class="top_menu">상담</a>
         <a href="/loginform" class="top_menu"><b style="color: #1290FF">로그인</b></a>
     </div>
 </div>
 <div class="c_menu">
     <div>
-        <a href="#">비공개</a><br>
-        <a href="#">온라인 상담</a>
+        <a href="/online-complaint">비공개</a><br>
+        <a href="/online-complaint">온라인 상담</a>
     </div>
     <div>
-        <a href="#">방문 상담</a>
+        <a href="/counseling-appointment-form">방문 상담</a>
     </div>
 </div>
 <div class="c_menu_line">
+    <!--    <img src="../../static/images/line.png" alt="line">-->
     <img src="/images/line.png" alt="line">
 </div>
 <div class="c_menu_triangle">
+    <!--    <img src="../../static/images/triangle.png" alt="triangle">-->
     <img src="/images/triangle.png" alt="triangle">
 </div>
 <div class="c_title">
@@ -41,7 +45,7 @@
         상담 목록
     </div>
 </div>
-<form>
+<form id="searchForm" action="/online-complaint/search" method="GET">
     <div class="search_section">
         <table>
             <thead>
@@ -52,40 +56,52 @@
             <tr>
                 <td class="search_title">제목</td>
                 <td colspan="4">
-                    <input type="text" style="width:430px; height:35px">&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="submit" class="search_button" value="검색"/>
+                    <input type="text" id="searchInput" style="width:430px; height:35px">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit" id="searchButton" class="search_button">검색</button>
                 </td>
             </tr>
         </table>
     </div>
+<div id="searchResultsContainer">
+    <div class="list_section">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th style="text-align: start">번호</th>
+                <th style="text-align: start">제목</th>
+                <th style="text-align: start">도움 받고<br> 싶은 사람</th>
+                <th style="text-align: start">작성자</th>
+                <th style="text-align: start">작성일</th>
+                <th style="text-align: start">답변여부</th>
+            </tr>
+            <tr>
+                <th colspan="6">
+                    <!--                    <img src="../../static/images/line.png" alt="line">-->
+                    <img src="/images/line.png" alt="line">
+                </th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            <tr>
+                <td></td>
+                <td class="truncate"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </form>
-
-<div class="list_section">
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-            <th>답변여부</th>
-        </tr>
-        </thead>
-        <tbody id="tbody">
-        </tbody>
-    </table>
-</div>
-<div class="c_menu_line">
-    <img src="/images/line.png" alt="line">
-</div>
-<ul class="data_list">
-    data list
-</ul>
 <div class="pagination">
     page numbers
 </div>
-<div class="submit_section" style="margin-top: 5%">
-    <button type="submit" class="c_register_button">상담 신청</button>
+<div class="form_submit_section" style="margin-top: 5%">
+    <form action="/online-complaint-form" method="get">
+        <button type="submit" class="c_register_button">상담 신청</button>
+    </form>
 </div>
 </body>
 </html>

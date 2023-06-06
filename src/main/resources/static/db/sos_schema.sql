@@ -65,6 +65,7 @@ CREATE TABLE  Online_Complaint  (
 	 oc_date 	Datetime	NULL	DEFAULT NOW(),
 	 oc_response_status 	Varchar(10)	NOT NULL DEFAULT '답변대기',
 	 oc_response_content 	VARCHAR(1000)	NULL,
+	 oc_date_formatted VARCHAR(20) NULL,
 	 PRIMARY KEY (oc_id),
 	 FOREIGN KEY (a_id) REFERENCES Admin(a_id)
 ); 

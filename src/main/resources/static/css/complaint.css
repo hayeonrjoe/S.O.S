@@ -133,7 +133,7 @@ b {
 .submit_section {
     display: flex;
     width: 700px;
-    justify-items: flex-end;
+    text-align: center;
 }
 
 .c_response {

@@ -1,5 +1,6 @@
 package com.sos.signal.policecomplaint.service;
 
+import com.sos.signal.onlinecomplaint.OnlineComplaint;
 import com.sos.signal.policecomplaint.dto.AttachmentFile;
 import com.sos.signal.policecomplaint.dto.PoliceComplaint;
 import com.sos.signal.policecomplaint.repository.PoliceComplaintRepository;
@@ -9,6 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 public class PoliceComplaintService {
@@ -22,17 +25,17 @@ public class PoliceComplaintService {
     }
 
     public void validatePoliceComplaint(PoliceComplaint policeComplaint, BindingResult bindingResult) {
-        if (policeComplaint.getPc_pw() == null || policeComplaint.getPc_pw().isEmpty()) {
-            bindingResult.rejectValue("pc_pw", "error.pc_pw", "비밀번호가 필요합니다.");
+        if (policeComplaint.getPcPw() == null || policeComplaint.getPcPw().isEmpty()) {
+            bindingResult.rejectValue("pcPw", "error.pcPw", "비밀번호가 필요합니다.");
         }
-        if (policeComplaint.getPc_title() == null || policeComplaint.getPc_title().isEmpty()) {
-            bindingResult.rejectValue("pc_title", "error.pc_title", "제목이 필요합니다.");
+        if (policeComplaint.getPcTitle() == null || policeComplaint.getPcTitle().isEmpty()) {
+            bindingResult.rejectValue("pcTitle", "error.pcTitle", "제목이 필요합니다.");
         }
-        if (policeComplaint.getPc_content() == null || policeComplaint.getPc_content().isEmpty()) {
-            bindingResult.rejectValue("pc_content", "error.pc_content", "내용이 필요합니다.");
+        if (policeComplaint.getPcContent() == null || policeComplaint.getPcContent().isEmpty()) {
+            bindingResult.rejectValue("pcContent", "error.pcContent", "내용이 필요합니다.");
         }
-        if (policeComplaint.getPc_name() == null || policeComplaint.getPc_name().isEmpty()) {
-            bindingResult.rejectValue("pc_name", "error.pc_name", "신고자 이름이 필요합니다.");
+        if (policeComplaint.getPcName() == null || policeComplaint.getPcName().isEmpty()) {
+            bindingResult.rejectValue("pcName", "error.pcName", "신고자 이름이 필요합니다.");
         }
 
     }
@@ -46,8 +49,30 @@ public class PoliceComplaintService {
         }
 
         // Set other properties and save police complaint
-        policeComplaint.setPc_response_status("답변대기");
-        policeComplaint.setPc_date(LocalDateTime.now());
+        policeComplaint.setPcResponseStatus("답변대기");
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        policeComplaint.setPcDate(currentDateTime);
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = currentDateTime.format(dateFormatter);
+        policeComplaint.setPcDateFormatted(formattedDate);
+
         policeComplaintRepository.save(policeComplaint);
+    }
+
+    public List<PoliceComplaint> searchPoliceComplaintsByTitle(String query) {
+        return policeComplaintRepository.findByPcTitleContainingIgnoreCase(query);
+    }
+
+    public PoliceComplaint updateAndRetrievePoliceComplaint(PoliceComplaint policeComplaint) {
+        String pcDateFormatted = policeComplaint.getPcDateFormatted();
+        if (pcDateFormatted == null) {
+            LocalDateTime pcDate = policeComplaint.getPcDate();
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            pcDateFormatted = pcDate.format(dateFormatter);
+            policeComplaint.setPcDateFormatted(pcDateFormatted);
+            policeComplaintRepository.save(policeComplaint);
+        }
+        return policeComplaint;
     }
 }

@@ -135,7 +135,7 @@ VALUES
 
 # police complaint
 INSERT INTO 
-	police_complaint(pc_pw, pc_name, pc_title, pc_content)
+	police_complaint(pcPw, pcName, pcTitle, pcContent)
 VALUES
 	('S3cureP@ssword!', '유채원', '학폭 신고합니다.', '존경하는 경찰께,
 저는 서울예고에 다니는 유채원입니다. 이 편지를 통해 제 학교에서 발생한 심각한 학교 폭력 사건에 대해 신고하고자 합니다. 저희 학교 내에서 발생한 폭력 행위로 인해 학생들이 위험에 노출되고 있으며, 이에 대한 조사와 조치를 취해주시기를 간절히 부탁드립니다.

@@ -1,76 +1,86 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/complaint.css">
-  <title>S.O.S</title>
-
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/complaint.css">
+    <title>S.O.S</title>
+    <script src="/js/police_complaint_search.js"></script>
 </head>
 <body>
 <div class="header">
-  <div class="title_menu">
-    <a href="/main" class="logo_main">
-      S<small class="small_title">peak</small>.O<small class="small_title">ut</small>.S<small
-            class="small_title">afely</small>
-    </a>
-    <a href="/room" class="top_menu_chat">채팅</a>
-    <a href="#" class="top_menu">상담사 연결</a>
-    <a href="#" class="top_menu">정보</a>
-    <a href="/online-complaint" class="top_menu">상담</a>
-    <a href="/loginform" class="top_menu"><b style="color: #1290FF">로그인</b></a>
-  </div>
+    <div class="title_menu">
+        <a href="/main" class="logo_main">
+            S<small class="small_title">peak</small>.O<small class="small_title">ut</small>.S<small
+                class="small_title">afely</small>
+        </a>
+        <a href="/room" class="top_menu_chat">채팅</a>
+        <a href="#" class="top_menu">상담사 연결</a>
+        <a href="#" class="top_menu">정보</a>
+        <a href="/online-complaint" class="top_menu">상담</a>
+        <a href="/loginform" class="top_menu"><b style="color: #1290FF">로그인</b></a>
+    </div>
 </div>
 <div class="c_title">
-  <div class="c_title_menu" style="text-align: center">
-    신고 목록
-  </div>
+    <div class="c_title_menu" style="text-align: center">
+        신고 목록
+    </div>
 </div>
-<form>
-  <div class="search_section">
-    <table>
-      <thead>
-      <tr>
-        <th colspan="5"></th>
-      </tr>
-      </thead>
-      <tr>
-        <td class="search_title">제목</td>
-        <td colspan="4">
-          <input type="text" style="width:430px; height:35px">&nbsp;&nbsp;&nbsp;&nbsp;
-          <input type="submit" class="search_button" value="검색"/>
-        </td>
-      </tr>
-    </table>
-  </div>
+<form id="searchForm" action="/police-complaint/search" method="GET">
+    <div class="search_section">
+        <table>
+            <thead>
+            <tr>
+                <th colspan="5"></th>
+            </tr>
+            </thead>
+            <tr>
+                <td class="search_title">제목</td>
+                <td colspan="4">
+                    <input type="text" id="searchInput" style="width:430px; height:35px">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit" id="searchButton" class="search_button">검색</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="searchResultsContainer">
+        <div class="list_section">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th style="text-align: start">번호</th>
+                    <th style="text-align: start">제목</th>
+                    <th style="text-align: start">작성자</th>
+                    <th style="text-align: start">작성일</th>
+                    <th style="text-align: start">답변여부</th>
+                </tr>
+                <tr>
+                    <th colspan="5">
+                        <!--                    <img src="../../static/images/line.png" alt="line">-->
+                        <img src="/images/line.png" alt="line">
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                <tr>
+                    <td></td>
+                    <td class="truncate"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </form>
-
-<div class="list_section">
-  <table class="table table-bordered">
-    <thead>
-    <tr>
-      <th>번호</th>
-      <th>제목</th>
-      <th>작성자</th>
-      <th>작성일</th>
-      <th>답변여부</th>
-    </tr>
-    </thead>
-    <tbody id="tbody">
-    </tbody>
-  </table>
-</div>
-<div class="c_menu_line">
-  <img src="/images/line.png" alt="line">
-</div>
-<ul class="data_list">
-  data list
-</ul>
 <div class="pagination">
-  page numbers
+    page numbers
 </div>
-<div class="submit_section" style="margin-top: 5%">
-  <button type="submit" class="c_register_button">신고</button>
+<div class="form_submit_section" style="margin-top: 5%">
+    <form action="/police-complaint-form" method="get">
+        <button type="submit" class="c_register_button">신고</button>
+    </form>
 </div>
 </body>
 </html>

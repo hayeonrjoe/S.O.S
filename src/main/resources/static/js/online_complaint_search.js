@@ -5,6 +5,13 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault(); // Prevent the default form submission
         search(); // Call your search function
     });
+
+    // Function to show or hide the pagination container
+    function togglePagination(show) {
+        var paginationContainer = document.getElementById('pagination');
+        paginationContainer.style.display = show ? 'block' : 'none';
+    }
+
     function search() {
         var searchTerm = document.getElementById("searchInput").value;
 
@@ -17,6 +24,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (xhr.status === 200) {
                     // Update the search results on the page
                     var searchResults = JSON.parse(xhr.responseText);
+                    searchResults.sort(function(a, b) {
+                        return b.ocId - a.ocId; // Sort in descending order based on ocId
+                    });
                     var tbody = document.getElementById("tbody");
                     tbody.innerHTML = ""; // Clear existing content
 
@@ -24,6 +34,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     for (var i = 0; i < searchResults.length; i++) {
                         var result = searchResults[i];
                         var row = document.createElement("tr");
+
+                        // Set the height of the table row
+                        row.style.height = "2.5em"; // Adjust the height value as needed
+                        // Set the font size of the table row
+                        row.style.fontSize = "15px";
 
                         // Create and populate each table cell
                         var idCell = document.createElement("td");
@@ -64,6 +79,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             }
                         });
                     }
+
+                    togglePagination(false); // Hide the pagination container
                 } else {
                     // Handle the error case
                     console.error("에러: " + xhr.status);

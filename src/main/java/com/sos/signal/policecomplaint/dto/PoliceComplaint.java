@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,15 +17,22 @@ public class PoliceComplaint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pc_id")
-    private Integer pc_id;
+    private Integer pcId;
     // foreign keys
     @Column(name = "a_id")
     private Integer a_id;
     //    required
-    private String pc_pw;
-    private String pc_title;
-    private String pc_content;
-    private String pc_name;
+    @Column(name = "pc_pw")
+    private String pcPw;
+
+    @Column(name = "pc_title")
+    private String pcTitle;
+
+    @Column(name = "pc_content")
+    private String pcContent;
+
+    @Column(name = "pc_name")
+    private String pcName;
     // optional
     private String pc_contact;
     // victim
@@ -39,14 +47,26 @@ public class PoliceComplaint {
     private String pc_bully_contact;
     private String pc_bully_other;
     // other info
-    private LocalDateTime pc_date;
+    @Column(name = "pc_date")
+    private LocalDateTime pcDate;
     @Column(name = "pc_response_status", nullable = false, columnDefinition = "VARCHAR(10) DEFAULT '답변대기'")
-    private String pc_response_status;
+    private String pcResponseStatus;
     private String pc_response_content;
 
     private String pc_file_ids;
 
-    public void setPc_date(LocalDateTime pc_date) {
-        this.pc_date = LocalDateTime.now();
+    @Column(name = "pc_date_formatted")
+    private String pcDateFormatted;
+
+    public void setPcDate(LocalDateTime pcDate) {
+        if (pcDate == null) {
+            this.pcDate = LocalDateTime.now();
+        } else {
+            this.pcDate = pcDate;
+        }
+
+        // Format the ocDate into a string representation
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        this.pcDateFormatted = this.pcDate.format(dateFormatter);
     }
 }

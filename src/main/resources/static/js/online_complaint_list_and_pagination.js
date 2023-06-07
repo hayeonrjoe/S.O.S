@@ -15,11 +15,49 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 // Update the search results on the page
                 updateSearchResults(data);
+                attachRowClickListener();
             })
             .catch(error => {
                 // Handle any errors that occur during the request
                 console.error('에러: ', error);
             });
+    }
+
+    function attachRowClickListener() {
+        var rows = document.querySelectorAll("#tbody tr");
+
+        Array.from(rows).forEach(function (row) {
+            row.addEventListener("click", function (event) {
+                var ocPw = prompt("비밀번호를 입력해주세요");
+                var ocId = row.querySelector("td:first-child").textContent;
+
+                console.log("ocId:", ocId);
+                console.log("ocPw:", ocPw);
+
+                if (ocPw !== null) {
+                    fetch('/online-complaint/check-password', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ ocId: ocId, ocPw: ocPw }),
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log("Response:", data);
+                            if (data.valid) {
+                                // Redirect to the new HTML page with the data
+                                window.location.href = "/online-complaint/detail?num=" + ocId + "&ocPw=" + ocPw;
+                            } else {
+                                alert("비밀번호가 일치하지 않습니다.");
+                            }
+                        })
+                        .catch(error => {
+                            console.error('에러:', error);
+                        });
+                }
+            });
+        });
     }
 
     function updateSearchResults(results) {
@@ -66,17 +104,6 @@ document.addEventListener('DOMContentLoaded', function () {
             row.appendChild(statusCell);
 
             tbody.appendChild(row);
-
-            // Add click event listener to handle opening with the right password
-            row.addEventListener("click", function (event) {
-                var ocPw = prompt("비밀번호를 입력해주세요");
-                if (ocPw === result.ocPw) {
-                    // Open the result
-                    window.location.href = "/online-complaint/" + result.ocId;
-                } else {
-                    alert("비밀번호가 일치하지 않습니다.");
-                }
-            });
         }
     }
 });

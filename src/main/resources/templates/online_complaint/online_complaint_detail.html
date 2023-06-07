@@ -68,7 +68,7 @@
                 <td class="c_form_title">연락처</td>
                 <td colspan="4">
                     <p th:if="${complaint.ocContact != null}" th:text="${complaint.ocContact}"></p>
-                    <p th:unless="${complaint.ocContact != null}"></p>
+                    <p th:unless="${complaint.ocContact != null}">-</p>
                 </td>
             </tr>
             <tr style="height:15px">

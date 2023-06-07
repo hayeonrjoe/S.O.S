@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (xhr.status === 200) {
                     // Update the search results on the page
                     var searchResults = JSON.parse(xhr.responseText);
+                    searchResults.sort(function(a, b) {
+                        return b.pcId - a.pcId; // Sort in descending order based on pcId
+                    });
                     var tbody = document.getElementById("tbody");
                     tbody.innerHTML = ""; // Clear existing content
 

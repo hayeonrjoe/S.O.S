@@ -189,6 +189,10 @@ p {
     width: 900px;
 }
 
+#title:hover {
+    cursor: pointer;
+}
+
 .date_title {
     width: 269px;
     text-align: center;

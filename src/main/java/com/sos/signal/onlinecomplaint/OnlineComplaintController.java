@@ -5,7 +5,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -43,7 +46,46 @@ public class OnlineComplaintController {
         return "online_complaint/online_complaint_form_submit_success";
     }
 
-//////////////////////////////////////////////////////////////////////
+    @RequestMapping(value = "/online-complaint/detail", method = RequestMethod.GET)
+    public String getComplaintDetail(@RequestParam("num") int ocId, Model model) {
+        // Retrieve the complaint detail based on ocId
+        OnlineComplaint complaint = onlineComplaintService.getComplaintById(ocId);
+
+        if (complaint != null) {
+            // Add the complaint object to the model
+            model.addAttribute("complaint", complaint);
+
+            // Return the name of the HTML page for the complaint detail
+            return "online_complaint/online_complaint_detail";
+        } else {
+            // Handle the case when the complaint is not found
+            // You can redirect to an error page or return an appropriate response
+            return "online_complaint/online_complaint_list";
+        }
+    }
+
+
+    @RequestMapping(value = "/online-complaint/check-password", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Boolean> checkPassword(@RequestBody Map<String, String> requestBody) {
+        int ocId = Integer.parseInt(requestBody.get("ocId"));
+        String ocPw = requestBody.get("ocPw");
+
+        // Retrieve the OnlineComplaint object by ocId from the database
+        OnlineComplaint onlineComplaint = onlineComplaintService.findById(ocId);
+
+        // Check if the password matches
+        boolean valid = (onlineComplaint != null && ocPw.equals(onlineComplaint.getOcPw()));
+
+        // Prepare the response JSON
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("valid", valid);
+
+        return response;
+    }
+
+
+    //////////////////////////////////////////////////////////////////////
 //    Without Pagination
     @RequestMapping(value = "/online-complaint", method = RequestMethod.GET)
     public String showOnlineComplaintList(Model model) {

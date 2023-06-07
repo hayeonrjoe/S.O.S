@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PoliceComplaintService {
@@ -46,7 +47,7 @@ public class PoliceComplaintService {
         String fileIds = attachmentFileService.saveAttachmentFiles(files);
 
         if (!fileIds.isEmpty()) {
-            policeComplaint.setPc_file_ids(fileIds);
+            policeComplaint.setPcFileIds(fileIds);
         }
 
         // Set other properties and save police complaint
@@ -74,6 +75,19 @@ public class PoliceComplaintService {
             }
         }
         return complaints;
+    }
+
+    public PoliceComplaint getComplaintById(int pcId) {
+        return policeComplaintRepository.findById(pcId);
+    }
+
+    public PoliceComplaint findById(int pcId) {
+        Optional<PoliceComplaint> result = Optional.ofNullable(policeComplaintRepository.findById(pcId).orElse(null));
+        return result.isPresent() ? result.get() : createErrorMessage();
+    }
+
+    private PoliceComplaint createErrorMessage() {
+        return new PoliceComplaint("페이지를 찾을 수 없습니다. 다시 한번 확인해 주시기 바랍니다.");
     }
 
     public List<PoliceComplaint> getLatestResults() {

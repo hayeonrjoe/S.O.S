@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/complaint.css">
-  <title>S.O.S</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/complaint.css">
+    <title>S.O.S</title>
 </head>
 <body>
 <div class="header">
@@ -21,58 +21,249 @@
   </div>
 </div>
 <div class="c_title">
-  <div class="c_title_back">
-    <a href="/police-complaint">
-      <img src="/images/back_arrow.svg" alt="back arrow">
-    </a>
-    <a href="/police-complaint">신고 목록</a>
-  </div>
-  <div class="c_title_menu">
-    신고
-  </div>
+    <div class="c_title_back">
+        <a href="/police-complaint">
+            <img src="/images/back_arrow.svg" alt="back arrow">
+        </a>
+        <a href="/police-complaint">신고 목록</a>
+    </div>
+    <div class="c_title_menu">
+        신고
+    </div>
 </div>
-<div class="c_form">
-  <form>
+<form>
+    <div class="c_form">
+        <table class="c_table">
+            <thead>
+            <tr>
+                <th colspan="5"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="c_form_title">제목</td>
+                <td colspan="4">
+                    <p th:text="${complaint.pcTitle}"></p>
+                </td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="c_form_title" colspan="5" style="text-align: center">내용</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="c_response">
+                        <p th:text="${complaint.pcContent}"></p>
+                    </div>
+                </td>
+            </tr>
+            <tr style="height:15px">
+                <td></td>
+            </tr>
+            <tr>
+                <td class="c_form_title">첨부파일</td>
+                <td>
+                    <p th:if="${complaint.pcFileIds != null}">신고서에 첨부파일이 포함되었습니다.<br><br>
+                    참고 부탁드립니다.</p>
+                    <p th:unless="${complaint.pcFileIds != null}">-</p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="oc_menu_line" style="margin-top: 5%">
+        <img src="/images/line.png" alt="line">
+    </div>
+
     <table class="c_table">
-      <thead>
-      <tr>
-        <th colspan="5"></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td class="c_form_title">제목</td>
-        <td colspan="4">
-          <p>Data</p>
-        </td>
-      </tr>
-      <tr style="height:15px">
-        <td></td>
-      </tr>
-      <tr>
-        <td class="c_form_title" colspan="5" style="text-align: center">내용</td>
-      </tr>
-      <tr>
-        <td>
-          <div class="c_response">
-            <p>Data</p>
-          </div>
-        </td>
-      </tr>
-      </tbody>
+        <thead>
+        <tr>
+            <th colspan="5"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr style="height:15px">
+            <td></td>
+        </tr>
+        <tr>
+            <td class="c_form_title" colspan="5" style="text-align: center">신고자 정보</td>
+        </tr>
+        <tr style="height:15px">
+            <td></td>
+        </tr>
+        <tr>
+            <td class="c_form_title">신고자 이름</td>
+            <td colspan="4">
+                <p th:text="${complaint.pcName}"></p>
+            </td>
+        </tr>
+        <tr style="height:15px">
+            <td></td>
+        </tr>
+        <tr>
+            <td class="c_form_title">연락처</td>
+            <td colspan="4">
+                <p th:if="${complaint.pcContact != null}" th:text="${complaint.pcContact}"></p>
+                <p th:unless="${complaint.pcContact != null}">-</p>
+            </td>
+        </tr>
+        <tr style="height:15px">
+            <td></td>
+        </tr>
+        </tbody>
     </table>
-  </form>
-</div>
-<div class="c_menu_line">
-  <img src="/images/line.png" alt="line">
-</div>
-<div class="c_title">
-  <div class="c_title_menu" style="color:#1290FF; text-align: center">
-    답변
-  </div>
-</div>
-<div class="c_response">
-  <p>Data</p>
-</div>
+
+    <div class="c_menu_line" style="margin-top: 5%">
+        <img src="/images/line.png" alt="line">
+    </div>
+
+    <table class="c_table">
+        <thead>
+        <tr>
+            <th colspan="5"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr style="height:15px">
+            <td></td>
+        </tr>
+        <tr>
+            <td class="c_form_title" colspan="5" style="text-align: center">
+                피해자 정보</td>
+        </tr>
+        <tr style="height:15px">
+            <td></td>
+        </tr>
+        <tr>
+            <td class="c_form_title">이름</td>
+            <td colspan="4">
+                <p th:if="${complaint.pcVictimName != null}" th:text="${complaint.pcVictimName}"></p>
+                <p th:unless="${complaint.pcVictimName != null}">-</p>
+            </td>
+        </tr>
+        <tr style="height:15px">
+            <td></td>
+        </tr>
+        <tr>
+            <td class="c_form_title">나이</td>
+            <td colspan="4">
+                <p th:if="${complaint.pcVictimAge != null}" th:text="${complaint.pcVictimAge}"></p>
+                <p th:unless="${complaint.pcVictimAge != null}">-</p>
+            </td>
+        </tr>
+        <tr style="height:15px">
+            <td></td>
+        </tr>
+        <tr>
+            <td class="c_form_title">연락처</td>
+            <td colspan="4">
+                <p th:if="${complaint.pcVictimContact != null}" th:text="${complaint.pcVictimContact}"></p>
+                <p th:unless="${complaint.pcVictimContact != null}">-</p>
+            </td>
+        </tr>
+        <tr style="height:15px">
+            <td></td>
+        </tr>
+        <tr>
+            <td class="c_form_title" colspan="5" style="text-align: center">기타 정보</td>
+        </tr>
+        <tr>
+            <td>
+                <p th:if="${complaint.pcVictimOther != null}" th:text="${complaint.pcVictimOther}"></p>
+                <p th:unless="${complaint.pcVictimOther != null}">-</p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="c_menu_line" style="margin-top: 5%">
+        <img src="/images/line.png" alt="line">
+    </div>
+
+    <table class="c_table">
+        <thead>
+        <tr>
+            <th colspan="5"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr style="height:15px">
+            <td></td>
+        </tr>
+        <tr>
+            <td class="c_form_title" colspan="5" style="text-align: center">가해자 정보</td>
+        </tr>
+        <tr style="height:15px">
+            <td></td>
+        </tr>
+        <tr>
+            <td class="c_form_title">이름</td>
+            <td colspan="4">
+                <p th:if="${complaint.pcBullyName != null}" th:text="${complaint.pcBullyName}"></p>
+                <p th:unless="${complaint.pcBullyName != null}"-</p>
+            </td>
+        </tr>
+        <tr style="height:15px">
+            <td></td>
+        </tr>
+        <tr>
+            <td class="c_form_title">피해자와의<br>관계</td>
+            <td colspan="4">
+                <p th:if="${complaint.pcBullyRelationship != null}" th:text="${complaint.pcBullyRelationship}"></p>
+                <p th:unless="${complaint.pcBullyRelationship != null}">-</p>
+            </td>
+        </tr>
+        <tr style="height:15px">
+            <td></td>
+        </tr>
+        <tr>
+            <td class="c_form_title">나이</td>
+            <td colspan="4">
+                <p th:if="${complaint.pcBullyAge != null}" th:text="${complaint.pcBullyAge}"></p>
+                <p th:unless="${complaint.pcBullyAge != null}">-</p>
+            </td>
+        </tr>
+        <tr style="height:15px">
+            <td></td>
+        </tr>
+        <tr>
+            <td class="c_form_title">연락처</td>
+            <td colspan="4">
+                <p th:if="${complaint.pcBullyContact != null}" th:text="${complaint.pcBullyContact}"></p>
+                <p th:unless="${complaint.pcBullyContact != null}">-</p>
+            </td>
+        </tr>
+        <tr style="height:15px">
+            <td></td>
+        </tr>
+        <tr>
+            <td class="c_form_title" colspan="5" style="text-align: center">기타 정보</td>
+        </tr>
+        <tr>
+            <td>
+                <p th:if="${complaint.pcBullyOther != null}" th:text="${complaint.pcBullyOther}"></p>
+                <p th:unless="${complaint.pcBullyOther != null}">-</p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="c_menu_line">
+        <img src="/images/line.png" alt="line">
+    </div>
+    <div class="c_title">
+        <div class="c_title_menu" style="color:#1290FF; text-align: center">
+            답변
+        </div>
+    </div>
+    <div class="c_response" style="text-align: center">
+        <p th:if="${complaint.pcResponseContent} != null" th:text="${complaint.pcResponseContent}"></p>
+        <p th:unless="${complaint.pcResponseContent} != null">[답변 대기] 상태입니다.<br><br> [답변 완료] 상태 확인 후 다시 확인해주세요.</p>
+    </div>
+</form>
+<script type="module" src="/js/police_complaint_detail.js"></script>
 </body>
 </html>

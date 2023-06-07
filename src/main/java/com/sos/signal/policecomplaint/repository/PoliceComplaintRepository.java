@@ -20,4 +20,6 @@ public interface PoliceComplaintRepository extends JpaRepository<PoliceComplaint
             "ORDER BY pc.pcId DESC")
     List<PoliceComplaint> findLatestResults();
 
+    PoliceComplaint findById(int pcId);
+
 }

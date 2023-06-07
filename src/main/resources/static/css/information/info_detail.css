@@ -1,0 +1,28 @@
+.title {
+    width: 25%;
+    text-align: center;
+    color: #1290FF;
+}
+
+.table_detail {
+    margin-top: 20%;
+    height: 500px;
+}
+
+.line {
+    border: 1px solid black;
+    border-left: none;
+    border-right: none;
+    height: 34.5px;
+    font-weight: 700;
+}
+
+.reference_case_list {
+    width: 70px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: #1290FF;
+    color: white;
+    margin-left: 90%;
+}

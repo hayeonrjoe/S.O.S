@@ -6,8 +6,8 @@ import org.springframework.validation.BindingResult;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OnlineComplaintService {
@@ -31,8 +31,8 @@ public class OnlineComplaintService {
         if (onlineComplaint.getOcTitle() == null || onlineComplaint.getOcTitle().isEmpty()) {
             bindingResult.rejectValue("ocTitle", "error.ocTitle", "제목이 필요합니다.");
         }
-        if (onlineComplaint.getOc_content() == null || onlineComplaint.getOc_content().isEmpty()) {
-            bindingResult.rejectValue("oc_content", "error.oc_content", "내용이 필요합니다.");
+        if (onlineComplaint.getOcContent() == null || onlineComplaint.getOcContent().isEmpty()) {
+            bindingResult.rejectValue("ocContent", "error.ocContent", "내용이 필요합니다.");
         }
 
     }
@@ -63,6 +63,20 @@ public class OnlineComplaintService {
         }
         return complaints;
     }
+
+    public OnlineComplaint getComplaintById(int ocId) {
+        return onlineComplaintRepository.findById(ocId);
+    }
+
+    public OnlineComplaint findById(int ocId) {
+        Optional<OnlineComplaint> result = Optional.ofNullable(onlineComplaintRepository.findById(ocId).orElse(null));
+        return result.isPresent() ? result.get() : createErrorMessage();
+    }
+
+    private OnlineComplaint createErrorMessage() {
+        return new OnlineComplaint("페이지를 찾을 수 없습니다. 다시 한번 확인해 주시기 바랍니다.");
+    }
+
 //////////////////////////////////////////////////////////////////////
 //    Without Pagination
     public List<OnlineComplaint> getLatestResults() {

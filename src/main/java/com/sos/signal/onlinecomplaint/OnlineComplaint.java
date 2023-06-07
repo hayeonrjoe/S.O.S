@@ -21,7 +21,7 @@ public class OnlineComplaint {
     private Integer ocId;
 
     @Column(name = "a_id")
-    private Integer a_id;
+    private Integer aId;
     //    required
     @Column(name = "oc_pw")
     private String ocPw;
@@ -29,7 +29,8 @@ public class OnlineComplaint {
     @Column(name = "oc_title")
     private String ocTitle;
 
-    private String oc_content;
+    @Column(name = "oc_content")
+    private String ocContent;
 
     @Column(name = "oc_name")
     private String ocName;
@@ -41,12 +42,14 @@ public class OnlineComplaint {
     private String ocResponseStatus;
 
     //    optional
-    private String oc_contact;
+    @Column(name = "oc_contact")
+    private String ocContact;
 
     @Column(name = "oc_date")
     private LocalDateTime ocDate;
 
-    private String oc_response_content;
+    @Column(name = "oc_response_content")
+    private String ocResponseContent;
 
     @Column(name = "oc_date_formatted")
     private String ocDateFormatted;
@@ -62,6 +65,9 @@ public class OnlineComplaint {
         this.ocResponseStatus = ocResponseStatus;
     }
 
+    public OnlineComplaint(String s) {
+    }
+
     public void setOcDate(LocalDateTime ocDate) {
         if (ocDate == null) {
             this.ocDate = LocalDateTime.now();
@@ -72,6 +78,14 @@ public class OnlineComplaint {
         // Format the ocDate into a string representation
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.ocDateFormatted = this.ocDate.format(dateFormatter);
+    }
+
+    public OnlineComplaint orElse(OnlineComplaint other) {
+        if (this != null) {
+            return this;
+        } else {
+            return other;
+        }
     }
 
 }

@@ -16,4 +16,6 @@ public interface OnlineComplaintRepository extends JpaRepository<OnlineComplaint
             "ORDER BY oc.ocId DESC")
     List<OnlineComplaint> findLatestResults();
 
+    OnlineComplaint findById(int ocId);
+
 }

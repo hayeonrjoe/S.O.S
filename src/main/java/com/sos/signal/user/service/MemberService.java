@@ -8,6 +8,7 @@ import com.sos.signal.user.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -15,6 +16,8 @@ import java.net.URL;
 @Service
 public class MemberService {
 
+    @Autowired
+    private HttpSession session;
     public String getAccessToken (String authorize_code) {
         String access_Token = "";
         String refresh_Token = "";
@@ -108,6 +111,9 @@ public class MemberService {
             e.printStackTrace();
         }
 
+        session.setAttribute("kakaoE", kakaoDTO.getU_email());
+        session.setAttribute("kakaoA", kakaoDTO.getU_age_range());
+
         // catch 아래 코드 추가.
         KakaoDTO result = mr.findkakao(kakaoDTO.getU_email());
         // 위 코드는 먼저 정보가 저장되있는지 확인하는 코드.
@@ -120,6 +126,7 @@ public class MemberService {
             // 위 코드는 정보 저장 후 컨트롤러에 정보를 보내는 코드임.
             //  result를 리턴으로 보내면 null이 리턴되므로 위 코드를 사용.
         }
+
         return result;
     }
 }

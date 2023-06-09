@@ -4,10 +4,12 @@ import com.sos.signal.user.dto.KakaoDTO;
 import com.sos.signal.user.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 @Controller
 public class MemberController {
@@ -64,4 +66,14 @@ public class MemberController {
     public String adminLogin() {
         return "member/login_form";
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        // 세션 초기화
+        session.invalidate();
+
+        // 로그아웃 후 리다이렉트할 페이지 또는 뷰 이름을 반환합니다.
+        return "redirect:/loginform"; // 로그인 페이지로 리다이렉트하는 예시
+    }
+
 }

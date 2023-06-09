@@ -22,7 +22,8 @@ public class Admin {
     @Column(name = "a_pw", length = 10, nullable = false)
     private String a_pw;
 
-    private String a_admin_type;
+    @Column(name = "a_admin_type")
+    private String adminType;
 
     @Column(name = "a_company_name", length = 50, nullable = false)
     private String a_company_name;
@@ -76,12 +77,12 @@ public class Admin {
         this.a_pw = a_pw;
     }
 
-    public String getA_admin_type() {
-        return a_admin_type;
+    public String getAdminType() {
+        return adminType;
     }
 
-    public void setA_admin_type(String a_admin_type) {
-        this.a_admin_type = a_admin_type;
+    public void setAdminType(String a_admin_type) {
+        this.adminType = a_admin_type;
     }
 
     public String getA_company_name() {

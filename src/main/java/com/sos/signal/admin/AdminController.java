@@ -40,7 +40,7 @@ public class AdminController {
 
     @PostMapping("/signup")
     public String join(@ModelAttribute Admin admin,  @RequestParam("a_admin_type") String a_admin_type) {
-        admin.setA_admin_type(a_admin_type);
+        admin.setAdminType(a_admin_type);
         adminRepository.save(admin);
         return "member/login_form";
     }
@@ -49,9 +49,15 @@ public class AdminController {
     public String signIn(@RequestParam("email") String email, @RequestParam("pw") String pw) {
         List<Admin> admins = adminRepository.findMembers(email, pw);
         if (!admins.isEmpty()) {
-            Authentication authentication = new UsernamePasswordAuthenticationToken(admins.get(0), null, null);
+            Admin admin = admins.get(0);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(admin, null, null);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            return "common/main";
+
+            if (admin.getAdminType().equals("경찰")) {
+                return "admin/police/admin_main_police";
+            } else {
+                return "admin/nonpolice/admin_main_nonpolice";
+            }
         }
         return "member/login_form";
     }
@@ -66,8 +72,4 @@ public class AdminController {
         return "common/main";
     }
 
-    @GetMapping("/home")
-    public String home() {
-        return "common/main";
-    }
 }

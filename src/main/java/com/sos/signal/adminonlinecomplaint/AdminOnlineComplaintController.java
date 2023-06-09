@@ -46,25 +46,7 @@ public class AdminOnlineComplaintController {
 //        return "online_complaint/online_complaint_form_submit_success";
 //    }
 //
-//    @RequestMapping(value = "/online-complaint/detail", method = RequestMethod.GET)
-//    public String getComplaintDetail(@RequestParam("num") int ocId, Model model) {
-//        // Retrieve the complaint detail based on ocId
-//        OnlineComplaint complaint = onlineComplaintService.getComplaintById(ocId);
-//
-//        if (complaint != null) {
-//            // Add the complaint object to the model
-//            model.addAttribute("complaint", complaint);
-//
-//            // Return the name of the HTML page for the complaint detail
-//            return "online_complaint/online_complaint_detail";
-//        } else {
-//            // Handle the case when the complaint is not found
-//            // You can redirect to an error page or return an appropriate response
-//            return "online_complaint/online_complaint_list";
-//        }
-//    }
-//
-//
+
     // Police Admin
     @RequestMapping(value = "/online-complaint/admin/p/check-type", method = RequestMethod.POST)
     @ResponseBody
@@ -112,6 +94,25 @@ public class AdminOnlineComplaintController {
     public List<OnlineComplaint> searchPAdminOnlineComplaintsByTitle(@RequestParam("query") String query) {
         return onlineComplaintService.searchOnlineComplaintsByTitle(query);
     }
+
+    @RequestMapping(value = "/online-complaint/admin/p/detail", method = RequestMethod.GET)
+    public String getPAdminComplaintDetail(@RequestParam("num") int ocId, Model model) {
+        // Retrieve the complaint detail based on ocId
+        OnlineComplaint complaint = onlineComplaintService.getComplaintById(ocId);
+
+        if (complaint != null) {
+            // Add the complaint object to the model
+            model.addAttribute("complaint", complaint);
+//            if (complaint.getOcResponseContent() == null) return "admin/police/admin_complaint_comment_form_police";
+            // Return the name of the HTML page for the complaint detail
+            return "admin/police/admin_online_complaint_detail_police";
+        } else {
+            // Handle the case when the complaint is not found
+            // You can redirect to an error page or return an appropriate response
+            return "admin/police/admin_online_complaint_list_police";
+        }
+    }
+
 
     // Nonpolice Admin
     @RequestMapping(value = "/online-complaint/admin/n/check-type", method = RequestMethod.POST)

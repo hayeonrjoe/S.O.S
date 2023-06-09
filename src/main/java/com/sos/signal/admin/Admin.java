@@ -8,7 +8,7 @@ public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "a_id")
-    private Integer a_id;
+    private Integer aId;
 
     @Column(name = "a_name", length = 10, nullable = false)
     private String a_name;
@@ -17,7 +17,7 @@ public class Admin {
     private String a_contact;
 
     @Column(name = "a_email", length = 50, nullable = false)
-    private String a_email;
+    private String aEmail;
 
     @Column(name = "a_pw", length = 10, nullable = false)
     private String a_pw;
@@ -37,12 +37,12 @@ public class Admin {
 
     }
 
-    public Integer getA_id() {
-        return a_id;
+    public Integer getAId() {
+        return aId;
     }
 
-    public void setA_id(Integer a_id) {
-        this.a_id = a_id;
+    public void setAId(Integer aId) {
+        this.aId = aId;
     }
 
     public String getA_name() {
@@ -61,12 +61,12 @@ public class Admin {
         this.a_contact = a_contact;
     }
 
-    public String getA_email() {
-        return a_email;
+    public String getAEmail() {
+        return aEmail;
     }
 
-    public void setA_email(String a_email) {
-        this.a_email = a_email;
+    public void setAEmail(String aEmail) {
+        this.aEmail = aEmail;
     }
 
     public String getA_pw() {

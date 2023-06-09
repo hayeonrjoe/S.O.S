@@ -100,13 +100,13 @@ public class AdminOnlineComplaintController {
 
     @RequestMapping(value = "/online-complaint-comment-form/admin/p/submit", method = RequestMethod.POST)
     public String submitPAdminOnlineComplaintCommentForm(
-            @RequestParam("a_email") String aEmail,
+            @RequestParam("aEmail") String aEmail,
             @RequestParam("a_pw") String aPw,
             @RequestParam("ocReponseContent") String ocResponseContent,
             @RequestParam("ocId") Integer ocId,
             BindingResult bindingResult
     ) {
-            // Validate the admin and retrieve the a_id from the admin service
+            // Validate the admin and retrieve the aId from the admin service
             String adId = adminService.validatePAdminAndGetAIdForOnlineComplaintCommentForm(aEmail, aPw, bindingResult);
 
             if (bindingResult.hasErrors()) {

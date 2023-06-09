@@ -16,8 +16,8 @@ public class AdminService {
     }
 
     public String validatePAdminAndGetAIdForOnlineComplaintCommentForm(String aEmail, String aPw, BindingResult bindingResult) {
-        // Retrieve the Admin entity from the repository based on a_email
-        Admin admin = adminRepository.findByA_email(aEmail);
+        // Retrieve the Admin entity from the repository based on aEmail
+        Admin admin = adminRepository.findByaEmail(aEmail);
         if (admin == null) {
             // Admin not found, handle the error
             return "admin/police/admin_online_complaint_comment_form_police";
@@ -32,13 +32,13 @@ public class AdminService {
             // admin is not a cop, handle the error
             bindingResult.rejectValue("adminType", "error.adminType", "관리자 형태가 맞지 않습니다.");
         }
-        // Retrieve the a_id from the admin entity
-        return String.valueOf(admin.getA_id());
+        // Retrieve the aId from the admin entity
+        return String.valueOf(admin.getAId());
     }
 
     public String getPAdminATypeForOnlineComplaintCommentForm(String adId){
-        // Retrieve the Admin entity from the repository based on a_email
-        Admin admin = adminRepository.findByA_id(Integer.parseInt(adId));
+        // Retrieve the Admin entity from the repository based on aEmail
+        Admin admin = adminRepository.findByaId(Integer.parseInt(adId));
         if (admin == null) {
             // Admin not found, handle the error
             return "admin/police/admin_online_complaint_comment_form_police";

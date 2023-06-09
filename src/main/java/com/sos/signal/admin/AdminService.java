@@ -17,7 +17,7 @@ public class AdminService {
 
     public String validatePAdminAndGetAIdForOnlineComplaintCommentForm(String aEmail, String aPw, BindingResult bindingResult) {
         // Retrieve the Admin entity from the repository based on a_email
-        Admin admin = adminRepository.findByA_email(aEmail);
+        Admin admin = adminRepository.findByEmail(aEmail);
         if (admin == null) {
             // Admin not found, handle the error
             return "admin/police/admin_online_complaint_comment_form_police";
@@ -38,7 +38,7 @@ public class AdminService {
 
     public String getPAdminATypeForOnlineComplaintCommentForm(String adId){
         // Retrieve the Admin entity from the repository based on a_email
-        Admin admin = adminRepository.findByA_id(Integer.parseInt(adId));
+        Admin admin = adminRepository.findById(Integer.parseInt(adId));
         if (admin == null) {
             // Admin not found, handle the error
             return "admin/police/admin_online_complaint_comment_form_police";

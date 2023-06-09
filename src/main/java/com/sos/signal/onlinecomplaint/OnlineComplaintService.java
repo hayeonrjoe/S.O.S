@@ -49,6 +49,22 @@ public class OnlineComplaintService {
         onlineComplaintRepository.save(onlineComplaint);
     }
 
+    public void updatePAdminOnlineComplaint(Integer aId, Integer ocId, String ocResponseContent) {
+        // Retrieve the OnlineComplaint entity from the repository based on ocId
+        OnlineComplaint onlineComplaint = getComplaintById(ocId);
+        if ((onlineComplaint != null) && (onlineComplaint.getOcAdvisor().equals("경찰"))) {
+            // Update the aId and ocResponseStatus in the OnlineComplaint entity
+            onlineComplaint.setAId(aId);
+            onlineComplaint.setOcResponseContent(ocResponseContent);
+
+            // Update the ocResponseStatus to "답변완료"
+            onlineComplaint.setOcResponseStatus("답변완료");
+
+            // Save the updated OnlineComplaint entity
+            onlineComplaintRepository.save(onlineComplaint);
+        }
+    }
+
     public List<OnlineComplaint> searchOnlineComplaintsByTitle(String query) {
         List<OnlineComplaint> complaints = onlineComplaintRepository.findByOcTitleContainingIgnoreCase(query);
         for (OnlineComplaint complaint : complaints) {

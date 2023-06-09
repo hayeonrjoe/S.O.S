@@ -9,43 +9,27 @@
 <body>
 <div class="header">
     <div class="title_menu">
-        <a href="/main" class="logo_main">
+        <a href="/main/admin/p" class="logo_main">
             S<small class="small_title">peak</small>.O<small class="small_title">ut</small>.S<small
                 class="small_title">afely</small>
         </a>
         <a href="#" class="top_menu">신고</a>
-        <a href="" class="top_menu">상담</a>
-        <a href="/loginform" class="top_menu"><b style="color: #1290FF">로그인</b></a>
+        <a href="/online-complaint/admin/p" class="top_menu">상담</a>
     </div>
-</div>
-<div class="c_menu">
-    <div>
-        <a href="/online-complaint">비공개</a><br>
-        <a href="/online-complaint">온라인 상담</a>
-    </div>
-    <div>
-        <a href="/counseling-appointment-form">방문 상담</a>
-    </div>
-</div>
-<div class="c_menu_line">
-    <img src="/images/line.png" alt="line">
-</div>
-<div class="c_menu_triangle">
-    <img src="/images/triangle.png" alt="triangle">
 </div>
 <div class="c_title">
     <div class="c_title_back">
-        <a href="/online-complaint">
+        <a href="/online-complaint/admin/p">
             <img src="/images/back_arrow.svg" alt="back arrow">
         </a>
-        <a href="/online-complaint">상담 목록</a>
+        <a href="/online-complaint/admin/p">상담 목록</a>
     </div>
     <div class="c_title_menu">
         상담
     </div>
 </div>
-<div class="c_form">
-    <form>
+<form>
+    <div class="c_form">
         <table class="c_table">
             <thead>
             <tr>
@@ -56,7 +40,7 @@
             <tr>
                 <td class="c_form_title">이름</td>
                 <td colspan="4">
-                    <p>Data</p>
+                    <p th:text="${complaint.ocName}"></p>
                 </td>
             </tr>
             <tr style="height:15px">
@@ -65,7 +49,8 @@
             <tr>
                 <td class="c_form_title">연락처</td>
                 <td colspan="4">
-                    <p>Data</p>
+                    <p th:if="${complaint.ocContact != null}" th:text="${complaint.ocContact}"></p>
+                    <p th:unless="${complaint.ocContact != null}">-</p>
                 </td>
             </tr>
             <tr style="height:15px">
@@ -74,7 +59,7 @@
             <tr>
                 <td class="c_form_title">도움 받고<br> 싶은 사람</td>
                 <td colspan="4">
-                    <p>Data</p>
+                    <p th:text="${complaint.ocAdvisor}"></p>
                 </td>
             </tr>
             <tr style="height:15px">
@@ -83,7 +68,7 @@
             <tr>
                 <td class="c_form_title">제목</td>
                 <td colspan="4">
-                    <p>Data</p>
+                    <p th:text="${complaint.ocTitle}"></p>
                 </td>
             </tr>
             <tr style="height:15px">
@@ -95,14 +80,14 @@
             <tr>
                 <td>
                     <div class="c_response">
-                        <p>Data</p>
+                        <p th:text="${complaint.ocContent}"></p>
                     </div>
                 </td>
             </tr>
             </tbody>
         </table>
-    </form>
-</div>
+    </div>
+</form>
 <div class="c_menu_line">
     <img src="/images/line.png" alt="line">
 </div>
@@ -111,13 +96,39 @@
         답변
     </div>
 </div>
-<form action="post">
+<form action="/online-complaint-comment-form/admin/p/submit" method="POST">
+    <table class="c_table">
+        <thead>
+        <tr>
+            <th colspan="5"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="c_form_title">이메일<b>*</b></td>
+            <td colspan="4"><input type="text" name="a_email" class="c_form_input" placeholder="이메일을 입력해주세요." required></td>
+        </tr>
+        <tr style="height:15px">
+            <td></td>
+        </tr>
+        <tr>
+            <td class="c_form_title">비밀번호<b>*</b></td>
+            <td colspan="4">
+                <input type="password" name="a_pw" class="c_form_input"
+                       placeholder="비밀번호를 입력해주세요."
+                       required minlength="8" maxlength="16"
+                       pattern="^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$">
+            </td>
+        </tr>
+        </tbody>
+    </table>
     <div class="c_response">
-        <textarea class="textarea_content" rows="10">답변 내용 입력해 주세요.</textarea>
+        <textarea name="ocResponseContent" class="textarea_content" rows="10" placeholder="답변 내용 입력해주세요.<br>이메일과 비밀번호 확인 시 답변이 등록됩니다."></textarea>
+    </div>
+    <div class="submit_section">
+        <button type="submit" class="submit_button" id="submitBtn">확인</button>
     </div>
 </form>
-<div class="submit_section">
-    <button type="submit" class="submit_button">확인</button>
-</div>
+<script type="module" src="/js/admin/admin_online_complaint_comment_form_police.js"></script>
 </body>
 </html>

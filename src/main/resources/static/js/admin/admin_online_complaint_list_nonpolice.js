@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
     var loadAction = document.getElementById('searchForm').getAttribute('data-load-action');
 
-    if (loadAction === '/online-complaint/admin/p/load-latest') {
+    if (loadAction === '/online-complaint/admin/n/load-latest') {
         // Fetch the latest results when the page is first loaded
         fetchLatestResults();
     }
 
     function fetchLatestResults() {
-        return fetch('/online-complaint/admin/p/latest-results')
+        return fetch('/online-complaint/admin/n/latest-results')
             .then(response => response.json())
             .then(data => {
                 // Update the search results on the page
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log("ocAdvisor:", ocAdvisor);
 
                 if (ocAdvisor !== null) {
-                    fetch('/online-complaint/admin/p/check-type', {
+                    fetch('/online-complaint/admin/n/check-type', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             console.log("Response:", data);
                             if (data.valid) {
                                 // Redirect to the new HTML page with the data
-                                window.location.href = "/online-complaint/admin/p/detail?num=" + ocId + "&advisor=" + ocAdvisor;
+                                window.location.href = "/online-complaint/admin/n/detail?num=" + ocId + "&advisor=" + ocAdvisor;
                             } else {
                                 alert("권한이 없습니다.");
                             }

@@ -65,16 +65,17 @@ public class AdminOnlineComplaintController {
 //    }
 //
 //
-    @RequestMapping(value = "/online-complaint/admin/p/check-password", method = RequestMethod.POST)
+    // Police Admin
+    @RequestMapping(value = "/online-complaint/admin/p/check-type", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Boolean> checkPassword(@RequestBody Map<String, String> requestBody) {
+    public Map<String, Boolean> checkPAdminType(@RequestBody Map<String, String> requestBody) {
         int ocId = Integer.parseInt(requestBody.get("ocId"));
         String ocAdvisor = requestBody.get("ocAdvisor");
 
         // Retrieve the OnlineComplaint object by ocId from the database
         OnlineComplaint onlineComplaint = onlineComplaintService.findById(ocId);
 
-        // Check if the password matches
+        // Check if the type matches
         boolean valid = (onlineComplaint != null && ocAdvisor.equals(onlineComplaint.getOcAdvisor()));
 
         // Prepare the response JSON
@@ -99,7 +100,7 @@ public class AdminOnlineComplaintController {
 
     @RequestMapping(value = "/online-complaint/admin/p/latest-results", method = RequestMethod.GET)
     @ResponseBody
-    public List<OnlineComplaint> getLatestResults() {
+    public List<OnlineComplaint> getPAdminLatestResults() {
 
         // Fetch the latest results from the service for the specified page
         return onlineComplaintService.getLatestResults();
@@ -112,4 +113,51 @@ public class AdminOnlineComplaintController {
         return onlineComplaintService.searchOnlineComplaintsByTitle(query);
     }
 
+    // Nonpolice Admin
+    @RequestMapping(value = "/online-complaint/admin/n/check-type", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Boolean> checkNAdminType(@RequestBody Map<String, String> requestBody) {
+        int ocId = Integer.parseInt(requestBody.get("ocId"));
+        String ocAdvisor = requestBody.get("ocAdvisor");
+
+        // Retrieve the OnlineComplaint object by ocId from the database
+        OnlineComplaint onlineComplaint = onlineComplaintService.findById(ocId);
+
+        // Check if the type matches
+        boolean valid = (onlineComplaint != null && ocAdvisor.equals(onlineComplaint.getOcAdvisor()));
+
+        // Prepare the response JSON
+        Map<String, Boolean> response = new HashMap<>();
+
+        response.put("valid", valid);
+
+        return response;
+    }
+
+    @RequestMapping(value = "/online-complaint/admin/n", method = RequestMethod.GET)
+    public String showNAdminOnlineComplaintList(Model model) {
+
+        // Fetch the latest results from the service for the specified page
+        List<OnlineComplaint> latestResults = onlineComplaintService.getLatestResults();
+
+        // Add the latest results to the model
+        model.addAttribute("latestResults", latestResults);
+
+        return "admin/nonpolice/admin_online_complaint_list_nonpolice";
+    }
+
+    @RequestMapping(value = "/online-complaint/admin/n/latest-results", method = RequestMethod.GET)
+    @ResponseBody
+    public List<OnlineComplaint> getNAdminLatestResults() {
+
+        // Fetch the latest results from the service for the specified page
+        return onlineComplaintService.getLatestResults();
+
+    }
+
+    @RequestMapping(value = "/online-complaint/admin/n/search", method = RequestMethod.GET)
+    @ResponseBody
+    public List<OnlineComplaint> searchNAdminOnlineComplaintsByTitle(@RequestParam("query") String query) {
+        return onlineComplaintService.searchOnlineComplaintsByTitle(query);
+    }
 }

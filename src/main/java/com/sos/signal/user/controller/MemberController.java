@@ -39,6 +39,27 @@ public class MemberController {
         return "common/main";
     }
 
+    @RequestMapping(value = "/chat_loginform", method=RequestMethod.GET)
+    public String chatlogin() {
+        return "chat/chat_login";
+    }
+
+    @RequestMapping(value = "/chat_login", method = RequestMethod.GET)
+    public String chatkakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
+//        System.out.println("#########" + code);
+//        String access_Token = ms.getAccessToken(code);
+//        KakaoDTO userInfo = ms.getUserInfo(access_Token);
+//        System.out.println("###access_Token#### : " + access_Token);
+////        System.out.println("###age_range#### : " + userInfo.get("age_range"));
+////        System.out.println("###email#### : " + userInfo.get("email"));
+//
+//        session.invalidate();
+//        session.setAttribute("kakaoE", userInfo.getU_email());
+//        session.setAttribute("kakaoA", userInfo.getU_age_range());
+
+        return "chat/room";
+    }
+
     @RequestMapping(value = "/admin-login", method = RequestMethod.GET)
     public String adminLogin() {
         return "member/login_form";

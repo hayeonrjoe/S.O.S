@@ -17,10 +17,6 @@
             <a href="/counseling-session" class="top_menu">상담사 연결</a>
             <a href="/information/school_violence" class="top_menu">정보</a>
             <a href="/online-complaint" class="top_menu">상담</a>
-            <a th:href="@{/loginform}" class="top_menu" th:if="${#httpServletRequest.userPrincipal == null}"><b
-                    style="color: #1290FF">로그인</b></a>
-            <a th:href="@{/logout}" class="top_menu" th:if="${#httpServletRequest.userPrincipal != null}"><b
-                    style="color: #1290FF">로그아웃</b></a>
         </div>
     </div>
 

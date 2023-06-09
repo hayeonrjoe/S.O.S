@@ -34,11 +34,10 @@ public class MemberController {
 //        System.out.println("###age_range#### : " + userInfo.get("age_range"));
 //        System.out.println("###email#### : " + userInfo.get("email"));
 
-        session.invalidate();
         session.setAttribute("kakaoE", userInfo.getU_email());
         session.setAttribute("kakaoA", userInfo.getU_age_range());
 
-        return "common/main";
+        return "common/logout_main";
     }
 
     @RequestMapping(value = "/chat_loginform", method=RequestMethod.GET)
@@ -67,13 +66,12 @@ public class MemberController {
         return "member/login_form";
     }
 
-    @GetMapping("/logout")
+    @RequestMapping("/logout")
     public String logout(HttpServletRequest request) {
-        // 세션 초기화
-        session.invalidate();
-
-        // 로그아웃 후 리다이렉트할 페이지 또는 뷰 이름을 반환합니다.
-        return "redirect:/loginform"; // 로그인 페이지로 리다이렉트하는 예시
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate(); // 세션 무효화
+        }
+        return "common/logout_main"; // 로그아웃 후 리다이렉트할 URL
     }
-
 }

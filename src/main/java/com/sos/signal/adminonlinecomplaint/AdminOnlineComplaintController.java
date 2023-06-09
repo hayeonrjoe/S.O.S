@@ -1,9 +1,11 @@
 package com.sos.signal.adminonlinecomplaint;
 
+import com.sos.signal.admin.AdminService;
 import com.sos.signal.onlinecomplaint.OnlineComplaint;
 import com.sos.signal.onlinecomplaint.OnlineComplaintService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -14,38 +16,14 @@ import java.util.Map;
 @Controller
 public class AdminOnlineComplaintController {
 
+    private final AdminService adminService;
     private final OnlineComplaintService onlineComplaintService;
 
-    public AdminOnlineComplaintController(OnlineComplaintService onlineComplaintService) {
+
+    public AdminOnlineComplaintController(AdminService adminService, OnlineComplaintService onlineComplaintService) {
+        this.adminService = adminService;
         this.onlineComplaintService = onlineComplaintService;
     }
-//
-//    @RequestMapping(value = "/online-complaint-form", method = RequestMethod.GET)
-//    public String showOnlineComplaintForm(Model model) {
-//        model.addAttribute("onlineComplaint", new OnlineComplaint());
-//        return "online_complaint/online_complaint_form";
-//    }
-//
-//    @RequestMapping(value = "/online-complaint-form/submit", method = RequestMethod.POST)
-//    public String submitOnlineComplaintForm(@ModelAttribute("onlineComplaint") OnlineComplaint onlineComplaint, BindingResult bindingResult) {
-//
-//        onlineComplaintService.validateOnlineComplaint(onlineComplaint, bindingResult);
-//
-//        if (bindingResult.hasErrors()) {
-//            return "online_complaint/online_complaint_form";
-//        }
-//
-//        onlineComplaintService.saveOnlineComplaint(onlineComplaint);
-//
-//        // Redirect to the success page
-//        return "redirect:/online_complaint_form/submit-success";
-//    }
-//
-//    @RequestMapping(value = "/online_complaint_form/submit-success", method = RequestMethod.GET)
-//    public String showSuccessPage() {
-//        return "online_complaint/online_complaint_form_submit_success";
-//    }
-//
 
     // Police Admin
     @RequestMapping(value = "/online-complaint/admin/p/check-type", method = RequestMethod.POST)
@@ -114,6 +92,42 @@ public class AdminOnlineComplaintController {
     }
 
 
+    @RequestMapping(value = "/online-complaint-comment-form/admin/p", method = RequestMethod.GET)
+    public String showPAdminOnlineComplaintForm(Model model) {
+        model.addAttribute("onlineComplaint", new OnlineComplaint());
+        return "admin/police/admin_online_complaint_comment_form_police";
+    }
+
+    @RequestMapping(value = "/online-complaint-comment-form/admin/p/submit", method = RequestMethod.POST)
+    public String submitPAdminOnlineComplaintCommentForm(
+            @RequestParam("a_email") String aEmail,
+            @RequestParam("a_pw") String aPw,
+            @RequestParam("ocReponseContent") String ocResponseContent,
+            @RequestParam("ocId") Integer ocId,
+            BindingResult bindingResult
+    ) {
+            // Validate the admin and retrieve the a_id from the admin service
+            String adId = adminService.validatePAdminAndGetAIdForOnlineComplaintCommentForm(aEmail, aPw, bindingResult);
+
+            if (bindingResult.hasErrors()) {
+                return "admin/police/admin_online_complaint_comment_form_police";
+            }
+
+            // converts the adId string into an integer value and assigns it to the aId variable
+            Integer aId = Integer.parseInt(adId);
+
+            // Pass aId, ocId, and ocResponseStatus to the online complaint service and save if advisor type is a cop
+            onlineComplaintService.updatePAdminOnlineComplaint(aId, ocId, ocResponseContent);
+
+            // Redirect to the success page
+            return "redirect:/online-complaint-comment-form/admin/p/submit-success";
+    }
+
+    @RequestMapping(value = "/online-complaint-comment-form/admin/p/submit-success", method = RequestMethod.GET)
+    public String showPAdminSuccessPage() {
+        return "admin/police/admin_online_complaint_form_police_submit_success";
+    }
+
     // Nonpolice Admin
     @RequestMapping(value = "/online-complaint/admin/n/check-type", method = RequestMethod.POST)
     @ResponseBody
@@ -179,5 +193,7 @@ public class AdminOnlineComplaintController {
             return "admin/nonpolice/admin_online_complaint_list_nonpolice";
         }
     }
+
+
 
 }

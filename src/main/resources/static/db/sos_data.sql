@@ -249,3 +249,13 @@ VALUES
 도움을 청하는 저희는 경찰 분들과 교육 당국의 도움을 간절히 바라고 있습니다. 피해자들을 지원하고 보호하기 위해 적절한 조치를 취해주시기를 요청드립니다. 학교폭력에 대한 경계와 인식을 높이고, 가해자들에 대한 엄정한 처벌을 통해 안전하고 존중받는 학교 환경을 조성해주시기를 간절히 부탁드립니다.
 도움과 지지를 기다리는 저와 피해자들에게 긍정적인 변화를 가져다주실 수 있기를 진심으로 바랍니다.
 감사합니다.');
+
+INSERT INTO `admin` (`a_name`, `a_contact`, `a_email`, `a_pw`, `a_admin_type`, `a_company_name`, `a_company_contact`, `a_company_address`) VALUES ('spring', '010-1111-2222', 'spring@naver.com', '1234', '상담사', '서울시청소년상담복지센터', '02-1234-4567', '서울 중구 을지로11길 23');
+INSERT INTO `admin` (`a_name`, `a_contact`, `a_email`, `a_pw`, `a_admin_type`, `a_company_name`, `a_company_contact`, `a_company_address`) VALUES ('이채진', '010-3322-4455', 'chaehin@naver.com', '1111', '상담사', '국제인성심리상담센터', '02-999-9876', '서울 금천구 가산동 345-4');
+INSERT INTO `admin` (`a_name`, `a_contact`, `a_email`, `a_pw`, `a_admin_type`, `a_company_name`, `a_company_contact`, `a_company_address`) VALUES ('이상이', '010-4912-7253', 'sanglee@gmial.com', '7891', '상담사', '다르마심리상담명상센터', '02-719-5219', '서울 금천구 범안로16길 40');
+INSERT INTO `admin` (`a_name`, `a_contact`, `a_email`, `a_pw`, `a_admin_type`, `a_company_name`, `a_company_contact`, `a_company_address`) VALUES ('김민석', '010-0921-1111', 'minsuck@naver.com', 'b0921', '변호사', '로엘법무법인', '02-9876-5432', '서울 서초구 서초대로 274');
+INSERT INTO `admin` (`a_name`, `a_contact`, `a_email`, `a_pw`, `a_admin_type`, `a_company_name`, `a_company_contact`, `a_company_address`) VALUES ('박준영', '010-7654-3456', 'park@gmail.com', '5678', '변호사', '광장', '02-321-4566', '서울 중구 남대문로 63');
+INSERT INTO `admin` (`a_name`, `a_contact`, `a_email`, `a_pw`, `a_admin_type`, `a_company_name`, `a_company_contact`, `a_company_address`) VALUES ('김변호', '010-1736-9321', 'kimb@naver.com', '7890', '변호사', '율촌', '02-333-2222', '서울 강남구 테헤란로 521');
+INSERT INTO `admin` (`a_name`, `a_contact`, `a_email`, `a_pw`, `a_admin_type`, `a_company_name`, `a_company_contact`, `a_company_address`) VALUES ('서경찬', '010-5678-0987', 'ok@gmail.com', '4444', '경찰', '서울 경찰청', '02-456-4567', '서울 종로구 사직로8길 31');
+INSERT INTO `admin` (`a_name`, `a_contact`, `a_email`, `a_pw`, `a_admin_type`, `a_company_name`, `a_company_contact`, `a_company_address`) VALUES ('이초경', '010-4803-6431', 'lee@naver.com', '0987', '경찰', '경기경찰청', '032-432-0987', '경기 화성시 남양읍 남양로 570');
+INSERT INTO `admin` (`a_name`, `a_contact`, `a_email`, `a_pw`, `a_admin_type`, `a_company_name`, `a_company_contact`, `a_company_address`) VALUES ('이경호', '010-2044-8732', 'kungho@gmail.com', '5555', '경찰', '인천경찰', '02-432-8754', '인천 남동구 예술로152번길 9');

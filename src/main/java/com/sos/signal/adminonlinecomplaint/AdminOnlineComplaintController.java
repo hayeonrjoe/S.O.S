@@ -161,4 +161,23 @@ public class AdminOnlineComplaintController {
     public List<OnlineComplaint> searchNAdminOnlineComplaintsByTitle(@RequestParam("query") String query) {
         return onlineComplaintService.searchOnlineComplaintsByTitle(query);
     }
+
+    @RequestMapping(value = "/online-complaint/admin/n/detail", method = RequestMethod.GET)
+    public String getNAdminComplaintDetail(@RequestParam("num") int ocId, Model model) {
+        // Retrieve the complaint detail based on ocId
+        OnlineComplaint complaint = onlineComplaintService.getComplaintById(ocId);
+
+        if (complaint != null) {
+            // Add the complaint object to the model
+            model.addAttribute("complaint", complaint);
+//            if (complaint.getOcResponseContent() == null) return "admin/police/admin_complaint_comment_form_police";
+            // Return the name of the HTML page for the complaint detail
+            return "admin/nonpolice/admin_online_complaint_detail_nonpolice";
+        } else {
+            // Handle the case when the complaint is not found
+            // You can redirect to an error page or return an appropriate response
+            return "admin/nonpolice/admin_online_complaint_list_nonpolice";
+        }
+    }
+
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>카카오 로그인</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/chat/chat_login.css">
+</head>
+<body>
+<div class="header">
+    <div class="title_menu">
+        <a href="/main" class="logo_main">
+            S<small class="small_title">peak</small>.O<small class="small_title">ut</small>.S<small class="small_title">afely</small>
+        </a>
+        <a href="/room" class="top_menu_chat">채팅</a>
+        <a href="/counseling-session" class="top_menu">상담사 연결</a>
+        <a href="/information/school_violence" class="top_menu">정보</a>
+        <a href="/online-complaint" class="top_menu">상담</a>
+        <a th:href="@{/login}" class="top_menu" th:if="${#httpServletRequest.userPrincipal == null}"><b
+                style="color: #1290FF">로그인</b></a>
+        <a th:href="@{/logout}" class="top_menu" th:if="${#httpServletRequest.userPrincipal != null}"><b
+                style="color: #1290FF">로그아웃</b></a>
+    </div>
+</div>
+<div class="chat_register">
+    <h1 class="register_title">로그인</h1>
+    <p class="com_register_comment">
+        채팅 시작 전에 로그인을 먼저 해주세요!
+    </p>
+    <a class="p-2"
+       href="https://kauth.kakao.com/oauth/authorize?client_id=d52eb1fa182c6d476ac8b1e6b2b73099&redirect_uri=http://localhost:8080/chat_login&response_type=code">
+        <img src="/images/kakao_login_large_wide.png" class="kakao_login">
+    </a>
+</div>
+</body>
+</html>

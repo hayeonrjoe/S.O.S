@@ -11,9 +11,49 @@
         var confirmPassword = document.getElementById('pw_ok').value;
 
         if (password !== confirmPassword) {
-          alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+          alert('비밀번호가 일치하지 않습니다.');
         }
       }
+
+      function showConfirmationMessage() {
+        var name = document.getElementById("name").value;
+        var contact = document.getElementById("contact").value;
+        var email = document.getElementById("email").value;
+        var pw = document.getElementById("pw").value;
+        var pw_ok = document.getElementById("pw_ok").value;
+        var company_name = document.getElementById("company_name").value;
+        var company_contact = document.getElementById("company_contact").value;
+        var streetAdr = document.getElementById("streetAdr").value;
+
+        if(name === "") {
+          alert("이름을 입력해주세요.");
+        }
+        else if (contact === "") {
+          alert("연락처를 입력해주세요.");
+        }
+        else if (email === "") {
+          alert("이메일을 입력해주세요.");
+        }
+        else if (pw === "") {
+          alert("비밀번호를 입력해주세요.");
+        }
+        else if (pw_ok === "") {
+          alert("비밀번호 확인를 입력해주세요.");
+        }
+        else if (company_name === "") {
+          alert("직장명을 입력해주세요.");
+        }
+        else if (company_contact === "") {
+          alert("직장 연락처를 입력해주세요.")
+        }
+        else if(streetAdr === "") {
+          alert("도로명 주소를 입력해주세요.");
+        }
+        else {
+          alert("회원가입이 완료되었습니다.");
+        }
+      }
+
     </script>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script>
@@ -136,9 +176,9 @@
         </tr>
         <tr style="height: 11px;"><td></td><td></td></tr>
         <tr>
-          <td class="title">직장 우편번호<b>*</b></td>
+          <td class="title">직장 우편번호</td>
           <td>
-            <input type="text" id="zipcode" class="input" placeholder="우편번호를 입력하세요" name="a_company_zipcode" readonly required onclick="findAddr()"/>
+            <input type="text" id="zipcode" class="input" placeholder="우편번호를 입력하세요" name="a_company_zipcode" required readonly onclick="findAddr()"/>
             <br/>
           </td>
         </tr>
@@ -146,7 +186,7 @@
         <tr>
           <td class="title">직장 도로명주소<b>*</b></td>
           <td>
-            <input type="text"id="streetAdr"" class="input" name="a_company_address" required readonly/>
+            <input type="text" id="streetAdr" class="input" name="a_company_address" required/>
             <br/>
           </td>
         </tr>
@@ -161,7 +201,7 @@
       </table>
 
       <div id="liveAlertPlaceholder"></div>
-      <button class="register_sub">관리자 회원가입</button>
+      <button class="register_sub" onclick="showConfirmationMessage()">관리자 회원가입</button>
       <p class="register_comment">
         관리자 회원가입은 신원 확인 후 계정 사용이 가능합니다.
         입력하신 이메일로 회원가입 완료 메일을 전송해 드립니다.

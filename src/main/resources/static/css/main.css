@@ -88,8 +88,25 @@
     font-weight: bold;
 }
 
+.admin_main_menu_large {
+    margin-top: 15%;
+    justify-content: space-between;
+    word-spacing: 50px;
+}
+
+.admin_main_menu_large a {
+    font-size: 25px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
 .main_image {
     margin-top: 10%;
+}
+
+.admin_main_image {
+    margin-top: 15%;
 }
 
 .siren_image {

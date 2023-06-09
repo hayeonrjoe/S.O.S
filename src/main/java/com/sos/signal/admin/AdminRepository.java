@@ -7,11 +7,10 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface AdminRepository extends JpaRepository<Admin, Integer> {
-    @Query("SELECT a FROM Admin a WHERE a.a_email = :email AND a.a_pw = :pw")
+    @Query("SELECT a FROM Admin a WHERE a.aEmail = :email AND a.a_pw = :pw")
     List<Admin> findMembers(@Param("email") String email, @Param("pw") String pw);
 
-    Admin findByEmail(String a_email);
+    Admin findByaEmail(String aEmail);
 
-    Admin findById(int a_id);
-
+    Admin findByaId(Integer aId);
 }

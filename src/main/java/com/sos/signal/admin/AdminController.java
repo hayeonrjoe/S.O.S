@@ -71,5 +71,4 @@ public class AdminController {
         SecurityContextHolder.clearContext();
         return "common/main";
     }
-
 }

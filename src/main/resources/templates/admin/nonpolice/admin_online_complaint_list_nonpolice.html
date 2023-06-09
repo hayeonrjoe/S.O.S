@@ -5,17 +5,16 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/complaint.css">
     <title>S.O.S</title>
-    <script src="/js/admin/admin_online_complaint_search_police.js"></script>
+    <script src="/js/admin/admin_online_complaint_search_nonpolice.js"></script>
 </head>
 <body>
 <div class="header">
     <div class="title_menu">
-        <a href="/main/admin/p" class="logo_main">
+        <a href="/main/admin/n" class="logo_main">
             S<small class="small_title">peak</small>.O<small class="small_title">ut</small>.S<small
                 class="small_title">afely</small>
         </a>
-        <a href="#" class="top_menu">신고</a>
-        <a href="/online-complaint/admin/p" class="top_menu">상담</a>
+        <a href="/online-complaint/admin/n" class="top_menu">상담</a>
     </div>
 </div>
 <div class="c_title">
@@ -23,7 +22,7 @@
         상담 목록
     </div>
 </div>
-<form id="searchForm" action="/online-complaint/admin/p/search" method="GET" data-load-action="/online-complaint/admin/p/load-latest">
+<form id="searchForm" action="/online-complaint/admin/n/search" method="GET" data-load-action="/online-complaint/admin/n/load-latest">
     <div class="search_section">
         <table>
             <thead>
@@ -83,6 +82,6 @@
         </div>
     </div>
 </form>
-<script src="/js/admin/admin_online_complaint_list_police.js"></script>
+<script src="/js/admin/admin_online_complaint_list_nonpolice.js"></script>
 </body>
 </html>

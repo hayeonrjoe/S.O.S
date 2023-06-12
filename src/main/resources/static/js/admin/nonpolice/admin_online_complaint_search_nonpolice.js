@@ -9,23 +9,23 @@ document.addEventListener('DOMContentLoaded', function() {
     function search() {
         var searchTerm = document.getElementById("searchInput").value;
 
-        // Make an AJAX request to the server
+        // Retrieve aId from the session
+        var aId = parseInt(document.getElementById("aId").textContent);
+
+        // Make an AJAX request to the server with aId included in the URL
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/online-complaint/admin/n/search?query=" + searchTerm, true);
+        xhr.open("GET", "/online-complaint/admin/n/search?query=" + searchTerm + "&aId=" + aId, true);
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     // Update the search results on the page
                     var searchResults = JSON.parse(xhr.responseText);
-                    // Filter the search results based on ocAdvisor value
-                    searchResults = searchResults.filter(function(result) {
-                        return result.ocAdvisor === "상담사" || result.ocAdvisor === "변호사";
-                    });
 
                     searchResults.sort(function(a, b) {
                         return b.ocId - a.ocId; // Sort in descending order based on ocId
                     });
+
                     var tbody = document.getElementById("tbody");
                     tbody.innerHTML = ""; // Clear existing content
 
@@ -67,15 +67,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         tbody.appendChild(row);
 
-                        // Add click event listener to handle opening with the right password
                         row.addEventListener("click", function(event) {
-                            var ocAdvisor = prompt("관리자 형태(상담사, 변호사, 경찰)를 입력하세요.");
-                            if (ocAdvisor === result.ocAdvisor && (ocAdvisor === "상담사" || ocAdvisor === "변호사")) {
-                                // Open the result
-                                window.location.href = "/online-complaint/admin/n" + result.ocId;
-                            } else {
-                                alert("권한이 없습니다.");
-                            }
+                            // Redirect to the next page with the ocId as a query parameter
+                            var url = "/online-complaint/admin/n?ocId=" + result.ocId;
+                            window.location.href = url;
                         });
                     }
 

@@ -5,9 +5,10 @@ import com.sos.signal.onlinecomplaint.OnlineComplaint;
 import com.sos.signal.onlinecomplaint.OnlineComplaintService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,26 +27,6 @@ public class AdminOnlineComplaintController {
     }
 
     // Police Admin
-    @RequestMapping(value = "/online-complaint/admin/p/check-type", method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String, Boolean> checkPAdminType(@RequestBody Map<String, String> requestBody) {
-        int ocId = Integer.parseInt(requestBody.get("ocId"));
-        String ocAdvisor = requestBody.get("ocAdvisor");
-
-        // Retrieve the OnlineComplaint object by ocId from the database
-        OnlineComplaint onlineComplaint = onlineComplaintService.findById(ocId);
-
-        // Check if the type matches
-        boolean valid = (onlineComplaint != null && ocAdvisor.equals(onlineComplaint.getOcAdvisor()));
-
-        // Prepare the response JSON
-        Map<String, Boolean> response = new HashMap<>();
-
-        response.put("valid", valid);
-
-        return response;
-    }
-
     @RequestMapping(value = "/online-complaint/admin/p", method = RequestMethod.GET)
     public String showPAdminOnlineComplaintList(Model model) {
 
@@ -55,7 +36,7 @@ public class AdminOnlineComplaintController {
         // Add the latest results to the model
         model.addAttribute("latestResults", latestResults);
 
-        return "admin/police/admin_online_complaint_list_police";
+        return "admin/police/online_complaint/admin_online_complaint_list_police";
     }
 
     @RequestMapping(value = "/online-complaint/admin/p/latest-results", method = RequestMethod.GET)
@@ -81,13 +62,16 @@ public class AdminOnlineComplaintController {
         if (complaint != null) {
             // Add the complaint object to the model
             model.addAttribute("complaint", complaint);
-//            if (complaint.getOcResponseContent() == null) return "admin/police/admin_complaint_comment_form_police";
-            // Return the name of the HTML page for the complaint detail
-            return "admin/police/admin_online_complaint_detail_police";
+            if (complaint.getOcResponseContent().equals("답변대기")) {
+                return "admin/police/online_complaint/admin_online_complaint_comment_form_police";
+            } else {
+                // Return the name of the HTML page for the complaint detail
+                return "admin/police/online_complaint/admin_online_complaint_detail_police";
+            }
         } else {
             // Handle the case when the complaint is not found
             // You can redirect to an error page or return an appropriate response
-            return "admin/police/admin_online_complaint_list_police";
+            return "admin/police/online_complaint/admin_online_complaint_list_police";
         }
     }
 
@@ -95,37 +79,39 @@ public class AdminOnlineComplaintController {
     @RequestMapping(value = "/online-complaint-comment-form/admin/p", method = RequestMethod.GET)
     public String showPAdminOnlineComplaintForm(Model model) {
         model.addAttribute("onlineComplaint", new OnlineComplaint());
-        return "admin/police/admin_online_complaint_comment_form_police";
+        return "admin/police/online_complaint/admin_online_complaint_comment_form_police";
     }
 
     @RequestMapping(value = "/online-complaint-comment-form/admin/p/submit", method = RequestMethod.POST)
     public String submitPAdminOnlineComplaintCommentForm(
-            @RequestParam("aEmail") String aEmail,
             @RequestParam("a_pw") String aPw,
-            @RequestParam("ocReponseContent") String ocResponseContent,
+            @RequestParam("ocResponseContent") String ocResponseContent,
             @RequestParam("ocId") Integer ocId,
-            BindingResult bindingResult
+            HttpServletRequest request
     ) {
-            // Validate the admin and retrieve the aId from the admin service
-            String adId = adminService.validatePAdminAndGetAIdForOnlineComplaintCommentForm(aEmail, aPw, bindingResult);
+        // Retrieve aId from the session
+        HttpSession session = request.getSession();
+        Integer aId = (Integer) session.getAttribute("aId");
 
-            if (bindingResult.hasErrors()) {
-                return "admin/police/admin_online_complaint_comment_form_police";
-            }
+        // Verify the password using the service method
+        boolean passwordMatch = adminService.verifyAdminPassword(aId, aPw);
 
-            // converts the adId string into an integer value and assigns it to the aId variable
-            Integer aId = Integer.parseInt(adId);
+        if (!passwordMatch) {
+            return "redirect:/online-complaint-comment-form/admin/p";
+        }
 
-            // Pass aId, ocId, and ocResponseStatus to the online complaint service and save if advisor type is a cop
-            onlineComplaintService.updatePAdminOnlineComplaint(aId, ocId, ocResponseContent);
+        // Passwords match, proceed with the submission
+        // Pass aId, ocId, and ocResponseStatus to the online complaint service and save
+        onlineComplaintService.updatePAdminOnlineComplaint(aId, ocId, ocResponseContent);
 
-            // Redirect to the success page
-            return "redirect:/online-complaint-comment-form/admin/p/submit-success";
+        // Redirect to the success page
+        return "redirect:/online-complaint-comment-form/admin/p/submit-success";
     }
+
 
     @RequestMapping(value = "/online-complaint-comment-form/admin/p/submit-success", method = RequestMethod.GET)
     public String showPAdminSuccessPage() {
-        return "admin/police/admin_online_complaint_form_police_submit_success";
+        return "admin/police/online_complaint/admin_online_complaint_form_police_submit_success";
     }
 
     // Nonpolice Admin

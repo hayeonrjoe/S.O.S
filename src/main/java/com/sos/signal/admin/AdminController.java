@@ -46,17 +46,24 @@ public class AdminController {
     }
 
     @PostMapping("/admin-signin")
-    public String signIn(@RequestParam("email") String email, @RequestParam("pw") String pw) {
+    public String signIn(@RequestParam("email") String email, @RequestParam("pw") String pw,
+                         @RequestParam("aId") Integer aId, HttpServletRequest request) {
         List<Admin> admins = adminRepository.findMembers(email, pw);
         if (!admins.isEmpty()) {
             Admin admin = admins.get(0);
+            // Store the adminId in the admin object for future reference
+            admin.setAId(aId);
             Authentication authentication = new UsernamePasswordAuthenticationToken(admin, null, null);
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
+            // Store the admin in the HTTP session
+            HttpSession session = request.getSession();
+            session.setAttribute("admin", admin);
+
             if (admin.getAdminType().equals("경찰")) {
-                return "admin/police/admin_main_police";
+                return "admin/police/admin_main_police" + admin.getAId();
             } else {
-                return "admin/nonpolice/admin_main_nonpolice";
+                return "admin/nonpolice/admin_main_nonpolice" + admin.getAId();
             }
         }
         return "member/login_form";

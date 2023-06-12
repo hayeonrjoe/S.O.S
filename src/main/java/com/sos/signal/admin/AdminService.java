@@ -15,6 +15,11 @@ public class AdminService {
         this.onlineComplaintRepository = onlineComplaintRepository;
     }
 
+    public boolean verifyAdminPassword(Integer aId, String password) {
+        Admin admin = adminRepository.findByaId(aId);
+        return admin != null && admin.getAPw().equals(password);
+    }
+
     public String validatePAdminAndGetAIdForOnlineComplaintCommentForm(String aEmail, String aPw, BindingResult bindingResult) {
         // Retrieve the Admin entity from the repository based on aEmail
         Admin admin = adminRepository.findByaEmail(aEmail);
@@ -23,14 +28,9 @@ public class AdminService {
             return "admin/police/admin_online_complaint_comment_form_police";
         }
         // Check if the requested a_pw matches the a_pw from the repository
-        if (!aPw.equals(admin.getA_pw())) {
+        if (!aPw.equals(admin.getAPw())) {
             // a_pw doesn't match, handle the error
             bindingResult.rejectValue("a_pw", "error.a_pw", "비밀번호가 일치하지 않습니다.");
-        }
-        // Check if the admin is a cop in the repository
-        if (!admin.getAdminType().equals("경찰")) {
-            // admin is not a cop, handle the error
-            bindingResult.rejectValue("adminType", "error.adminType", "관리자 형태가 맞지 않습니다.");
         }
         // Retrieve the aId from the admin entity
         return String.valueOf(admin.getAId());

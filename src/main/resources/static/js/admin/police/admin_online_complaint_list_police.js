@@ -23,47 +23,29 @@ document.addEventListener('DOMContentLoaded', function () {
     function attachRowClickListener() {
         var rows = document.querySelectorAll("#tbody tr");
 
-        Array.from(rows).forEach(function (row) {
-            row.addEventListener("click", function (event) {
-                var ocAdvisor = prompt("관리자 형태(상담사, 변호사, 경찰)를 입력하세요.");
+        Array.from(rows).forEach(function(row) {
+            row.addEventListener("click", function(event) {
                 var ocId = row.querySelector("td:first-child").textContent;
 
-                console.log("ocId:", ocId);
-                console.log("ocAdvisor:", ocAdvisor);
-
-                if (ocAdvisor !== null) {
-                    fetch('/online-complaint/admin/p/check-type', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ ocId: ocId, ocAdvisor: ocAdvisor }),
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log("Response:", data);
-                            if (data.valid) {
-                                // Redirect to the new HTML page with the data
-                                window.location.href = "/online-complaint/admin/p/detail?num=" + ocId + "&advisor=" + ocAdvisor;
-                            } else {
-                                alert("권한이 없습니다.");
-                            }
-                        })
-                        .catch(error => {
-                            console.error('에러:', error);
-                        });
-                }
+                // Redirect to the new HTML page with the data
+                window.location.href = "/online-complaint/admin/p/detail?num=" + ocId;
             });
         });
     }
+
 
     function updateSearchResults(results) {
         var tbody = document.getElementById("tbody");
         tbody.innerHTML = ""; // Clear existing content
 
-        // Loop through the latest results and create table rows
-        for (var i = 0; i < results.length; i++) {
-            var result = results[i];
+        // Filter the results based on ocAdvisor and ocResponseStatus values
+        var filteredResults = results.filter(function(result) {
+            return result.ocAdvisor === "경찰" && result.ocResponseStatus === "답변대기";
+        });
+
+        // Loop through the filtered results and create table rows
+        for (var i = 0; i < filteredResults.length; i++) {
+            var result = filteredResults[i];
 
             // Create and populate each table row
             var row = document.createElement("tr");
@@ -103,4 +85,5 @@ document.addEventListener('DOMContentLoaded', function () {
             tbody.appendChild(row);
         }
     }
+
 });

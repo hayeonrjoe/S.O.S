@@ -13,4 +13,8 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
     Admin findByaEmail(String aEmail);
 
     Admin findByaId(Integer aId);
+<<<<<<< HEAD
+=======
+
+>>>>>>> baaf3847bbda343a1b2d5a20d31f41ccd3e0c906
 }

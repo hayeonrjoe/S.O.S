@@ -20,7 +20,7 @@ public class Admin {
     private String aEmail;
 
     @Column(name = "a_pw", length = 10, nullable = false)
-    private String a_pw;
+    private String aPw;
 
     @Column(name = "a_admin_type")
     private String adminType;
@@ -69,12 +69,12 @@ public class Admin {
         this.aEmail = aEmail;
     }
 
-    public String getA_pw() {
-        return a_pw;
+    public String getAPw() {
+        return aPw;
     }
 
-    public void setA_pw(String a_pw) {
-        this.a_pw = a_pw;
+    public void setAPw(String aPw) {
+        this.aPw = aPw;
     }
 
     public String getAdminType() {
@@ -109,7 +109,7 @@ public class Admin {
         this.a_company_address = a_company_address;
     }
 
-    public boolean checkPassword(String a_pw) {
-        return this.a_pw.equals(a_pw);
+    public boolean checkPassword(String aPw) {
+        return this.aPw.equals(aPw);
     }
 }

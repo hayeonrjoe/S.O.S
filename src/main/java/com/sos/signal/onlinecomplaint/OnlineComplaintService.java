@@ -3,11 +3,14 @@ package com.sos.signal.onlinecomplaint;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import javax.naming.directory.SearchResult;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OnlineComplaintService {
@@ -93,7 +96,19 @@ public class OnlineComplaintService {
         return new OnlineComplaint("페이지를 찾을 수 없습니다. 다시 한번 확인해 주시기 바랍니다.");
     }
 
-//////////////////////////////////////////////////////////////////////
+    public List<OnlineComplaint> searchByTitleAndAdminType(String query, String adminType) {
+        if (adminType.equals("상담사")) {
+            return onlineComplaintRepository.findByTitleAndOcAdvisorForCounselor(query);
+        } else if (adminType.equals("변호사")) {
+            return onlineComplaintRepository.findByTitleAndOcAdvisorForLawyer(query);
+        } else {
+            // Handle other admin types or invalid admin types
+            return Collections.emptyList(); // Return an empty list or handle it accordingly
+        }
+    }
+
+
+    //////////////////////////////////////////////////////////////////////
 //    Without Pagination
     public List<OnlineComplaint> getLatestResults() {
         return onlineComplaintRepository.findLatestResults();

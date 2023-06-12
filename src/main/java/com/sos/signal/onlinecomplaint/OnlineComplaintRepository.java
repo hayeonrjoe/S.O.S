@@ -18,4 +18,8 @@ public interface OnlineComplaintRepository extends JpaRepository<OnlineComplaint
 
     OnlineComplaint findById(int ocId);
 
+    List<OnlineComplaint> findByTitleAndOcAdvisorForCounselor(String title);
+
+    List<OnlineComplaint> findByTitleAndOcAdvisorForLawyer(String title);
+
 }

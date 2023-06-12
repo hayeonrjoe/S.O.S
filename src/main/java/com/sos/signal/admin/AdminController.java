@@ -26,6 +26,9 @@ public class AdminController {
     @Autowired
     private ResourceLoader resourceLoader;
 
+    @Autowired
+    private AdminService adminService;
+
     @ResponseBody
     @GetMapping("/admin-register")
     public ResponseEntity<Resource> joinform() throws IOException {
@@ -78,4 +81,14 @@ public class AdminController {
         SecurityContextHolder.clearContext();
         return "common/main";
     }
+
+    @GetMapping("/admin/get-admin-type")
+    @ResponseBody
+    public String getAdminType(@RequestParam("aId") Integer aId) {
+        // Retrieve the adminType based on the aId from your database or other data source
+        String adminType = adminService.getAdminType(aId);
+
+        return adminType;
+    }
+
 }

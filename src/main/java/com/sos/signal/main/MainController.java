@@ -22,5 +22,4 @@ public class MainController {
     public String showNAdminMain()  {
         return "admin/nonpolice/admin_main_nonpolice";
     }
-    
 }

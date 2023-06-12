@@ -298,6 +298,10 @@ b {
     white-space: nowrap;
 }
 
+tr.table-row:hover {
+    cursor: pointer;
+}
+
 .searchResultsContainer {
     text-align: start;
 }

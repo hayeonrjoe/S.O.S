@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (xhr.status === 200) {
                     // Update the search results on the page
                     var searchResults = JSON.parse(xhr.responseText);
+                    // Filter the search results based on ocAdvisor value
+                    searchResults = searchResults.filter(function(result) {
+                        return result.ocAdvisor === "경찰";
+                    });
+
                     searchResults.sort(function(a, b) {
                         return b.ocId - a.ocId; // Sort in descending order based on ocId
                     });
@@ -62,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         tbody.appendChild(row);
 
-                        // Add click event listener to handle opening with the right password
                         row.addEventListener("click", function(event) {
                             var ocAdvisor = prompt("관리자 형태(상담사, 변호사, 경찰)를 입력하세요.");
                             if (ocAdvisor === result.ocAdvisor && ocAdvisor === "경찰") {

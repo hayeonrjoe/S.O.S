@@ -74,4 +74,13 @@ public class MemberController {
         }
         return "common/logout_main"; // 로그아웃 후 리다이렉트할 URL
     }
+
+    @RequestMapping("/admin/logout")
+    public String adminLogout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate(); // 세션 무효화
+        }
+        return "common/main"; // 로그아웃 후 리다이렉트할 URL
+    }
 }

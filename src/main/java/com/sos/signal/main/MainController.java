@@ -1,30 +1,25 @@
 package com.sos.signal.main;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.io.IOException;
 
-@RestController
-@RequestMapping("/main")
+@Controller
 public class MainController {
 
-    @Autowired
-    private ResourceLoader resourceLoader;
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    public String showMain()  {
+        return "common/main";
+    }
 
-    @GetMapping
-    public ResponseEntity<Resource> showMain() throws IOException {
-        Resource resource = resourceLoader.getResource("classpath:templates/common/main.html");
-        if (resource.exists()) {
-            return ResponseEntity.ok().contentType(MediaType.TEXT_HTML).body(resource);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @RequestMapping(value = "/main/admin/p", method = RequestMethod.GET)
+    public String showPAdminMain()  {
+        return "admin/police/admin_main_police";
+    }
+
+    @RequestMapping(value = "/main/admin/n", method = RequestMethod.GET)
+    public String showNAdminMain()  {
+        return "admin/nonpolice/admin_main_nonpolice";
     }
 }

@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (xhr.status === 200) {
                     // Update the search results on the page
                     var searchResults = JSON.parse(xhr.responseText);
+                    // Filter the search results based on ocAdvisor value
+                    searchResults = searchResults.filter(function(result) {
+                        return result.ocAdvisor === "상담사" || result.ocAdvisor === "변호사";
+                    });
+
                     searchResults.sort(function(a, b) {
                         return b.ocId - a.ocId; // Sort in descending order based on ocId
                     });

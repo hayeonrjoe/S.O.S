@@ -1,16 +1,10 @@
 // Wait for the DOM to load
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var searchForm = document.getElementById('searchForm');
-    searchForm.addEventListener('submit', function(event) {
+    searchForm.addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent the default form submission
         search(); // Call your search function
     });
-
-    // Function to show or hide the pagination container
-    function togglePagination(show) {
-        var paginationContainer = document.getElementById('pagination');
-        paginationContainer.style.display = show ? 'block' : 'none';
-    }
 
     function search() {
         var searchTerm = document.getElementById("searchInput").value;
@@ -19,12 +13,12 @@ document.addEventListener('DOMContentLoaded', function() {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "/online-complaint/search?query=" + searchTerm, true);
 
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     // Update the search results on the page
                     var searchResults = JSON.parse(xhr.responseText);
-                    searchResults.sort(function(a, b) {
+                    searchResults.sort(function (a, b) {
                         return b.ocId - a.ocId; // Sort in descending order based on ocId
                     });
                     var tbody = document.getElementById("tbody");
@@ -69,18 +63,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         tbody.appendChild(row);
 
                         // Add click event listener to handle opening with the right password
-                        row.addEventListener("click", function(event) {
-                            var ocPw = prompt("비밀번호를 입력해주세요");
-                            if (ocPw === result.ocPw) {
-                                // Open the result
-                                window.location.href = "/online-complaint/" + result.ocId;
-                            } else {
-                                alert("비밀번호가 일치하지 않습니다.");
-                            }
-                        });
+                        row.addEventListener("click", createRowClickListener(result));
                     }
 
-                    togglePagination(false); // Hide the pagination container
                 } else {
                     // Handle the error case
                     console.error("에러: " + xhr.status);
@@ -90,5 +75,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Send the AJAX request
         xhr.send();
+    }
+
+    function createRowClickListener(result) {
+        return function (event) {
+            var ocPw = prompt("비밀번호를 입력해주세요");
+            if (ocPw === result.ocPw) {
+                // Open the result with ocId as a query parameter in the URL
+                window.location.href = "/online-complaint/detail?ocId=" + result.ocId;
+            } else {
+                alert("비밀번호가 일치하지 않습니다.");
+            }
+        };
     }
 });

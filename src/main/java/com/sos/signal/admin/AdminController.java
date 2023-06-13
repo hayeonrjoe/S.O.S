@@ -1,6 +1,5 @@
 package com.sos.signal.admin;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.MediaType;
@@ -17,17 +16,24 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/register-form")
 public class AdminController {
 
-    @Autowired
-    private AdminRepository adminRepository;
+    private final AdminRepository adminRepository;
 
-    @Autowired
-    private ResourceLoader resourceLoader;
+    private final ResourceLoader resourceLoader;
 
-    @Autowired
-    private AdminService adminService;
+    private final AdminService adminService;
+
+    public AdminController(AdminRepository adminRepository, ResourceLoader resourceLoader, AdminService adminService) {
+        this.adminRepository = adminRepository;
+        this.resourceLoader = resourceLoader;
+        this.adminService = adminService;
+    }
+
+    @RequestMapping("/register-form")
+    public String showRegisterForm() {
+        return "/member/register_form";
+    }
 
     @ResponseBody
     @GetMapping("/admin-register")

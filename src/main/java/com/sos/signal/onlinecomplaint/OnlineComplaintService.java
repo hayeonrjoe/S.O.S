@@ -82,11 +82,11 @@ public class OnlineComplaintService {
     }
 
     public OnlineComplaint getComplaintById(int ocId) {
-        return onlineComplaintRepository.findById(ocId);
+        return onlineComplaintRepository.findByOcId(ocId);
     }
 
-    public OnlineComplaint findById(int ocId) {
-        Optional<OnlineComplaint> result = Optional.ofNullable(onlineComplaintRepository.findById(ocId).orElse(null));
+    public OnlineComplaint findByOcId(int ocId) {
+        Optional<OnlineComplaint> result = Optional.ofNullable(onlineComplaintRepository.findByOcId(ocId).orElse(null));
         return result.isPresent() ? result.get() : createErrorMessage();
     }
 

@@ -3,14 +3,12 @@ package com.sos.signal.onlinecomplaint;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
-import javax.naming.directory.SearchResult;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class OnlineComplaintService {
@@ -98,14 +96,15 @@ public class OnlineComplaintService {
 
     public List<OnlineComplaint> searchByTitleAndAdminType(String query, String adminType) {
         if (adminType.equals("상담사")) {
-            return onlineComplaintRepository.findByTitleAndOcAdvisorForCounselor(query);
+            return onlineComplaintRepository.findByOcTitleAndOcAdvisor(query, "상담사");
         } else if (adminType.equals("변호사")) {
-            return onlineComplaintRepository.findByTitleAndOcAdvisorForLawyer(query);
+            return onlineComplaintRepository.findByOcTitleAndOcAdvisor(query, "변호사");
         } else {
             // Handle other admin types or invalid admin types
             return Collections.emptyList(); // Return an empty list or handle it accordingly
         }
     }
+
 
 
     //////////////////////////////////////////////////////////////////////

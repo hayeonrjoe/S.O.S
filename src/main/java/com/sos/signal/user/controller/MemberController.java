@@ -40,7 +40,7 @@ public class MemberController {
         return "common/logout_main";
     }
 
-    @RequestMapping(value = "/chat_loginform", method=RequestMethod.GET)
+    @RequestMapping(value = "/chat-loginform", method=RequestMethod.GET)
     public String chatlogin() {
         return "chat/chat_login";
     }

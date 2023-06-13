@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var ocPw = prompt("비밀번호를 입력해주세요");
             if (ocPw === result.ocPw) {
                 // Open the result with ocId as a query parameter in the URL
-                window.location.href = "/online-complaint/detail?ocId=" + result.ocId;
+                window.location.href = "/online-complaint/detail?num=" + result.ocId;
             } else {
                 alert("비밀번호가 일치하지 않습니다.");
             }

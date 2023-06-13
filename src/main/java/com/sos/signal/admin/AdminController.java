@@ -1,9 +1,5 @@
 package com.sos.signal.admin;
 
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -83,13 +78,23 @@ public class AdminController {
         return "common/main";
     }
 
-    @GetMapping("/admin/get-admin-type")
-    @ResponseBody
-    public String getAdminType(@RequestParam("aId") Integer aId) {
-        // Retrieve the adminType based on the aId from your database or other data source
-        String adminType = adminService.getAdminType(aId);
+    @RequestMapping (value = "/admin/get-admin-type", method = RequestMethod.GET)
+    public String getAdminType(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Admin admin = (Admin) session.getAttribute("admin");
 
-        return adminType;
+        if (admin != null) {
+            Integer aId = admin.getAId();
+
+            // Retrieve the adminType based on the aId from your database or other data source
+            String adminType = adminService.getAdminType(aId);
+
+            return adminType;
+        }
+
+        // Handle the case when admin is not found in the session
+        return "redirect:/online-complaint/admin/n";
     }
+
 
 }

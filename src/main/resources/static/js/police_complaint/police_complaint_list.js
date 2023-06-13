@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             console.log("Response:", data);
                             if (data.valid) {
                                 // Redirect to the new HTML page with the data
-                                window.location.href = "/police-complaint/detail?pcId=" + pcId;
+                                window.location.href = "/police-complaint/detail?num=" + pcId;
                             } else {
                                 alert("비밀번호가 일치하지 않습니다.");
                             }

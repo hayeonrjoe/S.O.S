@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Make an AJAX request to the server with aId included in the URL
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/online-complaint/admin/n/search?query=" + searchTerm + "&aId=" + aId, true);
+        xhr.open("GET", "/online-complaint/admin/n/search?query=" + searchTerm + "&num=" + aId, true);
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         row.addEventListener("click", function(event) {
                             // Redirect to the next page with the ocId as a query parameter
-                            var url = "/online-complaint/admin/n?ocId=" + result.ocId;
+                            var url = "/online-complaint/admin/n?num=" + result.ocId;
                             window.location.href = url;
                         });
                     }

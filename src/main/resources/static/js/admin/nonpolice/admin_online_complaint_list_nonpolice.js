@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var aId = parseInt(document.getElementById("aId").textContent);
 
         // Fetch the adminType associated with the aId from the server-side
-        fetch('/admin/get-admin-type?aId=' + aId)
+        fetch('/admin/get-admin-type?num=' + aId)
             .then(response => response.text())
             .then(adminType => {
                 // Loop through the results and create table rows based on adminType and ocAdvisor
@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     // Filter the results based on adminType and ocAdvisor
                     if (
-                        (adminType === "상담사" && result.ocAdvisor === "상담사") ||
-                        (adminType === "변호사" && result.ocAdvisor === "변호사")
+                        (adminType === "상담사" && result.ocAdvisor === "상담사" && result.ocResponseStatus === "답변대기") ||
+                        (adminType === "변호사" && result.ocAdvisor === "변호사" && result.ocResponseStatus === "답변대기")
                     ) {
                         // Create and populate each table row
                         var row = document.createElement("tr");
@@ -97,4 +97,5 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('에러: ', error);
             });
     }
+
 });

@@ -1,6 +1,5 @@
 package com.sos.signal.policecomplaint.repository;
 
-import com.sos.signal.onlinecomplaint.OnlineComplaint;
 import com.sos.signal.policecomplaint.dto.PoliceComplaint;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,6 +19,6 @@ public interface PoliceComplaintRepository extends JpaRepository<PoliceComplaint
             "ORDER BY pc.pcId DESC")
     List<PoliceComplaint> findLatestResults();
 
-    PoliceComplaint findById(int pcId);
+    PoliceComplaint findByPcId(int pcId);
 
 }

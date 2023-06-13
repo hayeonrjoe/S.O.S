@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             console.log("Response:", data);
                             if (data.valid) {
                                 // Redirect to the detail page with ocId as a query parameter
-                                window.location.href = "/online-complaint/detail?ocId=" + ocId;
+                                window.location.href = "/online-complaint/detail?num=" + ocId;
 
                             } else {
                                 alert("비밀번호가 일치하지 않습니다.");

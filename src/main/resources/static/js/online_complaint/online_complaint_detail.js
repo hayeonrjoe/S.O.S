@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Retrieve the ocId from the URL parameter
     const urlParams = new URLSearchParams(window.location.search);
-    const ocId = urlParams.get('ocId');
+    const ocId = urlParams.get('num');
 
     // Fetch the data using AJAX
-    fetch('/online-complaint/detail?ocId=' + ocId)
+    fetch('/online-complaint/detail?num=' + ocId)
         .then(response => response.json())
         .then(data => {
             console.log(data); // Check the data received in the console

@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         row.addEventListener("click", function(event) {
                             // Redirect to the next page with the ocId as a query parameter
-                            var url = "/online-complaint/admin/p?ocId=" + result.ocId;
+                            var url = "/online-complaint/admin/p?num=" + result.ocId;
                             window.location.href = url;
                         });
                     }

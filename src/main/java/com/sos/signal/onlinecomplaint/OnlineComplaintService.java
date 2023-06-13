@@ -105,31 +105,8 @@ public class OnlineComplaintService {
         }
     }
 
-
-
-    //////////////////////////////////////////////////////////////////////
-//    Without Pagination
     public List<OnlineComplaint> getLatestResults() {
         return onlineComplaintRepository.findLatestResults();
     }
-
-//////////////////////////////////////////////////////////////////////
-//    Pagination
-//    public List<OnlineComplaint> getLatestResults(int pageNumber, int pageSize) {
-//        int startIndex = pageNumber * pageSize;
-//        int endIndex = startIndex + pageSize;
-//
-//        List<OnlineComplaint> results = onlineComplaintRepository.findLatestResults();
-//
-//        if (startIndex >= results.size()) {
-//            return Collections.emptyList();
-//        }
-//
-//        // Adjust the end index if it exceeds the actual number of results
-//        endIndex = Math.min(endIndex, results.size());
-//
-//        return results.subList(startIndex, endIndex);
-//    }
-
 
 }

@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Retrieve the pcId from the URL parameter
     const urlParams = new URLSearchParams(window.location.search);
-    const pcId = urlParams.get('num');
+    const pcId = urlParams.get('pcId');
 
     // Fetch the data using AJAX
-    fetch('/police-complaint/detail?num=' + pcId)
+    fetch('/police-complaint/detail?pcId=' + pcId)
         .then(response => response.json())
         .then(data => {
             console.log(data); // Check the data received in the console

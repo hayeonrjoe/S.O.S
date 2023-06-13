@@ -78,11 +78,11 @@ public class PoliceComplaintService {
     }
 
     public PoliceComplaint getComplaintById(int pcId) {
-        return policeComplaintRepository.findById(pcId);
+        return policeComplaintRepository.findByPcId(pcId);
     }
 
-    public PoliceComplaint findById(int pcId) {
-        Optional<PoliceComplaint> result = Optional.ofNullable(policeComplaintRepository.findById(pcId).orElse(null));
+    public PoliceComplaint findByPcId(int pcId) {
+        Optional<PoliceComplaint> result = Optional.ofNullable(policeComplaintRepository.findByPcId(pcId).orElse(null));
         return result.isPresent() ? result.get() : createErrorMessage();
     }
 

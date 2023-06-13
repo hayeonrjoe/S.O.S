@@ -1,6 +1,5 @@
 package com.sos.signal.policecomplaint;
 
-import com.sos.signal.onlinecomplaint.OnlineComplaint;
 import com.sos.signal.policecomplaint.dto.PoliceComplaint;
 import com.sos.signal.policecomplaint.service.PoliceComplaintService;
 import org.springframework.stereotype.Controller;
@@ -55,9 +54,9 @@ public class PoliceComplaintController {
     }
 
     @RequestMapping(value = "/police-complaint/detail", method = RequestMethod.GET)
-    public String getComplaintDetail(@RequestParam("num") int pcId, Model model) {
+    public String getComplaintDetail(@RequestParam("pcId") String pcId, Model model) {
         // Retrieve the complaint detail based on pcId
-        PoliceComplaint complaint = policeComplaintService.getComplaintById(pcId);
+        PoliceComplaint complaint = policeComplaintService.getComplaintById(Integer.parseInt(pcId));
 
         if (complaint != null) {
             // Add the complaint object to the model
@@ -75,11 +74,11 @@ public class PoliceComplaintController {
     @RequestMapping(value = "/police-complaint/check-password", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Boolean> checkPassword(@RequestBody Map<String, String> requestBody) {
-        int pcId = Integer.parseInt(requestBody.get("pcId"));
+        Integer pcId = Integer.parseInt(requestBody.get("pcId"));
         String pcPw = requestBody.get("pcPw");
 
         // Retrieve the PoliceComplaint object by pcId from the database
-        PoliceComplaint policeComplaint = policeComplaintService.findById(pcId);
+        PoliceComplaint policeComplaint = policeComplaintService.findByPcId(pcId);
 
         // Check if the password matches
         boolean valid = (policeComplaint != null && pcPw.equals(policeComplaint.getPcPw()));

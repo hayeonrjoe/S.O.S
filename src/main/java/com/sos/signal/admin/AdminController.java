@@ -20,13 +20,10 @@ public class AdminController {
 
     private final AdminRepository adminRepository;
 
-    private final ResourceLoader resourceLoader;
-
     private final AdminService adminService;
 
-    public AdminController(AdminRepository adminRepository, ResourceLoader resourceLoader, AdminService adminService) {
+    public AdminController(AdminRepository adminRepository, AdminService adminService) {
         this.adminRepository = adminRepository;
-        this.resourceLoader = resourceLoader;
         this.adminService = adminService;
     }
 
@@ -35,15 +32,10 @@ public class AdminController {
         return "/member/register_form";
     }
 
-    @ResponseBody
-    @GetMapping("/admin-register")
-    public ResponseEntity<Resource> joinform() throws IOException {
-        Resource resource = resourceLoader.getResource("classpath:templates/member/register_form.html");
-        if (resource.exists()) {
-            return ResponseEntity.ok().contentType(MediaType.TEXT_HTML).body(resource);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+
+    @RequestMapping(value = "/register-form/admin-register", method = RequestMethod.GET)
+    public String showJoinForm() {
+        return "/member/register_form";
     }
 
 
@@ -54,14 +46,16 @@ public class AdminController {
         return "member/login_form";
     }
 
-    @PostMapping("/admin-signin")
-    public String signIn(@RequestParam("email") String email, @RequestParam("pw") String pw,
-                         @RequestParam("aId") Integer aId, HttpServletRequest request) {
-        List<Admin> admins = adminRepository.findMembers(email, pw);
+    @RequestMapping(value = "/admin-signin", method = RequestMethod.POST)
+    public String signIn(@RequestParam("email") String email, @RequestParam("pw") String password,
+                         HttpServletRequest request) {
+        List<Admin> admins = adminRepository.findMembers(email, password);
         if (!admins.isEmpty()) {
             Admin admin = admins.get(0);
-            // Store the adminId in the admin object for future reference
+            // Store the aId in the admin object for future reference
+            Integer aId = admin.getAId();
             admin.setAId(aId);
+
             Authentication authentication = new UsernamePasswordAuthenticationToken(admin, null, null);
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -70,11 +64,12 @@ public class AdminController {
             session.setAttribute("admin", admin);
 
             if (admin.getAdminType().equals("경찰")) {
-                return "admin/police/admin_main_police" + admin.getAId();
+                return "redirect:/main/admin/p";
             } else {
-                return "admin/nonpolice/admin_main_nonpolice" + admin.getAId();
+                return "redirect:/main/admin/n";
             }
         }
+
         return "member/login_form";
     }
 

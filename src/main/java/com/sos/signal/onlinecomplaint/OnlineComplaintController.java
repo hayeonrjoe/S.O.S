@@ -38,18 +38,18 @@ public class OnlineComplaintController {
         onlineComplaintService.saveOnlineComplaint(onlineComplaint);
 
         // Redirect to the success page
-        return "redirect:/online_complaint_form/submit-success";
+        return "redirect:/online-complaint-form/submit-success";
     }
 
-    @RequestMapping(value = "/online_complaint_form/submit-success", method = RequestMethod.GET)
+    @RequestMapping(value = "/online-complaint-form/submit-success", method = RequestMethod.GET)
     public String showSuccessPage() {
         return "online_complaint/online_complaint_form_submit_success";
     }
 
     @RequestMapping(value = "/online-complaint/detail", method = RequestMethod.GET)
-    public String getComplaintDetail(@RequestParam("num") int ocId, Model model) {
+    public String getComplaintDetail(@RequestParam("ocId") String ocId, Model model) {
         // Retrieve the complaint detail based on ocId
-        OnlineComplaint complaint = onlineComplaintService.getComplaintById(ocId);
+        OnlineComplaint complaint = onlineComplaintService.getComplaintById(Integer.parseInt(ocId));
 
         if (complaint != null) {
             // Add the complaint object to the model
@@ -68,11 +68,11 @@ public class OnlineComplaintController {
     @RequestMapping(value = "/online-complaint/check-password", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Boolean> checkPassword(@RequestBody Map<String, String> requestBody) {
-        int ocId = Integer.parseInt(requestBody.get("ocId"));
+        Integer ocId = Integer.parseInt(requestBody.get("ocId"));
         String ocPw = requestBody.get("ocPw");
 
         // Retrieve the OnlineComplaint object by ocId from the database
-        OnlineComplaint onlineComplaint = onlineComplaintService.findById(ocId);
+        OnlineComplaint onlineComplaint = onlineComplaintService.findByOcId(ocId);
 
         // Check if the password matches
         boolean valid = (onlineComplaint != null && ocPw.equals(onlineComplaint.getOcPw()));
@@ -84,9 +84,6 @@ public class OnlineComplaintController {
         return response;
     }
 
-
-    //////////////////////////////////////////////////////////////////////
-//    Without Pagination
     @RequestMapping(value = "/online-complaint", method = RequestMethod.GET)
     public String showOnlineComplaintList(Model model) {
 
@@ -107,39 +104,6 @@ public class OnlineComplaintController {
         return onlineComplaintService.getLatestResults();
 
     }
-
-//////////////////////////////////////////////////////////////////////
-//    Pagination
-//@RequestMapping(value = "/online-complaint", method = RequestMethod.GET)
-//public String showOnlineComplaintList(@RequestParam(defaultValue = "1") int pageNumber, Model model) {
-//    int pageSize = 5; // Set the desired page size
-//
-//    // Adjust the page number to 0-based index
-//    int adjustedPageNumber = pageNumber - 1;
-//
-//    // Fetch the latest results from the service for the specified page
-//    List<OnlineComplaint> latestResults = onlineComplaintService.getLatestResults(adjustedPageNumber, pageSize);
-//
-//    // Add the latest results to the model
-//    model.addAttribute("latestResults", latestResults);
-//
-//    return "online_complaint/online_complaint_list";
-//}
-
-//    @RequestMapping(value = "/online-complaint/latest-results", method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<OnlineComplaint> getLatestResults(@RequestParam(defaultValue = "1") int pageNumber) {
-//        int pageSize = 5; // Set the desired page size
-//
-//        // Adjust the page number to 0-based index
-//        int adjustedPageNumber = pageNumber - 1;
-//
-//        // Fetch the latest results from the service for the specified page
-//        List<OnlineComplaint> latestResults = onlineComplaintService.getLatestResults(adjustedPageNumber, pageSize);
-//
-//        return latestResults;
-//    }
-
 
     @RequestMapping(value = "/online-complaint/search", method = RequestMethod.GET)
     @ResponseBody

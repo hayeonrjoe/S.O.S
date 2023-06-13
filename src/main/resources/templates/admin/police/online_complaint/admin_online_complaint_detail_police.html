@@ -9,20 +9,21 @@
 <body>
 <div class="header">
     <div class="title_menu">
-        <a href="/main/admin/n" class="logo_main">
+        <a href="/main/admin/p" class="logo_main">
             S<small class="small_title">peak</small>.O<small class="small_title">ut</small>.S<small
                 class="small_title">afely</small>
         </a>
-        <a href="/online-complaint/admin/n" class="top_menu">상담</a>
+        <a href="#" class="top_menu">신고</a>
+        <a href="/online-complaint/admin/p" class="top_menu">상담</a>
         <a href="/admin/logout" class="top_menu"><b style="color: #1290FF">로그아웃</b></a>
     </div>
 </div>
 <div class="c_title">
     <div class="c_title_back">
-        <a href="/online-complaint/admin/n">
+        <a href="/online-complaint/admin/p">
             <img src="/images/back_arrow.svg" alt="back arrow">
         </a>
-        <a href="/online-complaint/admin/n">상담 목록</a>
+        <a href="/online-complaint/admin/p">상담 목록</a>
     </div>
     <div class="c_title_menu">
         상담
@@ -96,9 +97,9 @@
     </div>
 </div>
 <div class="c_response" style="text-align: center">
-    <p th:text="${complaint.ResponseContent}"></p>
+    <p th:text="${complaint.ocResponseContent}"></p>
 </div>
 </form>
-<script type="module" src="/js/admin/admin_online_complaint_detail_nonpolice.js"></script>
+<script type="module" src="/js/admin/police/admin_online_complaint_detail_police.js"></script>
 </body>
 </html>

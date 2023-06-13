@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const ocId = urlParams.get('num');
 
     // Fetch the data using AJAX
-    fetch('/online-complaint/admin/p/detail?num=' + ocId)
+    fetch('/online-complaint/admin/n/detail?num=' + ocId)
         .then(response => response.json())
         .then(data => {
             console.log(data); // Check the data received in the console
@@ -34,12 +34,12 @@ document.addEventListener('DOMContentLoaded', function () {
             contentElement.textContent = ocContent;
             responseElement.textContent = ocResponseContent;
 
-            // // Check if ocResponseContent is null
-            // if (ocResponseContent === null) {
-            //     responseElement.innerHTML = "[답변 대기] 상태입니다. <br> [답변 완료] 상태 확인 후 다시 확인해주세요.";
-            // } else {
-            //     responseElement.textContent = ocResponseContent;
-            // }
+            // Check if ocResponseContent is "답변대기"
+            if (ocResponseContent === "답변대기") {
+                responseElement.innerHTML = "[답변 대기] 상태입니다. \n [답변 완료] 상태 확인 후 다시 확인해주세요.";
+            } else {
+                responseElement.textContent = ocResponseContent;
+            }
         })
         .catch(error => {
             // Handle any errors that occur during the request

@@ -1,6 +1,5 @@
 package com.sos.signal.admin;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.MediaType;
@@ -17,14 +16,24 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/register-form")
 public class AdminController {
 
-    @Autowired
-    private AdminRepository adminRepository;
+    private final AdminRepository adminRepository;
 
-    @Autowired
-    private ResourceLoader resourceLoader;
+    private final ResourceLoader resourceLoader;
+
+    private final AdminService adminService;
+
+    public AdminController(AdminRepository adminRepository, ResourceLoader resourceLoader, AdminService adminService) {
+        this.adminRepository = adminRepository;
+        this.resourceLoader = resourceLoader;
+        this.adminService = adminService;
+    }
+
+    @RequestMapping("/register-form")
+    public String showRegisterForm() {
+        return "/member/register_form";
+    }
 
     @ResponseBody
     @GetMapping("/admin-register")
@@ -46,17 +55,24 @@ public class AdminController {
     }
 
     @PostMapping("/admin-signin")
-    public String signIn(@RequestParam("email") String email, @RequestParam("pw") String pw) {
+    public String signIn(@RequestParam("email") String email, @RequestParam("pw") String pw,
+                         @RequestParam("aId") Integer aId, HttpServletRequest request) {
         List<Admin> admins = adminRepository.findMembers(email, pw);
         if (!admins.isEmpty()) {
             Admin admin = admins.get(0);
+            // Store the adminId in the admin object for future reference
+            admin.setAId(aId);
             Authentication authentication = new UsernamePasswordAuthenticationToken(admin, null, null);
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
+            // Store the admin in the HTTP session
+            HttpSession session = request.getSession();
+            session.setAttribute("admin", admin);
+
             if (admin.getAdminType().equals("경찰")) {
-                return "admin/police/admin_main_police";
+                return "admin/police/admin_main_police" + admin.getAId();
             } else {
-                return "admin/nonpolice/admin_main_nonpolice";
+                return "admin/nonpolice/admin_main_nonpolice" + admin.getAId();
             }
         }
         return "member/login_form";
@@ -71,4 +87,14 @@ public class AdminController {
         SecurityContextHolder.clearContext();
         return "common/main";
     }
+
+    @GetMapping("/admin/get-admin-type")
+    @ResponseBody
+    public String getAdminType(@RequestParam("aId") Integer aId) {
+        // Retrieve the adminType based on the aId from your database or other data source
+        String adminType = adminService.getAdminType(aId);
+
+        return adminType;
+    }
+
 }

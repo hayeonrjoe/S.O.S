@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,11 +82,11 @@ public class OnlineComplaintService {
     }
 
     public OnlineComplaint getComplaintById(int ocId) {
-        return onlineComplaintRepository.findById(ocId);
+        return onlineComplaintRepository.findByOcId(ocId);
     }
 
-    public OnlineComplaint findById(int ocId) {
-        Optional<OnlineComplaint> result = Optional.ofNullable(onlineComplaintRepository.findById(ocId).orElse(null));
+    public OnlineComplaint findByOcId(int ocId) {
+        Optional<OnlineComplaint> result = Optional.ofNullable(onlineComplaintRepository.findByOcId(ocId).orElse(null));
         return result.isPresent() ? result.get() : createErrorMessage();
     }
 
@@ -93,7 +94,20 @@ public class OnlineComplaintService {
         return new OnlineComplaint("페이지를 찾을 수 없습니다. 다시 한번 확인해 주시기 바랍니다.");
     }
 
-//////////////////////////////////////////////////////////////////////
+    public List<OnlineComplaint> searchByTitleAndAdminType(String query, String adminType) {
+        if (adminType.equals("상담사")) {
+            return onlineComplaintRepository.findByOcTitleAndOcAdvisor(query, "상담사");
+        } else if (adminType.equals("변호사")) {
+            return onlineComplaintRepository.findByOcTitleAndOcAdvisor(query, "변호사");
+        } else {
+            // Handle other admin types or invalid admin types
+            return Collections.emptyList(); // Return an empty list or handle it accordingly
+        }
+    }
+
+
+
+    //////////////////////////////////////////////////////////////////////
 //    Without Pagination
     public List<OnlineComplaint> getLatestResults() {
         return onlineComplaintRepository.findLatestResults();

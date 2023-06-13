@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Make an AJAX request to the server
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/online-complaint/admin/n/search?query=" + searchTerm, true);
+        xhr.open("GET", "/online-complaint/admin/p/search?query=" + searchTerm, true);
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     var searchResults = JSON.parse(xhr.responseText);
                     // Filter the search results based on ocAdvisor value
                     searchResults = searchResults.filter(function(result) {
-                        return result.ocAdvisor === "상담사" || result.ocAdvisor === "변호사";
+                        return result.ocAdvisor === "경찰" && result.ocResponseStatus === "답변대기";
                     });
 
                     searchResults.sort(function(a, b) {
@@ -67,15 +67,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         tbody.appendChild(row);
 
-                        // Add click event listener to handle opening with the right password
                         row.addEventListener("click", function(event) {
-                            var ocAdvisor = prompt("관리자 형태(상담사, 변호사, 경찰)를 입력하세요.");
-                            if (ocAdvisor === result.ocAdvisor && (ocAdvisor === "상담사" || ocAdvisor === "변호사")) {
-                                // Open the result
-                                window.location.href = "/online-complaint/admin/n" + result.ocId;
-                            } else {
-                                alert("권한이 없습니다.");
-                            }
+                            // Redirect to the next page with the ocId as a query parameter
+                            var url = "/online-complaint/admin/p?ocId=" + result.ocId;
+                            window.location.href = url;
                         });
                     }
 

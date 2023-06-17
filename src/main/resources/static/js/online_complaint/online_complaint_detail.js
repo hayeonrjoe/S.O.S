@@ -10,10 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(data); // Check the data received in the console
 
             // Access the JSON data from the model
-            var complaintJson = JSON.stringify(data);
-
-            // Parse the JSON data into a JavaScript object
-            var complaintData = JSON.parse(complaintJson);
+            var complaintData = data;
 
             // Retrieve the necessary data from the complaintData object
             const { ocName, ocContact, ocAdvisor, ocTitle, ocContent, ocResponseContent } = complaintData;
@@ -33,9 +30,9 @@ document.addEventListener('DOMContentLoaded', function () {
             titleElement.textContent = ocTitle;
             contentElement.textContent = ocContent;
 
-            // Check if ocResponseContent is null
-            if (ocResponseContent === null) {
-                responseElement.innerHTML = "[답변 대기] 상태입니다. \n [답변 완료] 상태 확인 후 다시 확인해주세요.";
+            // Check if ocResponseContent is null or empty
+            if (!ocResponseContent) {
+                responseElement.textContent = "[답변 대기] 상태입니다. \n [답변 완료] 상태 확인 후 다시 확인해주세요.";
             } else {
                 responseElement.textContent = ocResponseContent;
             }

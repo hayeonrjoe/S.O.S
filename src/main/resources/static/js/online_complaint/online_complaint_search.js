@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function createRowClickListener(result) {
-        return function (event) {
+        return function () {
             var ocPw = prompt("비밀번호를 입력해주세요");
             if (ocPw === result.ocPw) {
                 // Open the result with ocId as a query parameter in the URL

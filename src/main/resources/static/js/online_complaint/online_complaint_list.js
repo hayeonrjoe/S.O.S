@@ -1,10 +1,16 @@
-// Wait for the DOM to load
 document.addEventListener('DOMContentLoaded', function () {
     var loadAction = document.getElementById('searchForm').getAttribute('data-load-action');
 
     if (loadAction === '/online-complaint/load-latest') {
         // Fetch the latest results when the page is first loaded
-        fetchLatestResults();
+        fetchLatestResults()
+            .then(() => {
+                attachRowClickListener();
+            })
+            .catch(error => {
+                // Handle any errors that occur during the request
+                console.error('에러: ', error);
+            });
     }
 
     function fetchLatestResults() {
@@ -25,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var rows = document.querySelectorAll("#tbody tr");
 
         Array.from(rows).forEach(function (row) {
-            row.addEventListener("click", function (event) {
+            row.addEventListener("click", function () {
                 var ocPw = prompt("비밀번호를 입력해주세요");
                 var ocId = row.querySelector("td:first-child").textContent; // Get ocId as a string
 
@@ -46,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             if (data.valid) {
                                 // Redirect to the detail page with ocId as a query parameter
                                 window.location.href = "/online-complaint/detail?num=" + ocId;
-
                             } else {
                                 alert("비밀번호가 일치하지 않습니다.");
                             }
@@ -55,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             console.error('에러:', error);
                         });
                 }
-
             });
         });
     }

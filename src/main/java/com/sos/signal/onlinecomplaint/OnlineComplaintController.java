@@ -47,9 +47,10 @@ public class OnlineComplaintController {
     }
 
     @RequestMapping(value = "/online-complaint/detail", method = RequestMethod.GET)
-    public String getComplaintDetail(@RequestParam("ocId") String ocId, Model model) {
+    public String getComplaintDetail(@RequestParam("num") String num, Model model) {
+        int ocId = Integer.parseInt(num);
         // Retrieve the complaint detail based on ocId
-        OnlineComplaint complaint = onlineComplaintService.getComplaintById(Integer.parseInt(ocId));
+        OnlineComplaint complaint = onlineComplaintService.getComplaintById(ocId);
 
         if (complaint != null) {
             // Add the complaint object to the model
@@ -68,7 +69,7 @@ public class OnlineComplaintController {
     @RequestMapping(value = "/online-complaint/check-password", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Boolean> checkPassword(@RequestBody Map<String, String> requestBody) {
-        Integer ocId = Integer.parseInt(requestBody.get("ocId"));
+        int ocId = Integer.parseInt(requestBody.get("ocId"));
         String ocPw = requestBody.get("ocPw");
 
         // Retrieve the OnlineComplaint object by ocId from the database

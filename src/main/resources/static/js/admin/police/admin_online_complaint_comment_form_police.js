@@ -4,16 +4,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const ocId = urlParams.get('num');
 
     // Fetch the data using AJAX
-    fetch('/online-complaint/admin/p/detail?num=' + ocId)
+    fetch('/online-complaint-comment-form/admin/p?num=' + ocId)
         .then(response => response.json())
         .then(data => {
             console.log(data); // Check the data received in the console
 
             // Access the JSON data from the model
-            var complaintJson = JSON.stringify(data);
-
-            // Parse the JSON data into a JavaScript object
-            var complaintData = JSON.parse(complaintJson);
+            var complaintData = data;
 
             // Retrieve the necessary data from the complaintData object
             const { ocName, ocContact, ocAdvisor, ocTitle, ocContent } = complaintData;

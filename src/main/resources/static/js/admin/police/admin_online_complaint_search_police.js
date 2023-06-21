@@ -30,9 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     tbody.innerHTML = ""; // Clear existing content
 
                     // Loop through the search results and create table rows
-                    for (var i = 0; i < searchResults.length; i++) {
-                        var result = searchResults[i];
-                        var row = document.createElement("tr");
+                    for (let i = 0; i < searchResults.length; i++) {
+                        let result = searchResults[i];
+                        let row = document.createElement("tr");
 
                         // Set the height of the table row
                         row.style.height = "2.5em"; // Adjust the height value as needed
@@ -40,37 +40,36 @@ document.addEventListener('DOMContentLoaded', function() {
                         row.style.fontSize = "15px";
 
                         // Create and populate each table cell
-                        var idCell = document.createElement("td");
+                        let idCell = document.createElement("td");
                         idCell.textContent = result.ocId;
                         row.appendChild(idCell);
 
-                        var titleCell = document.createElement("td");
+                        let titleCell = document.createElement("td");
                         titleCell.classList.add("truncate");
                         titleCell.textContent = result.ocTitle.length > 20 ? result.ocTitle.substring(0, 17) + "..." : result.ocTitle;
                         row.appendChild(titleCell);
 
-                        var advisorCell = document.createElement("td");
+                        let advisorCell = document.createElement("td");
                         advisorCell.textContent = result.ocAdvisor;
                         row.appendChild(advisorCell);
 
-                        var nameCell = document.createElement("td");
+                        let nameCell = document.createElement("td");
                         nameCell.textContent = result.ocName.substring(0, 1) + "**";
                         row.appendChild(nameCell);
 
-                        var dateCell = document.createElement("td");
+                        let dateCell = document.createElement("td");
                         dateCell.textContent = result.ocDateFormatted;
                         row.appendChild(dateCell);
 
-                        var statusCell = document.createElement("td");
+                        let statusCell = document.createElement("td");
                         statusCell.textContent = result.ocResponseStatus;
                         row.appendChild(statusCell);
 
                         tbody.appendChild(row);
 
-                        row.addEventListener("click", function(event) {
+                        row.addEventListener("click", function() {
                             // Redirect to the next page with the ocId as a query parameter
-                            var url = "/online-complaint/admin/p?num=" + result.ocId;
-                            window.location.href = url;
+                            window.location.href = "/online-complaint-comment-form/admin/p?num=" + result.ocId;
                         });
                     }
 

@@ -3,7 +3,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (loadAction === '/online-complaint/admin/p/load-latest') {
         // Fetch the latest results when the page is first loaded
-        fetchLatestResults();
+        fetchLatestResults()
+            .then(() => {
+                attachRowClickListener();
+            })
+            .catch(error => {
+                // Handle any errors that occur during the request
+                console.error('에러: ', error);
+            });
     }
 
     function fetchLatestResults() {
@@ -24,14 +31,15 @@ document.addEventListener('DOMContentLoaded', function () {
         var rows = document.querySelectorAll("#tbody tr");
 
         Array.from(rows).forEach(function(row) {
-            row.addEventListener("click", function(event) {
+            row.addEventListener("click", function() {
                 var ocId = row.querySelector("td:first-child").textContent;
 
                 // Redirect to the new HTML page with the data
-                window.location.href = "/online-complaint/admin/p/detail?num=" + ocId;
+                window.location.href = "/online-complaint-comment-form/admin/p?num=" + ocId;
             });
         });
     }
+
 
 
     function updateSearchResults(results) {

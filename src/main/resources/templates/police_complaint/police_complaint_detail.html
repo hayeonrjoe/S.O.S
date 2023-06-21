@@ -204,7 +204,7 @@
             <td class="c_form_title">이름</td>
             <td colspan="4">
                 <p th:if="${complaint.pcBullyName != null}" th:text="${complaint.pcBullyName}"></p>
-                <p th:unless="${complaint.pcBullyName != null}"-</p>
+                <p th:unless="${complaint.pcBullyName != null}">-</p>
             </td>
         </tr>
         <tr style="height:15px">
@@ -262,7 +262,7 @@
             답변
         </div>
     </div>
-    <div class="c_response" style="text-align: center">
+    <div class="c_response" style="text-align: center; margin-bottom: 50px">
         <p th:if="${complaint.pcResponseContent} != null" th:text="${complaint.pcResponseContent}"></p>
         <p th:unless="${complaint.pcResponseContent} != null">[답변 대기] 상태입니다.<br><br> [답변 완료] 상태 확인 후 다시 확인해주세요.</p>
     </div>

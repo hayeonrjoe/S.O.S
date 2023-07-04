@@ -14,17 +14,6 @@
       <li><a href="#기술-스택">기술 스택</a></li>
       <li><a href="#개발-도구">개발 도구</a></li>
    </ul>
-   <li><a href="#개발-과정">개발 과정</a></li>
-   <ul>
-      <li><a href="#개발-일정">개발 일정</a></li>
-      <li><a href="#업무-분담">업무 분담</a></li>
-      <li><a href="#화면-설계">화면 설계</a></li>
-      <li><a href="#흐름도">흐름도</a></li>
-      <li><a href="#ERD">ERD</a></li>
-      <li><a href="#구조">구조</a></li>
-   </ul>
-   <li><a href="#주요-기능">주요 기능</a></li>
-   <li><a href="#시연-영상">시연 영상</a></li>
    <li><a href="#보완사항">보완사항</a></li>
    <li><a href="#개발-후기">개발 후기</a></li>
    <li><a href="#바로가기">바로가기</a></li>
@@ -62,30 +51,6 @@
    </ul>
 <h3 id="개발-도구">✔개발 도구</h3>
 Git, Github, IntelliJ IDEA, Figma, ERD Cloud, Google Docs
-
-<h2 id="개발-과정">✒️ 개발 과정</h2>
-<h3 id="개발-일정">✔개발 일정</h3>
-TBU
-
-<h3 id="업무-분담">✔업무 분담</h3>
-TBU
-
-<h3 id="화면-설계">✔화면 설계</h3>
-TBU
-<h3 id="흐름도">✔흐름도</h3>
-TBU
-
-<h3 id="ERD">✔ERD</h3>
-TBU
-
-<h3 id="구조">✔구조</h3>
-TBU
-
-<h2 id="주요-기능">✒️ 주요 기능</h2>
-TBU
-
-<h2 id="시연-영상">✒️ 시연 영상</h2>
-TBU
 
 <h2 id="보완사항">✒️ 보완사항</h2>
    <ul>

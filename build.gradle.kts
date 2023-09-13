@@ -16,6 +16,8 @@ repositories {
     }
 }
 
+
+
 dependencies {
     api("org.springframework.boot:spring-boot-starter-oauth2-client:2.7.12")
     api("org.springframework.boot:spring-boot-starter-thymeleaf:2.7.12")
@@ -41,12 +43,19 @@ dependencies {
     runtimeOnly("com.h2database:h2:2.1.214")
     compileOnly("org.projectlombok:lombok:1.18.26")
     compileOnly("org.apache.tomcat.embed:tomcat-embed-jasper:9.0.75")
+    annotationProcessor("org.projectlombok:lombok:1.18.26")
+    implementation("org.apache.httpcomponents.client5:httpclient5:5.2.1")
+    implementation("org.slf4j:slf4j-api:1.7.32")
+    implementation("ch.qos.logback:logback-classic:1.2.6")
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("javax.xml.bind:jaxb-api:2.3.1")
+    implementation("org.glassfish.jaxb:jaxb-runtime:2.3.3")
 }
 
 group = "com.sos"
 version = "0.0.1-SNAPSHOT"
 description = "signal"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+java.sourceCompatibility = JavaVersion.VERSION_20
 
 publishing {
     publications.create<MavenPublication>("maven") {

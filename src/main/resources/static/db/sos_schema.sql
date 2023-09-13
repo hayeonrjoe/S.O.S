@@ -1,4 +1,4 @@
-CREATE DATABASE sos DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE sos DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4;
 
 USE sos;
 
@@ -33,7 +33,7 @@ CREATE TABLE  Counseling_Appointment  (
 );
 
 CREATE TABLE  Attachment_File  (
-	 af_file_id 	Integer	NULL	AUTO_INCREMENT,
+	 af_file_id 	Integer	AUTO_INCREMENT,
 	 af_file_name 	Varchar(50)	NOT NULL,
 	 af_file_extension VARCHAR(50) NOT NULL,
 	 af_upload_path 	Varchar(100)	NOT NULL,

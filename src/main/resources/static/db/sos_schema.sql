@@ -40,7 +40,7 @@ CREATE TABLE  Attachment_File  (
 	 PRIMARY KEY (af_file_id)
 );
 
-CREATE TABLE  Admin  (
+CREATE TABLE  Admin_User  (
 	 a_id 	Integer	NOT NULL	AUTO_INCREMENT,
 	 a_name 	Varchar(10)	NOT NULL,
 	 a_contact 	Varchar(30)	NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE  Online_Complaint  (
 	 oc_response_content 	VARCHAR(1000)	NULL,
 	 oc_date_formatted  VARCHAR(20) NULL,
 	 PRIMARY KEY (oc_id),
-	 FOREIGN KEY (a_id) REFERENCES Admin(a_id)
+	 FOREIGN KEY (a_id) REFERENCES Admin_User(a_id)
 ); 
 
 CREATE TABLE  Police_Complaint  (
@@ -93,5 +93,5 @@ CREATE TABLE  Police_Complaint  (
 	 pc_response_content 	VARCHAR(1000)	NULL,
 	 pc_date_formatted  VARCHAR(20) NULL,
 	 PRIMARY KEY (pc_id),
-	 FOREIGN KEY (a_id) REFERENCES Admin(a_id)
+	 FOREIGN KEY (a_id) REFERENCES Admin_User(a_id)
 ); 

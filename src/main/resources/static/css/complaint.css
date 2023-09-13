@@ -14,6 +14,7 @@
 
 .c_menu_line img {
     margin-bottom: -4px;
+    width: 100%;
 }
 
 .c_menu_triangle img {
@@ -100,7 +101,7 @@
     height: 30px;
     font-size: 15px;
     padding: 5px;
-    color: gray;
+    color: grey;
     vertical-align: middle;
 }
 
@@ -239,7 +240,7 @@ b {
     width: 300px;
     text-align: center;
     font-size: 17px;
-    color: gray;
+    color: grey;
     height: 27px;
 }
 
@@ -292,7 +293,7 @@ b {
 }
 
 .truncate {
-    max-width: 200px; /* Adjust the value as per your needs */
+    max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

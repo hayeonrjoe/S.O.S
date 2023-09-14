@@ -26,6 +26,10 @@
     font-size: 14px;
 }
 
+.category1:hover {
+    color: #1290FF;
+}
+
 .school {
     margin-top: 77px;
     color: #1290FF;

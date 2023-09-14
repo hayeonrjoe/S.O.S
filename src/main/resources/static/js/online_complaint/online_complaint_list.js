@@ -2,30 +2,112 @@ document.addEventListener('DOMContentLoaded', function () {
     var loadAction = document.getElementById('searchForm').getAttribute('data-load-action');
 
     if (loadAction === '/online-complaint/load-latest') {
-        // Fetch the latest results when the page is first loaded
-        fetchLatestResults()
-            .then(() => {
+        fetchPageData();
+    }
+
+    var currentPage = 1;
+
+    function fetchPageData(page) {
+        // Fetch paginated data from the server using AJAX (e.g., fetch API)
+        fetch('/online-complaint/latest-results?page=' + page)
+            .then(response => response.json())
+            .then(data => {
+                currentPage = page; // Update currentPage before updating pagination
+
+                updateSearchResults(data);
                 attachRowClickListener();
+
+                updatePagination(data.totalPages);
             })
             .catch(error => {
-                // Handle any errors that occur during the request
                 console.error('에러: ', error);
             });
     }
 
-    function fetchLatestResults() {
-        return fetch('/online-complaint/latest-results')
-            .then(response => response.json())
-            .then(data => {
-                // Update the search results on the page
-                updateSearchResults(data);
-                attachRowClickListener();
-            })
-            .catch(error => {
-                // Handle any errors that occur during the request
-                console.error('에러: ', error);
+    function updatePagination(totalPages) {
+        var paginationContainer = document.querySelector(".paginationContainer");
+        paginationContainer.innerHTML = "";
+
+        var previousButton = document.createElement("button");
+        previousButton.textContent = "<";
+        previousButton.classList.add("pagination-button", "previous-button");
+        previousButton.addEventListener("click", function () {
+            if (currentPage > 1) {
+                fetchPageData(currentPage - 1);
+            }
+        });
+        paginationContainer.appendChild(previousButton);
+
+        for (var i = 1; i <= totalPages; i++) {
+            var pageButton = document.createElement("button");
+            pageButton.textContent = i;
+            pageButton.classList.add("pagination-button");
+            pageButton.addEventListener("click", function () {
+                var page = parseInt(this.textContent);
+                fetchPageData(page);
             });
+
+            if (i === currentPage) {
+                pageButton.classList.add("active");
+            }
+
+            paginationContainer.appendChild(pageButton);
+        }
+
+        var nextButton = document.createElement("button");
+        nextButton.textContent = ">";
+        nextButton.classList.add("pagination-button", "next-button");
+        nextButton.addEventListener("click", function () {
+            if (currentPage < totalPages) {
+                fetchPageData(currentPage + 1);
+            }
+        });
+        paginationContainer.appendChild(nextButton);
     }
+
+    function updateSearchResults(results) {
+        var tbody = document.getElementById("tbody");
+        tbody.innerHTML = "";
+
+        for (var i = 0; i < results.length; i++) {
+            var result = results[i];
+
+            var row = document.createElement("tr");
+
+            row.style.height = "2.5em";
+            row.style.fontSize = "15px";
+
+            var idCell = document.createElement("td");
+            idCell.textContent = result.ocId;
+            row.appendChild(idCell);
+
+            var titleCell = document.createElement("td");
+            titleCell.classList.add("truncate");
+            titleCell.textContent =
+                result.ocTitle.length > 20 ? result.ocTitle.substring(0, 17) + "..." : result.ocTitle;
+            row.appendChild(titleCell);
+
+            var advisorCell = document.createElement("td");
+            advisorCell.textContent = result.ocAdvisor;
+            row.appendChild(advisorCell);
+
+            var nameCell = document.createElement("td");
+            nameCell.textContent = result.ocName.substring(0, 1) + "**";
+            row.appendChild(nameCell);
+
+            var dateCell = document.createElement("td");
+            dateCell.textContent = result.ocDateFormatted;
+            row.appendChild(dateCell);
+
+            var statusCell = document.createElement("td");
+            statusCell.textContent = result.ocResponseStatus;
+            row.appendChild(statusCell);
+
+            tbody.appendChild(row);
+        }
+    }
+
+    fetchPageData(currentPage);
 
     function attachRowClickListener() {
         var rows = document.querySelectorAll("#tbody tr");
@@ -62,52 +144,5 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         });
-    }
-
-    function updateSearchResults(results) {
-        var tbody = document.getElementById("tbody");
-        tbody.innerHTML = ""; // Clear existing content
-
-        // Loop through the latest results and create table rows
-        for (var i = 0; i < results.length; i++) {
-            var result = results[i];
-
-            // Create and populate each table row
-            var row = document.createElement("tr");
-
-            // Set the height of the table row
-            row.style.height = "2.5em"; // Adjust the height value as needed
-            // Set the font size of the table row
-            row.style.fontSize = "15px";
-
-            // Create and populate each table cell
-            var idCell = document.createElement("td");
-            idCell.textContent = result.ocId;
-            row.appendChild(idCell);
-
-            var titleCell = document.createElement("td");
-            titleCell.classList.add("truncate");
-            titleCell.textContent =
-                result.ocTitle.length > 20 ? result.ocTitle.substring(0, 17) + "..." : result.ocTitle;
-            row.appendChild(titleCell);
-
-            var advisorCell = document.createElement("td");
-            advisorCell.textContent = result.ocAdvisor;
-            row.appendChild(advisorCell);
-
-            var nameCell = document.createElement("td");
-            nameCell.textContent = result.ocName.substring(0, 1) + "**";
-            row.appendChild(nameCell);
-
-            var dateCell = document.createElement("td");
-            dateCell.textContent = result.ocDateFormatted;
-            row.appendChild(dateCell);
-
-            var statusCell = document.createElement("td");
-            statusCell.textContent = result.ocResponseStatus;
-            row.appendChild(statusCell);
-
-            tbody.appendChild(row);
-        }
     }
 });

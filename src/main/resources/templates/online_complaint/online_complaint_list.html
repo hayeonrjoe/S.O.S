@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css">
@@ -10,7 +10,7 @@
 <body>
 <div class="header">
     <div class="title_menu">
-        <a href="/main" class="logo_main">
+        <a href="/main" class="logo_main" style="color: #1290FF">
             S<small class="small_title">peak</small>.O<small class="small_title">ut</small>.S<small
                 class="small_title">afely</small>
         </a>
@@ -19,13 +19,13 @@
         <a href="/information/school-violence" class="top_menu">정보</a>
         <a href="/online-complaint" class="top_menu">상담</a>
         <a href="/police-complaint" class="top_menu">신고</a>
-        <a href="/loginform" class="top_menu"><b style="color: #1290FF">로그인</b></a>
+        <a href="/loginform" class="top_menu"><b>로그인</b></a>
     </div>
 </div>
 <div class="c_menu">
     <div>
-        <a href="/online-complaint">비공개</a><br>
-        <a href="/online-complaint">온라인 상담</a>
+        <a href="/online-complaint">비공개<br>
+        온라인 상담</a>
     </div>
     <div>
         <a href="/counseling-appointment-form">방문 상담</a>
@@ -59,47 +59,42 @@
             </tr>
         </table>
     </div>
-    <div id="searchResultsContainer">
-        <div class="list_section">
-            <table>
-                <thead>
-                <tr>
-                    <th style="text-align: start">번호</th>
-                    <th style="text-align: start">제목</th>
-                    <th style="text-align: start">도움 받고<br> 싶은 사람</th>
-                    <th style="text-align: start">작성자</th>
-                    <th style="text-align: start">작성일</th>
-                    <th style="text-align: start">답변여부</th>
-                </tr>
-                <tr>
-                    <th colspan="6">
-                        <img src="/images/line.png" alt="line">
-                    </th>
-                </tr>
-                <tr style="height:10px">
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody id="tbody">
-                <tr class="table-row">
-                    <td></td>
-                    <td class="truncate"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+    <div id="searchResultsContainer" class="list_section">
+        <table>
+            <thead>
+            <tr>
+                <th style="text-align: start">번호</th>
+                <th style="text-align: start">제목</th>
+                <th style="text-align: start">도움 받고<br> 싶은 사람</th>
+                <th style="text-align: start">작성자</th>
+                <th style="text-align: start">작성일</th>
+                <th style="text-align: start">답변 여부</th>
+            </tr>
+            <tr>
+                <th colspan="6">
+                    <img src="/images/line.png" alt="line">
+                </th>
+            </tr>
+            <tr style="height:10px">
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            <tr class="table-row">
+                <td></td>
+                <td class="truncate"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="paginationContainer" class="paginationContainer">
     </div>
     <div class="c_menu_line">
         <img src="/images/line.png" alt="line">
-    </div>
-    <div id="paginationContainer" class="paginationContainer">
-        <div id="pagination">
-            <!-- Pagination links will be dynamically populated here -->
-        </div>
     </div>
 </form>
 <div class="form_submit_section" style="margin-top: 7%">

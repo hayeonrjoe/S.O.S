@@ -168,6 +168,10 @@ b {
     font-size: 15px;
 }
 
+.search_button:hover {
+    background: #1290FF;
+}
+
 .c_register_button {
     width: 100px;
     height: 40px;
@@ -176,6 +180,10 @@ b {
     border: none;
     color: white;
     font-size: 15px;
+}
+
+.c_register_button:hover {
+    background: black;
 }
 
 .list_section {
@@ -188,7 +196,7 @@ b {
 
 .paginationContainer {
     margin-top: 5%;
-    text-align: start;
+    text-align: center;
 }
 
 .uploaded_files {

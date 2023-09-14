@@ -36,14 +36,11 @@
     display: flex;
 }
 
-.c_title_back {
-    justify-content: flex-start;
-}
-
 .c_title_back img {
     width: 30px;
     height: auto;
     position: sticky;
+    flex-direction: row;
 }
 
 .c_title_back a {
@@ -55,7 +52,7 @@
 }
 
 .c_title_menu {
-    justify-content: center;
+    justify-self: center;
     font-size: 20px;
     font-weight: bold;
 }
@@ -118,6 +115,7 @@ b {
 .textarea_content {
     font-size: 15px;
     padding: 5px;
+    width: 100%;
 }
 
 .submit_button {

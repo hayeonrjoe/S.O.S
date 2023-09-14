@@ -19,6 +19,21 @@
     margin-top: 10px;
 }
 
+.title_menu a:hover{
+    color: black;
+    font-weight: bold;
+}
+
+.title_menu a b{
+    color: #1290FF;
+    font-weight: bold;
+}
+
+.title_menu a:hover b{
+    color: black;
+    font-weight: bold;
+}
+
 .small_title {
     font-size: 16px;
     font-weight: normal;

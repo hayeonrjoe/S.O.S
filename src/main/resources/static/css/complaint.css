@@ -12,6 +12,11 @@
     font-weight: bold;
 }
 
+.c_menu a:hover {
+    color: #1290FF;
+    font-weight: bold;
+}
+
 .c_menu_line img {
     margin-bottom: -4px;
     width: 100%;
@@ -183,6 +188,7 @@ b {
 
 .paginationContainer {
     margin-top: 5%;
+    text-align: start;
 }
 
 .uploaded_files {
@@ -303,4 +309,20 @@ tr.table-row:hover {
 
 .searchResultsContainer {
     text-align: start;
+}
+
+.pagination-button {
+    color: black;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.pagination-button:hover {
+    color: #1290FF;
+}
+
+.pagination-button.active {
+    border: #1290FF;
+    font-weight: bold;
 }

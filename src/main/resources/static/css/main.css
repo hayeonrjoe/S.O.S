@@ -75,6 +75,20 @@
     margin-right: 20px;
 }
 
+.main_menu_small a b {
+    color: #1290FF;
+}
+
+.main_menu_small a:hover {
+    color: black;
+    font-weight: bold;
+}
+
+.main_menu_small a:hover b {
+    color: black;
+    font-weight: bold;
+}
+
 .main_menu_large {
     margin-top: 10%;
     justify-content: space-between;
@@ -85,6 +99,11 @@
     font-size: 25px;
     text-decoration: none;
     color: black;
+    font-weight: bold;
+}
+
+.main_menu_large a:hover {
+    color: #1290FF;
     font-weight: bold;
 }
 

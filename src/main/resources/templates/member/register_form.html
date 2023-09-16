@@ -141,7 +141,9 @@
         <tr style="height: 11px;"><td></td><td></td></tr>
         <tr>
           <td class="title">비밀번호<b>*</b></td>
-          <td><input type="password" class="input" id="pw" name="a_pw" required/></td>
+          <td><input type="password" class="input" id="pw" name="a_pw" placeholder="8~16자 이내 영문 대소문자, 숫자, 특수문자(!@#$%^&*) 조합으로 작성해주세요."
+                     required minlength="8" maxlength="16"
+                     pattern="^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$"/></td>
         </tr>
         <tr style="height: 11px;"><td></td><td></td></tr>
         <tr>

@@ -14,13 +14,13 @@ public class CounselingAppointmentController {
         this.counselingAppointmentService = counselingAppointmentService;
     }
 
-    @RequestMapping(value = "/counseling-appointment-form", method = RequestMethod.GET)
+    @GetMapping("/counseling-appointment-form")
     public String showCounselingAppointmentForm(Model model) {
         model.addAttribute("counselingAppointment", new CounselingAppointment());
         return "counseling_appointment/counseling_appointment_form";
     }
 
-    @RequestMapping(value = "/counseling-appointment-form/submit", method = RequestMethod.POST)
+    @PostMapping("/counseling-appointment-form/submit")
     public String submitCounselingAppointmentForm(@ModelAttribute("counselingAppointment") CounselingAppointment counselingAppointment, BindingResult bindingResult) {
         counselingAppointmentService.validateCounselingAppointment(counselingAppointment, bindingResult);
 
@@ -30,11 +30,10 @@ public class CounselingAppointmentController {
 
         counselingAppointmentService.saveCounselingAppointment(counselingAppointment);
 
-        // Redirect to the success page
         return "redirect:/counseling-appointment-form/submit-success";
     }
 
-    @RequestMapping(value = "/counseling-appointment-form/submit-success", method = RequestMethod.GET)
+    @GetMapping(value = "/counseling-appointment-form/submit-success")
     public String showSuccessPage() {
         return "counseling_appointment/counseling_appointment_form_submit_success";
     }

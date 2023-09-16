@@ -302,6 +302,10 @@ b {
     font-size: 20px;
 }
 
+.form_to_main_button:hover {
+    background: black;
+}
+
 .form_submit_section {
     text-align: center;
     display: flex;

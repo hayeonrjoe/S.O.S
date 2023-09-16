@@ -9,7 +9,7 @@
 <body>
 <div class="header">
     <div class="title_menu">
-        <a href="/main" class="logo_main">
+        <a href="/main" class="logo_main" style="color: #1290FF">
             S<small class="small_title">peak</small>.O<small class="small_title">ut</small>.S<small class="small_title">afely</small>
         </a>
         <a href="/room" class="top_menu_chat">채팅</a>
@@ -17,10 +17,8 @@
         <a href="/information/school-violence" class="top_menu">정보</a>
         <a href="/online-complaint" class="top_menu">상담</a>
         <a href="/police-complaint" class="top_menu">신고</a>
-        <a th:href="@{/login}" class="top_menu" th:if="${#httpServletRequest.userPrincipal == null}"><b
-                style="color: #1290FF">로그인</b></a>
-        <a th:href="@{/logout}" class="top_menu" th:if="${#httpServletRequest.userPrincipal != null}"><b
-                style="color: #1290FF">로그아웃</b></a>
+        <a th:href="@{/login}" class="top_menu" th:if="${#httpServletRequest.userPrincipal == null}"><b>로그인</b></a>
+        <a th:href="@{/logout}" class="top_menu" th:if="${#httpServletRequest.userPrincipal != null}"><b>로그아웃</b></a>
     </div>
 </div>
 <div class="chat_register">

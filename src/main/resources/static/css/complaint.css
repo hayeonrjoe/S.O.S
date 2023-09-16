@@ -134,6 +134,10 @@ b {
     font-size: 20px;
 }
 
+.submit_button:hover {
+    background: black;
+}
+
 .submit_section {
     display: flex;
     width: 700px;
@@ -250,7 +254,7 @@ b {
 .calendar {
     margin-top: 5%;
     width: 300px;
-    text-align: center;
+    text-align: start;
     font-size: 17px;
     color: grey;
     height: 27px;

@@ -61,17 +61,17 @@ Git, Github, IntelliJ IDEA, Figma, ERD Cloud, Google Docs
 
 <h2 id="개발-과정">✒️ 개발 과정</h2>
 <h3 id="개발-일정">✔개발 일정</h3>
-<img src="https://github.com/beccajoe/S.O.S/assets/123378408/47a32e19-89d2-4f57-b075-b2fd807bb78e" alt="개발 일정">
+<img src="https://github.com/beccajoe/S.O.S/assets/123378408/b664f299-18d6-463d-a8c8-daba620d855b" alt="개발 일정">
 <h3 id="업무-분담">✔업무 분담</h3>
     <ul>
       <li>조하연 (팀장): 메인, 신고, 비공개 온라인 상담, 방문 상담, 상담사 연결, 로그인, 정보</li>
       <li>장채윤: 채팅, 상담사 연결, 로그인, 정보</li>
     </ul>
 <h3 id="요구-분석">✔요구 분석</h3>
-<img src="https://github.com/beccajoe/S.O.S/assets/123378408/838928b2-40c8-4bfa-b0e8-005f3237a272" alt="요구 분석">
+<img src="https://github.com/beccajoe/S.O.S/assets/123378408/86e41560-e962-4966-8783-2e7ab4087b44" alt="요구 분석">
 <h3 id="흐름도">✔흐름도</h3>
-<img src="https://github.com/beccajoe/S.O.S/assets/123378408/91fd8236-7cc0-4876-b52f-f3969e2145ad" alt="흐름도 (회원가입, 로그인 없이)">
-<img src="https://github.com/beccajoe/S.O.S/assets/123378408/4c7592fa-6554-439c-9505-490c33381919" alt="흐름도 (일반 회원)">
+<img src="https://github.com/beccajoe/S.O.S/assets/123378408/c4cd815a-98f3-4a31-9407-b4583616e4bf" alt="흐름도 (회원가입, 로그인 없이)">
+<img src="https://github.com/beccajoe/S.O.S/assets/123378408/1e614095-69f9-44e9-b23d-34b9e6ee40b6" alt="흐름도 (일반 회원)">
 
 <h2 id="보완사항">✒️ 보완사항</h2>
    <ul>

@@ -96,6 +96,7 @@ Git, Github, IntelliJ IDEA, Figma, ERD Cloud, Google Docs
    <ul>
       <li><a href="https://www.figma.com/file/p0kaRPJ08NNBBgxcLBpOOv/S.O.S?type=design&node-id=0%3A1&mode=design&t=oRqc2xS4Up2XEWuL-1">화면 설계</a></li>
       <li><a href="https://www.erdcloud.com/d/pZb55awWhQWFtBWSP">DB 설계</a></li>
+      <li><a href="https://drive.google.com/drive/folders/1wsQ1I91-3093bL4U9pUn4HAIjl_XbZJV?usp=sharing">구글 드라이브</li>
    </ul>
 
 ---------------------------------

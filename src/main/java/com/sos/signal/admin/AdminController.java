@@ -61,9 +61,10 @@ public class AdminController {
                 return "redirect:/main/admin/p";
             } else if (admin.getAdminType().equals("상담사")){
                 return "redirect:/main/admin/c";
+            } else if (admin.getAdminType().equals("변호사")) {
+                return "redirect:/main/admin/l";
             }
         }
-
         return "member/login_form";
     }
 

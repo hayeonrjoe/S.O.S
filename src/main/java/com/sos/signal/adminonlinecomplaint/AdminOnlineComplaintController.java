@@ -225,110 +225,104 @@ public class AdminOnlineComplaintController {
         }
     }
 
-    // Nonpolice Admin
-    @RequestMapping(value = "/online-complaint/admin/n", method = RequestMethod.GET)
-    public String showNAdminOnlineComplaintList(Model model) {
+    // Lawyer Admin
+    @GetMapping("/online-complaint/admin/l")
+    public String showLAdminOnlineComplaintList(Model model) {
 
-        // Fetch the latest results from the service for the specified page
-        List<OnlineComplaint> latestResults = onlineComplaintService.getLatestResults();
+        List<OnlineComplaint> allResults = onlineComplaintService.getLatestResults();
 
-        // Add the latest results to the model
-        model.addAttribute("latestResults", latestResults);
-
-        return "admin/nonpolice/online_complaint/admin_online_complaint_list_nonpolice";
-    }
-
-    @RequestMapping(value = "/online-complaint/admin/n/latest-results", method = RequestMethod.GET)
-    @ResponseBody
-    public List<OnlineComplaint> getNAdminLatestResults() {
-
-        // Fetch the latest results from the service for the specified page
-        return onlineComplaintService.getLatestResults();
-
-    }
-
-    @GetMapping("/online-complaint/admin/n/search")
-    public List<SearchResult> searchNAdminOnlineComplaintsByTitle(@RequestParam String query, @RequestParam Integer aId) {
-        // Fetch the adminType based on aId
-        String adminType = adminService.getAdminType(aId);
-
-        // Perform the search operation using the query, adminType, and ocAdvisor values
-        List<OnlineComplaint> onlineComplaints = onlineComplaintService.searchByTitleAndAdminType(query, adminType);
-
-        // Map the OnlineComplaint objects to SearchResult objects
-        return mapToSearchResults(onlineComplaints);
-    }
-
-    private List<SearchResult> mapToSearchResults(List<OnlineComplaint> onlineComplaints) {
-        return onlineComplaints.stream()
-                .map(onlineComplaint -> {
-                    SearchResult searchResult = new SearchResult();
-                    searchResult.setOcId(onlineComplaint.getOcId());
-                    searchResult.setOcTitle(onlineComplaint.getOcTitle());
-                    // Set other fields as needed
-                    return searchResult;
-                })
+        List<OnlineComplaint> filteredResults = allResults.stream()
+                .filter(oc -> "변호사".equals(oc.getOcAdvisor()) && "답변대기".equals(oc.getOcResponseStatus()))
                 .collect(Collectors.toList());
+
+        model.addAttribute("latestResults", filteredResults);
+
+        return "admin/lawyer/online_complaint/admin_online_complaint_list_lawyer";
     }
 
-    @RequestMapping(value = "/online-complaint/admin/n/detail", method = RequestMethod.GET)
-    public String getNAdminComplaintDetail(@RequestParam("num") int ocId, Model model) {
-        // Retrieve the complaint detail based on ocId
+    @GetMapping("/online-complaint/admin/l/latest-results")
+    @ResponseBody
+    public List<OnlineComplaint> getLAdminLatestResults() {
+
+        List<OnlineComplaint> allResults = onlineComplaintService.getLatestResults();
+
+        List<OnlineComplaint> filteredResults = allResults.stream()
+                .filter(oc -> "변호사".equals(oc.getOcAdvisor()) && "답변대기".equals(oc.getOcResponseStatus()))
+                .collect(Collectors.toList());
+
+        return filteredResults;
+    }
+
+    @GetMapping("/online-complaint/admin/l/search")
+    @ResponseBody
+    public List<OnlineComplaint> searchLAdminOnlineComplaintsByTitle(@RequestParam("query") String query) {
+        List<OnlineComplaint> complaints = onlineComplaintService.searchOnlineComplaintsByTitle(query);
+        List<OnlineComplaint> filteredComplaints = new ArrayList<>();
+
+        for (OnlineComplaint complaint : complaints) {
+            if ("변호사".equals(complaint.getOcAdvisor()) && "답변대기".equals(complaint.getOcResponseStatus())) {
+                filteredComplaints.add(complaint);
+            }
+        }
+
+        return filteredComplaints;
+    }
+
+    @GetMapping("/online-complaint-comment-form/admin/l")
+    public String showLAdminOnlineComplaintForm(@RequestParam("num") String num, Model model) {
+        int ocId = Integer.parseInt(num);
         OnlineComplaint complaint = onlineComplaintService.getComplaintById(ocId);
 
         if (complaint != null) {
-            // Add the complaint object to the model
             model.addAttribute("complaint", complaint);
-            if (complaint.getOcResponseContent().equals("답변대기")) {
-                return "admin/nonpolice/online_complaint/admin_online_complaint_comment_form_nonpolice";
-            } else {
-                // Return the name of the HTML page for the complaint detail
-                return "admin/nonpolice/online_complaint/admin_online_complaint_detail_nonpolice";
-            }
+
+            return "admin/lawyer/online_complaint/admin_online_complaint_comment_form_lawyer";
         } else {
-            // Handle the case when the complaint is not found
-            // You can redirect to an error page or return an appropriate response
-            return "admin/nonpolice/online_complaint/admin_online_complaint_list_nonpolice";
+            return "admin/lawyer/online_complaint/admin_online_complaint_list_lawyer";
         }
     }
 
-    @RequestMapping(value = "/online-complaint-comment-form/admin/n", method = RequestMethod.GET)
-    public String showNAdminOnlineComplaintForm(Model model) {
-        model.addAttribute("onlineComplaint", new OnlineComplaint());
-        return "admin/nonpolice/online_complaint/admin_online_complaint_comment_form_nonpolice";
-    }
-
-    @RequestMapping(value = "/online-complaint-comment-form/admin/n/submit", method = RequestMethod.POST)
-    public String submitNAdminOnlineComplaintCommentForm(
+    @PostMapping("/online-complaint-comment-form/admin/l/submit")
+    public String submitLAdminOnlineComplaintCommentForm(
             @RequestParam("a_pw") String aPw,
             @RequestParam("ocResponseContent") String ocResponseContent,
             @RequestParam("ocId") Integer ocId,
             HttpServletRequest request
     ) {
-        // Retrieve aId from the session
         HttpSession session = request.getSession();
         Integer aId = (Integer) session.getAttribute("aId");
 
-        // Verify the password using the service method
         boolean passwordMatch = adminService.verifyAdminPassword(aId, aPw);
 
         if (!passwordMatch) {
-            return "redirect:/online-complaint-comment-form/admin/p";
+            return "redirect:/online-complaint-comment-form/admin/l";
         }
 
-        // Passwords match, proceed with the submission
-        // Pass aId, ocId, and ocResponseStatus to the online complaint service and save
         onlineComplaintService.updateAdminOnlineComplaint(aId, ocId, ocResponseContent);
 
-        // Redirect to the success page
-        return "redirect:/online-complaint-comment-form/admin/n/submit-success";
+        return "redirect:/online-complaint-comment-form/admin/l/submit-success";
     }
 
 
-    @RequestMapping(value = "/online-complaint-comment-form/admin/n/submit-success", method = RequestMethod.GET)
-    public String shownAdminSuccessPage() {
-        return "admin/nonpolice/online_complaint/admin_online_complaint_form_nonpolice_submit_success";
+    @GetMapping("/online-complaint-comment-form/admin/l/submit-success")
+    public String showLAdminSuccessPage() {
+        return "admin/lawyer/online_complaint/admin_online_complaint_form_lawyer_submit_success";
     }
 
+    @GetMapping("/online-complaint/admin/l/detail")
+    public String getLAdminComplaintDetail(@RequestParam("num") String num, Model model) {
+        int ocId = Integer.parseInt(num);
+        OnlineComplaint complaint = onlineComplaintService.getComplaintById(ocId);
 
+        if (complaint != null) {
+            model.addAttribute("complaint", complaint);
+            if (complaint.getOcResponseContent().equals("답변대기")) {
+                return "admin/lawyer/online_complaint/admin_online_complaint_comment_form_lawyer";
+            } else {
+                return "admin/lawyer/online_complaint/admin_online_complaint_detail_lawyer";
+            }
+        } else {
+            return "admin/lawyer/online_complaint/admin_online_complaint_list_lawyer";
+        }
+    }
 }

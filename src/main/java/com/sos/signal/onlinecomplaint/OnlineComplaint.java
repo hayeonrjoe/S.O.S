@@ -14,7 +14,6 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @Table(name = "online_complaint")
 public class OnlineComplaint {
-    //    auto_increment
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "oc_id")
@@ -41,7 +40,6 @@ public class OnlineComplaint {
     @Column(name = "oc_response_status", nullable = false, columnDefinition = "VARCHAR(10) DEFAULT '답변대기'")
     private String ocResponseStatus;
 
-    //    optional
     @Column(name = "oc_contact")
     private String ocContact;
 
@@ -55,7 +53,6 @@ public class OnlineComplaint {
     private String ocDateFormatted;
 
     public OnlineComplaint(String ocPw, Integer ocId, String ocTitle, String ocAdvisor, String ocName, String ocDateFormatted, String ocResponseStatus) {
-        // Assign the constructor arguments to the corresponding fields
         this.ocPw = ocPw;
         this.ocId = ocId;
         this.ocTitle = ocTitle;
@@ -75,7 +72,6 @@ public class OnlineComplaint {
             this.ocDate = ocDate;
         }
 
-        // Format the ocDate into a string representation
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.ocDateFormatted = this.ocDate.format(dateFormatter);
     }

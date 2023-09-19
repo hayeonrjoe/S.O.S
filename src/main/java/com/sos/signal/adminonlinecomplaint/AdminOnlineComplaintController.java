@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @Controller
 public class AdminOnlineComplaintController {
 
@@ -45,7 +44,6 @@ public class AdminOnlineComplaintController {
     @ResponseBody
     public List<OnlineComplaint> getPAdminLatestResults() {
 
-        // Fetch the latest results from the service for the specified page
         List<OnlineComplaint> allResults = onlineComplaintService.getLatestResults();
 
         List<OnlineComplaint> filteredResults = allResults.stream()
@@ -111,27 +109,22 @@ public class AdminOnlineComplaintController {
         return "admin/police/online_complaint/admin_online_complaint_form_police_submit_success";
     }
 
-    //    @RequestMapping(value = "/online-complaint/admin/p/detail", method = RequestMethod.GET)
-//    public String getPAdminComplaintDetail(@RequestParam("num") String num, Model model) {
-//        int ocId = Integer.parseInt(num);
-//        // Retrieve the complaint detail based on ocId
-//        OnlineComplaint complaint = onlineComplaintService.getComplaintById(ocId);
-//
-//        if (complaint != null) {
-//            // Add the complaint object to the model
-//            model.addAttribute("complaint", complaint);
-//            if (complaint.getOcResponseContent().equals("답변대기")) {
-//                return "admin/police/online_complaint/admin_online_complaint_comment_form_police";
-//            } else {
-//                // Return the name of the HTML page for the complaint detail
-//                return "admin/police/online_complaint/admin_online_complaint_detail_police";
-//            }
-//        } else {
-//            // Handle the case when the complaint is not found
-//            // You can redirect to an error page or return an appropriate response
-//            return "admin/police/online_complaint/admin_online_complaint_list_police";
-//        }
-//    }
+    @RequestMapping(value = "/online-complaint/admin/p/detail", method = RequestMethod.GET)
+    public String getPAdminComplaintDetail(@RequestParam("num") String num, Model model) {
+       int ocId = Integer.parseInt(num);
+        OnlineComplaint complaint = onlineComplaintService.getComplaintById(ocId);
+
+        if (complaint != null) {
+            model.addAttribute("complaint", complaint);
+            if (complaint.getOcResponseContent().equals("답변대기")) {
+                return "admin/police/online_complaint/admin_online_complaint_comment_form_police";
+            } else {
+                return "admin/police/online_complaint/admin_online_complaint_detail_police";
+            }
+       } else {
+            return "admin/police/online_complaint/admin_online_complaint_list_police";
+       }
+    }
 
     // Nonpolice Admin
     @RequestMapping(value = "/online-complaint/admin/n", method = RequestMethod.GET)

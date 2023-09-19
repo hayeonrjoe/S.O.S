@@ -1,4 +1,4 @@
-CREATE DATABASE sos DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4;
+CREATE DATABASE sos DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 USE sos;
 
@@ -45,7 +45,7 @@ CREATE TABLE  Admin_User  (
 	 a_name 	Varchar(10)	NOT NULL,
 	 a_contact 	Varchar(30)	NOT NULL,
 	 a_email 	Varchar(50)	NOT NULL,
-	 a_pw 	Varchar(10)	NOT NULL,
+	 a_pw 	Varchar(50)	NOT NULL,
 	 a_admin_type 	Varchar(50)	NOT NULL DEFAULT '경찰'	COMMENT '경찰 / 상담사 / 변호사',
 	 a_company_name 	Varchar(50)	NOT NULL,
 	 a_company_contact 	Varchar(30)	NOT NULL,

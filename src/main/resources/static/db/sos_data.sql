@@ -511,6 +511,7 @@ VALUES
 INSERT INTO 
 	admin_user(a_name, a_contact, a_email, a_pw, a_admin_type, a_company_name, a_company_contact, a_company_address)
 VALUES
+# 1-9
 ('이봄', '010-1111-2222', 'spring@naver.com', 'P@ss10n4L!f3T!m3', '상담사', '서울시청소년상담복지센터', '02-1234-4567', '서울 중구 을지로11길 23'),
 ('이채진', '010-3322-4455', 'chaehin@naver.com', 'J0urn3y0fL0v3&', '상담사', '국제인성심리상담센터', '02-999-9876', '서울 금천구 가산동 345-4'),
 ('이상이', '010-4912-7253', 'sanglee@gmail.com', '5t@yP0s!t1v3!', '상담사', '다르마심리상담명상센터', '02-719-5219', '서울 금천구 범안로16길 40'),

@@ -18,10 +18,8 @@ public class AdminService {
     }
 
     public String getAdminType(Integer aId) {
-        // Retrieve the adminType based on the aId from your database or other data source
         String adminType = adminRepository.findAdminTypeByaId(aId);
 
-        // Return the adminType
         return adminType;
     }
 

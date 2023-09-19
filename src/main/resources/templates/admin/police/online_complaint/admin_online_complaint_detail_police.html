@@ -9,13 +9,13 @@
 <body>
 <div class="header">
     <div class="title_menu">
-        <a href="/main/admin/p" class="logo_main">
+        <a href="/main/admin/p" class="logo_main" style="color: #1290FF">
             S<small class="small_title">peak</small>.O<small class="small_title">ut</small>.S<small
                 class="small_title">afely</small>
         </a>
         <a href="#" class="top_menu">신고</a>
         <a href="/online-complaint/admin/p" class="top_menu">상담</a>
-        <a href="/admin/logout" class="top_menu"><b style="color: #1290FF">로그아웃</b></a>
+        <a href="/admin/logout" class="top_menu"><b>로그아웃</b></a>
     </div>
 </div>
 <div class="c_title">
@@ -79,7 +79,7 @@
                 <td class="c_form_title" colspan="5" style="text-align: center">내용</td>
             </tr>
             <tr>
-                <td>
+                <td colspan="5">
                     <div class="c_response">
                         <p th:text="${complaint.ocContent}"></p>
                     </div>

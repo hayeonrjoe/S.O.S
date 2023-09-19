@@ -1,45 +1,41 @@
-// Wait for the DOM to load
 document.addEventListener('DOMContentLoaded', function() {
     var searchForm = document.getElementById('searchForm');
     searchForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the default form submission
-        search(); // Call your search function
+        event.preventDefault();
+        search();
     });
 
     function search() {
         var searchTerm = document.getElementById("searchInput").value;
 
-        // Make an AJAX request to the server
+
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "/online-complaint/admin/p/search?query=" + searchTerm, true);
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
-                    // Update the search results on the page
+
                     var searchResults = JSON.parse(xhr.responseText);
-                    // Filter the search results based on ocAdvisor value
+
                     searchResults = searchResults.filter(function(result) {
                         return result.ocAdvisor === "경찰" && result.ocResponseStatus === "답변대기";
                     });
 
                     searchResults.sort(function(a, b) {
-                        return b.ocId - a.ocId; // Sort in descending order based on ocId
+                        return b.ocId - a.ocId;
                     });
                     var tbody = document.getElementById("tbody");
-                    tbody.innerHTML = ""; // Clear existing content
+                    tbody.innerHTML = "";
 
-                    // Loop through the search results and create table rows
                     for (let i = 0; i < searchResults.length; i++) {
                         let result = searchResults[i];
                         let row = document.createElement("tr");
 
-                        // Set the height of the table row
-                        row.style.height = "2.5em"; // Adjust the height value as needed
-                        // Set the font size of the table row
+
+                        row.style.height = "2.5em";
                         row.style.fontSize = "15px";
 
-                        // Create and populate each table cell
                         let idCell = document.createElement("td");
                         idCell.textContent = result.ocId;
                         row.appendChild(idCell);
@@ -68,19 +64,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         tbody.appendChild(row);
 
                         row.addEventListener("click", function() {
-                            // Redirect to the next page with the ocId as a query parameter
                             window.location.href = "/online-complaint-comment-form/admin/p?num=" + result.ocId;
                         });
                     }
 
                 } else {
-                    // Handle the error case
                     console.error("에러: " + xhr.status);
                 }
             }
         };
 
-        // Send the AJAX request
         xhr.send();
     }
 });

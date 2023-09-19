@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css">
@@ -9,27 +9,27 @@
 <body>
 <div class="header">
     <div class="title_menu">
-        <a href="/main/admin/n" class="logo_main" style="color: #1290FF">
+        <a href="/main/admin/l" class="logo_main" style="color: #1290FF">
             S<small class="small_title">peak</small>.O<small class="small_title">ut</small>.S<small
                 class="small_title">afely</small>
         </a>
-        <a href="/online-complaint/admin/n" class="top_menu">상담</a>
+        <a href="/online-complaint/admin/l" class="top_menu">상담</a>
         <a href="/admin/logout" class="top_menu"><b>로그아웃</b></a>
     </div>
 </div>
 <div class="c_title">
     <div class="c_title_back">
-        <a href="/online-complaint/admin/n">
+        <a href="/online-complaint/admin/l">
             <img src="/images/back_arrow.svg" alt="back arrow">
         </a>
-        <a href="/online-complaint/admin/n">상담 목록</a>
+        <a href="/online-complaint/admin/l">상담 목록</a>
     </div>
     <div class="c_title_menu">
         상담
     </div>
 </div>
 <form>
-<div class="c_form">
+    <div class="c_form">
         <table class="c_table">
             <thead>
             <tr>
@@ -78,7 +78,7 @@
                 <td class="c_form_title" colspan="5" style="text-align: center">내용</td>
             </tr>
             <tr>
-                <td>
+                <td colspan="5">
                     <div class="c_response">
                         <p th:text="${complaint.ocContent}"></p>
                     </div>
@@ -86,7 +86,8 @@
             </tr>
             </tbody>
         </table>
-</div>
+    </div>
+</form>
 <div class="c_menu_line">
     <img src="/images/line.png" alt="line">
 </div>
@@ -95,10 +96,33 @@
         답변
     </div>
 </div>
-<div class="c_response" style="text-align: center">
-    <p th:text="${complaint.ResponseContent}"></p>
-</div>
+<form action="/online-complaint-comment-form/admin/l/submit" method="POST">
+    <table class="c_table">
+        <thead>
+        <tr>
+            <th colspan="5"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="c_form_title">비밀번호<b>*</b></td>
+            <td colspan="4">
+                <input type="password" name="a_pw" class="c_form_input"
+                       placeholder="비밀번호를 입력해주세요."
+                       required minlength="8" maxlength="16"
+                       pattern="^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="c_response">
+        <textarea name="ocResponseContent" class="textarea_content" rows="10"
+                  placeholder="답변 내용 입력해주세요. 이메일과 비밀번호 확인 시 답변이 등록됩니다."></textarea>
+    </div>
+    <div class="submit_section">
+        <button type="submit" class="submit_button" id="submitBtn">확인</button>
+    </div>
 </form>
-<script type="module" src="/js/admin/nonpolice/admin_online_complaint_detail_nonpolice.js"></script>
+<script type="module" src="/js/admin/lawyer/admin_online_complaint_comment_form_lawyer.js"></script>
 </body>
 </html>

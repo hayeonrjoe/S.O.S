@@ -23,8 +23,8 @@ public class MainController {
         return "admin/counselor/admin_main_counselor";
     }
 
-    @RequestMapping(value = "/main/admin/n", method = RequestMethod.GET)
-    public String showNAdminMain()  {
-        return "admin/nonpolice/admin_main_nonpolice";
+    @GetMapping("/main/admin/l")
+    public String showLAdminMain()  {
+        return "admin/lawyer/admin_main_lawyer";
     }
 }

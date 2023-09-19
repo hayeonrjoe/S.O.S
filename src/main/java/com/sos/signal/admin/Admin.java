@@ -3,7 +3,7 @@ package com.sos.signal.admin;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Admin")
+@Table(name = "Admin_User")
 public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

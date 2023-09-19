@@ -22,13 +22,13 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @RequestMapping("/register-form")
+    @GetMapping("/register-form")
     public String showRegisterForm() {
         return "/member/register_form";
     }
 
 
-    @RequestMapping(value = "/register-form/admin-register", method = RequestMethod.GET)
+    @GetMapping("/register-form/admin-register")
     public String showJoinForm() {
         return "/member/register_form";
     }
@@ -41,27 +41,26 @@ public class AdminController {
         return "member/login_form";
     }
 
-    @RequestMapping(value = "/admin-signin", method = RequestMethod.POST)
+    @PostMapping("/admin-signin")
     public String signIn(@RequestParam("email") String email, @RequestParam("pw") String password,
                          HttpServletRequest request) {
         List<Admin> admins = adminRepository.findMembers(email, password);
         if (!admins.isEmpty()) {
             Admin admin = admins.get(0);
-            // Store the aId in the admin object for future reference
+
             Integer aId = admin.getAId();
             admin.setAId(aId);
 
             Authentication authentication = new UsernamePasswordAuthenticationToken(admin, null, null);
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            // Store the admin in the HTTP session
             HttpSession session = request.getSession();
             session.setAttribute("admin", admin);
 
             if (admin.getAdminType().equals("경찰")) {
                 return "redirect:/main/admin/p";
-            } else {
-                return "redirect:/main/admin/n";
+            } else if (admin.getAdminType().equals("상담사")){
+                return "redirect:/main/admin/c";
             }
         }
 
@@ -77,24 +76,5 @@ public class AdminController {
         SecurityContextHolder.clearContext();
         return "common/main";
     }
-
-    @RequestMapping (value = "/admin/get-admin-type", method = RequestMethod.GET)
-    public String getAdminType(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        Admin admin = (Admin) session.getAttribute("admin");
-
-        if (admin != null) {
-            Integer aId = admin.getAId();
-
-            // Retrieve the adminType based on the aId from your database or other data source
-            String adminType = adminService.getAdminType(aId);
-
-            return adminType;
-        }
-
-        // Handle the case when admin is not found in the session
-        return "redirect:/online-complaint/admin/n";
-    }
-
 
 }

@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const urlParams = new URLSearchParams(window.location.search);
     const ocId = urlParams.get('num');
 
-    fetch('/online-complaint-comment-form/admin/p?num=' + ocId)
+    fetch('/online-complaint-comment-form/admin/c?num=' + ocId)
         .then(response => response.json())
         .then(data => {
             console.log(data);

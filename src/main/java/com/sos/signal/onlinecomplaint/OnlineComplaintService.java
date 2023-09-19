@@ -20,7 +20,6 @@ public class OnlineComplaintService {
         this.onlineComplaintRepository = onlineComplaintRepository;
     }
 
-
     public List<OnlineComplaint> searchOnlineComplaintsByTitle(String query) {
         List<OnlineComplaint> complaints = onlineComplaintRepository.findByOcTitleContainingIgnoreCase(query);
         for (OnlineComplaint complaint : complaints) {
@@ -94,9 +93,9 @@ public class OnlineComplaintService {
         onlineComplaintRepository.save(onlineComplaint);
     }
 
-    public void updatePAdminOnlineComplaint(Integer aId, Integer ocId, String ocResponseContent) {
+    public void updateAdminOnlineComplaint(Integer aId, Integer ocId, String ocResponseContent) {
         OnlineComplaint onlineComplaint = getComplaintById(ocId);
-        if ((onlineComplaint != null) && (onlineComplaint.getOcAdvisor().equals("경찰"))) {
+        if (onlineComplaint != null) {
             onlineComplaint.setAId(aId);
             onlineComplaint.setOcResponseContent(ocResponseContent);
 

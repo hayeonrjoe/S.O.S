@@ -1,20 +1,26 @@
 package com.sos.signal.main;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MainController {
 
-    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    @GetMapping("/main")
     public String showMain()  {
         return "common/main";
     }
 
-    @RequestMapping(value = "/main/admin/p", method = RequestMethod.GET)
+    @GetMapping("/main/admin/p")
     public String showPAdminMain()  {
         return "admin/police/admin_main_police";
+    }
+
+    @GetMapping("/main/admin/c")
+    public String showCAdminMain()  {
+        return "admin/counselor/admin_main_counselor";
     }
 
     @RequestMapping(value = "/main/admin/n", method = RequestMethod.GET)

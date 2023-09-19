@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/complaint.css">
+    <title>S.O.S</title>
+    <script src="/js/admin/counselor/admin_online_complaint_search_counselor.js"></script>
+</head>
+<body>
+<div class="header">
+    <div class="title_menu">
+        <a href="/main/admin/c" class="logo_main" style="color: #1290FF">
+            S<small class="small_title">peak</small>.O<small class="small_title">ut</small>.S<small
+                class="small_title">afely</small>
+        </a>
+        <a href="/online-complaint/admin/c" class="top_menu">상담</a>
+        <a href="/admin/logout" class="top_menu"><b>로그아웃</b></a>
+    </div>
+</div>
+<div class="c_title">
+    <div class="c_title_menu" style="text-align: center">
+        상담 목록
+    </div>
+</div>
+<form id="searchForm" action="/online-complaint/admin/c/search" method="GET" data-load-action="/online-complaint/admin/c/load-latest">
+    <div class="search_section">
+        <table>
+            <thead>
+            <tr>
+                <th colspan="6"></th>
+            </tr>
+            </thead>
+            <tr>
+                <td class="search_title">제목</td>
+                <td colspan="5">
+                    <input type="text" id="searchInput" style="width:430px; height:35px">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit" id="searchButton" class="search_button">검색</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="searchResultsContainer">
+        <div class="list_section">
+            <table>
+                <thead>
+                <tr>
+                    <th style="text-align: start">번호</th>
+                    <th style="text-align: start">제목</th>
+                    <th style="text-align: start">도움 받고<br> 싶은 사람</th>
+                    <th style="text-align: start">작성자</th>
+                    <th style="text-align: start">작성일</th>
+                    <th style="text-align: start">답변여부</th>
+                </tr>
+                <tr>
+                    <th colspan="6">
+                        <img src="/images/line.png" alt="line">
+                    </th>
+                </tr>
+                <tr style="height:10px">
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                <tr class="table-row">
+                    <td></td>
+                    <td class="truncate"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="c_menu_line">
+        <img src="/images/line.png" alt="line">
+    </div>
+    <div id="paginationContainer" class="paginationContainer">
+        <div id="pagination">
+            <!-- Pagination links will be dynamically populated here -->
+        </div>
+    </div>
+</form>
+<script src="/js/admin/counselor/admin_online_complaint_list_counselor.js"></script>
+</body>
+</html>

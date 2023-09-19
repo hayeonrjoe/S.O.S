@@ -26,13 +26,13 @@ public class AdminOnlineComplaintController {
     }
 
     // Police Admin
-    @RequestMapping(value = "/online-complaint/admin/p", method = RequestMethod.GET)
+    @GetMapping("/online-complaint/admin/p")
     public String showPAdminOnlineComplaintList(Model model) {
 
         List<OnlineComplaint> allResults = onlineComplaintService.getLatestResults();
 
         List<OnlineComplaint> filteredResults = allResults.stream()
-                .filter(oc -> oc.getOcAdvisor().equals("경찰"))
+                .filter(oc -> "경찰".equals(oc.getOcAdvisor()) && "답변대기".equals(oc.getOcResponseStatus()))
                 .collect(Collectors.toList());
 
         model.addAttribute("latestResults", filteredResults);
@@ -40,27 +40,27 @@ public class AdminOnlineComplaintController {
         return "admin/police/online_complaint/admin_online_complaint_list_police";
     }
 
-    @RequestMapping(value = "/online-complaint/admin/p/latest-results", method = RequestMethod.GET)
+    @GetMapping("/online-complaint/admin/p/latest-results")
     @ResponseBody
     public List<OnlineComplaint> getPAdminLatestResults() {
 
         List<OnlineComplaint> allResults = onlineComplaintService.getLatestResults();
 
         List<OnlineComplaint> filteredResults = allResults.stream()
-                .filter(oc -> oc.getOcAdvisor().equals("경찰"))
+                .filter(oc -> "경찰".equals(oc.getOcAdvisor()) && "답변대기".equals(oc.getOcResponseStatus()))
                 .collect(Collectors.toList());
 
         return filteredResults;
     }
 
-    @RequestMapping(value = "/online-complaint/admin/p/search", method = RequestMethod.GET)
+    @GetMapping("/online-complaint/admin/p/search")
     @ResponseBody
     public List<OnlineComplaint> searchPAdminOnlineComplaintsByTitle(@RequestParam("query") String query) {
         List<OnlineComplaint> complaints = onlineComplaintService.searchOnlineComplaintsByTitle(query);
         List<OnlineComplaint> filteredComplaints = new ArrayList<>();
 
         for (OnlineComplaint complaint : complaints) {
-            if ("경찰".equals(complaint.getOcAdvisor())) {
+            if ("경찰".equals(complaint.getOcAdvisor()) && "답변대기".equals(complaint.getOcResponseStatus())) {
                 filteredComplaints.add(complaint);
             }
         }
@@ -68,7 +68,7 @@ public class AdminOnlineComplaintController {
         return filteredComplaints;
     }
 
-    @RequestMapping(value = "/online-complaint-comment-form/admin/p", method = RequestMethod.GET)
+    @GetMapping("/online-complaint-comment-form/admin/p")
     public String showPAdminOnlineComplaintForm(@RequestParam("num") String num, Model model) {
         int ocId = Integer.parseInt(num);
         OnlineComplaint complaint = onlineComplaintService.getComplaintById(ocId);
@@ -82,7 +82,7 @@ public class AdminOnlineComplaintController {
         }
     }
 
-    @RequestMapping(value = "/online-complaint-comment-form/admin/p/submit", method = RequestMethod.POST)
+    @PostMapping("/online-complaint-comment-form/admin/p/submit")
     public String submitPAdminOnlineComplaintCommentForm(
             @RequestParam("a_pw") String aPw,
             @RequestParam("ocResponseContent") String ocResponseContent,
@@ -98,18 +98,17 @@ public class AdminOnlineComplaintController {
             return "redirect:/online-complaint-comment-form/admin/p";
         }
 
-        onlineComplaintService.updatePAdminOnlineComplaint(aId, ocId, ocResponseContent);
+        onlineComplaintService.updateAdminOnlineComplaint(aId, ocId, ocResponseContent);
 
         return "redirect:/online-complaint-comment-form/admin/p/submit-success";
     }
 
-
-    @RequestMapping(value = "/online-complaint-comment-form/admin/p/submit-success", method = RequestMethod.GET)
+    @GetMapping("/online-complaint-comment-form/admin/p/submit-success")
     public String showPAdminSuccessPage() {
         return "admin/police/online_complaint/admin_online_complaint_form_police_submit_success";
     }
 
-    @RequestMapping(value = "/online-complaint/admin/p/detail", method = RequestMethod.GET)
+    @GetMapping("/online-complaint/admin/p/detail")
     public String getPAdminComplaintDetail(@RequestParam("num") String num, Model model) {
        int ocId = Integer.parseInt(num);
         OnlineComplaint complaint = onlineComplaintService.getComplaintById(ocId);
@@ -124,6 +123,106 @@ public class AdminOnlineComplaintController {
        } else {
             return "admin/police/online_complaint/admin_online_complaint_list_police";
        }
+    }
+    // Counselor Admin
+    @GetMapping("/online-complaint/admin/c")
+    public String showCAdminOnlineComplaintList(Model model) {
+
+        List<OnlineComplaint> allResults = onlineComplaintService.getLatestResults();
+
+        List<OnlineComplaint> filteredResults = allResults.stream()
+                .filter(oc -> "상담사".equals(oc.getOcAdvisor()) && "답변대기".equals(oc.getOcResponseStatus()))
+                .collect(Collectors.toList());
+
+        model.addAttribute("latestResults", filteredResults);
+
+        return "admin/counselor/online_complaint/admin_online_complaint_list_counselor";
+    }
+
+    @GetMapping("/online-complaint/admin/c/latest-results")
+    @ResponseBody
+    public List<OnlineComplaint> getCAdminLatestResults() {
+
+        List<OnlineComplaint> allResults = onlineComplaintService.getLatestResults();
+
+        List<OnlineComplaint> filteredResults = allResults.stream()
+                .filter(oc -> "상담사".equals(oc.getOcAdvisor()) && "답변대기".equals(oc.getOcResponseStatus()))
+                .collect(Collectors.toList());
+
+        return filteredResults;
+    }
+
+    @GetMapping("/online-complaint/admin/c/search")
+    @ResponseBody
+    public List<OnlineComplaint> searchCAdminOnlineComplaintsByTitle(@RequestParam("query") String query) {
+        List<OnlineComplaint> complaints = onlineComplaintService.searchOnlineComplaintsByTitle(query);
+        List<OnlineComplaint> filteredComplaints = new ArrayList<>();
+
+        for (OnlineComplaint complaint : complaints) {
+            if ("상담사".equals(complaint.getOcAdvisor()) && "답변대기".equals(complaint.getOcResponseStatus())) {
+                filteredComplaints.add(complaint);
+            }
+        }
+
+        return filteredComplaints;
+    }
+
+    @GetMapping("/online-complaint-comment-form/admin/c")
+    public String showCAdminOnlineComplaintForm(@RequestParam("num") String num, Model model) {
+        int ocId = Integer.parseInt(num);
+        OnlineComplaint complaint = onlineComplaintService.getComplaintById(ocId);
+
+        if (complaint != null) {
+            model.addAttribute("complaint", complaint);
+
+            return "admin/counselor/online_complaint/admin_online_complaint_comment_form_counselor";
+        } else {
+            return "admin/counselor/online_complaint/admin_online_complaint_list_counselor";
+        }
+    }
+
+    @PostMapping("/online-complaint-comment-form/admin/c/submit")
+    public String submitCAdminOnlineComplaintCommentForm(
+            @RequestParam("a_pw") String aPw,
+            @RequestParam("ocResponseContent") String ocResponseContent,
+            @RequestParam("ocId") Integer ocId,
+            HttpServletRequest request
+    ) {
+        HttpSession session = request.getSession();
+        Integer aId = (Integer) session.getAttribute("aId");
+
+        boolean passwordMatch = adminService.verifyAdminPassword(aId, aPw);
+
+        if (!passwordMatch) {
+            return "redirect:/online-complaint-comment-form/admin/c";
+        }
+
+        onlineComplaintService.updateAdminOnlineComplaint(aId, ocId, ocResponseContent);
+
+        return "redirect:/online-complaint-comment-form/admin/c/submit-success";
+    }
+
+
+    @GetMapping("/online-complaint-comment-form/admin/c/submit-success")
+    public String showCAdminSuccessPage() {
+        return "admin/counselor/online_complaint/admin_online_complaint_form_counselor_submit_success";
+    }
+
+    @GetMapping("/online-complaint/admin/c/detail")
+    public String getCAdminComplaintDetail(@RequestParam("num") String num, Model model) {
+        int ocId = Integer.parseInt(num);
+        OnlineComplaint complaint = onlineComplaintService.getComplaintById(ocId);
+
+        if (complaint != null) {
+            model.addAttribute("complaint", complaint);
+            if (complaint.getOcResponseContent().equals("답변대기")) {
+                return "admin/counselor/online_complaint/admin_online_complaint_comment_form_counselor";
+            } else {
+                return "admin/counselor/online_complaint/admin_online_complaint_detail_counselor";
+            }
+        } else {
+            return "admin/counselor/online_complaint/admin_online_complaint_list_counselor";
+        }
     }
 
     // Nonpolice Admin
@@ -219,7 +318,7 @@ public class AdminOnlineComplaintController {
 
         // Passwords match, proceed with the submission
         // Pass aId, ocId, and ocResponseStatus to the online complaint service and save
-        onlineComplaintService.updatePAdminOnlineComplaint(aId, ocId, ocResponseContent);
+        onlineComplaintService.updateAdminOnlineComplaint(aId, ocId, ocResponseContent);
 
         // Redirect to the success page
         return "redirect:/online-complaint-comment-form/admin/n/submit-success";

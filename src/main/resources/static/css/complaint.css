@@ -38,14 +38,12 @@
 
 .c_title {
     margin-top: 5%;
-    display: flex;
 }
 
 .c_title_back img {
     width: 30px;
     height: auto;
     position: sticky;
-    flex-direction: row;
 }
 
 .c_title_back a {
@@ -57,9 +55,10 @@
 }
 
 .c_title_menu {
-    justify-self: center;
     font-size: 20px;
     font-weight: bold;
+    vertical-align: middle;
+    text-align: center;
 }
 
 .c_form {

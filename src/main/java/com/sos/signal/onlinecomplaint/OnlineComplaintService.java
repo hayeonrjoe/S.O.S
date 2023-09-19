@@ -20,52 +20,6 @@ public class OnlineComplaintService {
         this.onlineComplaintRepository = onlineComplaintRepository;
     }
 
-    public void validateOnlineComplaint(OnlineComplaint onlineComplaint, BindingResult bindingResult) {
-        if (onlineComplaint.getOcPw() == null || onlineComplaint.getOcPw().isEmpty()) {
-            bindingResult.rejectValue("ocPw", "error.ocPw", "비밀번호가 필요합니다.");
-        }
-        if (onlineComplaint.getOcName() == null || onlineComplaint.getOcName().isEmpty()) {
-            bindingResult.rejectValue("ocName", "error.ocName", "이름이 필요합니다.");
-        }
-        if (onlineComplaint.getOcAdvisor() == null || onlineComplaint.getOcAdvisor().isEmpty()) {
-            bindingResult.rejectValue("ocAdvisor", "error.ocAdvisor", "도움 받고 싶은 사람을 선택해 주세요.");
-        }
-        if (onlineComplaint.getOcTitle() == null || onlineComplaint.getOcTitle().isEmpty()) {
-            bindingResult.rejectValue("ocTitle", "error.ocTitle", "제목이 필요합니다.");
-        }
-        if (onlineComplaint.getOcContent() == null || onlineComplaint.getOcContent().isEmpty()) {
-            bindingResult.rejectValue("ocContent", "error.ocContent", "내용이 필요합니다.");
-        }
-
-    }
-
-    public void saveOnlineComplaint(OnlineComplaint onlineComplaint) {
-        onlineComplaint.setOcResponseStatus("답변대기");
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        onlineComplaint.setOcDate(currentDateTime);
-
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String formattedDate = currentDateTime.format(dateFormatter);
-        onlineComplaint.setOcDateFormatted(formattedDate);
-
-        onlineComplaintRepository.save(onlineComplaint);
-    }
-
-    public void updatePAdminOnlineComplaint(Integer aId, Integer ocId, String ocResponseContent) {
-        // Retrieve the OnlineComplaint entity from the repository based on ocId
-        OnlineComplaint onlineComplaint = getComplaintById(ocId);
-        if ((onlineComplaint != null) && (onlineComplaint.getOcAdvisor().equals("경찰"))) {
-            // Update the aId and ocResponseStatus in the OnlineComplaint entity
-            onlineComplaint.setAId(aId);
-            onlineComplaint.setOcResponseContent(ocResponseContent);
-
-            // Update the ocResponseStatus to "답변완료"
-            onlineComplaint.setOcResponseStatus("답변완료");
-
-            // Save the updated OnlineComplaint entity
-            onlineComplaintRepository.save(onlineComplaint);
-        }
-    }
 
     public List<OnlineComplaint> searchOnlineComplaintsByTitle(String query) {
         List<OnlineComplaint> complaints = onlineComplaintRepository.findByOcTitleContainingIgnoreCase(query);
@@ -101,8 +55,7 @@ public class OnlineComplaintService {
         } else if (adminType.equals("변호사")) {
             return onlineComplaintRepository.findByOcTitleAndOcAdvisor(query, "변호사");
         } else {
-            // Handle other admin types or invalid admin types
-            return Collections.emptyList(); // Return an empty list or handle it accordingly
+            return Collections.emptyList();
         }
     }
 
@@ -110,4 +63,46 @@ public class OnlineComplaintService {
         return onlineComplaintRepository.findLatestResults();
     }
 
+    public void validateOnlineComplaint(OnlineComplaint onlineComplaint, BindingResult bindingResult) {
+        if (onlineComplaint.getOcPw() == null || onlineComplaint.getOcPw().isEmpty()) {
+            bindingResult.rejectValue("ocPw", "error.ocPw", "비밀번호가 필요합니다.");
+        }
+        if (onlineComplaint.getOcName() == null || onlineComplaint.getOcName().isEmpty()) {
+            bindingResult.rejectValue("ocName", "error.ocName", "이름이 필요합니다.");
+        }
+        if (onlineComplaint.getOcAdvisor() == null || onlineComplaint.getOcAdvisor().isEmpty()) {
+            bindingResult.rejectValue("ocAdvisor", "error.ocAdvisor", "도움 받고 싶은 사람을 선택해 주세요.");
+        }
+        if (onlineComplaint.getOcTitle() == null || onlineComplaint.getOcTitle().isEmpty()) {
+            bindingResult.rejectValue("ocTitle", "error.ocTitle", "제목이 필요합니다.");
+        }
+        if (onlineComplaint.getOcContent() == null || onlineComplaint.getOcContent().isEmpty()) {
+            bindingResult.rejectValue("ocContent", "error.ocContent", "내용이 필요합니다.");
+        }
+
+    }
+
+    public void saveOnlineComplaint(OnlineComplaint onlineComplaint) {
+        onlineComplaint.setOcResponseStatus("답변대기");
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        onlineComplaint.setOcDate(currentDateTime);
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = currentDateTime.format(dateFormatter);
+        onlineComplaint.setOcDateFormatted(formattedDate);
+
+        onlineComplaintRepository.save(onlineComplaint);
+    }
+
+    public void updatePAdminOnlineComplaint(Integer aId, Integer ocId, String ocResponseContent) {
+        OnlineComplaint onlineComplaint = getComplaintById(ocId);
+        if ((onlineComplaint != null) && (onlineComplaint.getOcAdvisor().equals("경찰"))) {
+            onlineComplaint.setAId(aId);
+            onlineComplaint.setOcResponseContent(ocResponseContent);
+
+            onlineComplaint.setOcResponseStatus("답변완료");
+
+            onlineComplaintRepository.save(onlineComplaint);
+        }
+    }
 }

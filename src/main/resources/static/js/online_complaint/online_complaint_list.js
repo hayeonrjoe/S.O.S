@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
         Array.from(rows).forEach(function (row) {
             row.addEventListener("click", function () {
                 var ocPw = prompt("비밀번호를 입력해주세요");
-                var ocId = row.querySelector("td:first-child").textContent; // Get ocId as a string
+                var ocId = row.querySelector("td:first-child").textContent;
 
                 console.log("ocId:", ocId);
                 console.log("ocPw:", ocPw);
@@ -126,13 +126,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ ocId: ocId, ocPw: ocPw }), // Pass ocId as a string
+                        body: JSON.stringify({ ocId: ocId, ocPw: ocPw }),
                     })
                         .then(response => response.json())
                         .then(data => {
                             console.log("Response:", data);
                             if (data.valid) {
-                                // Redirect to the detail page with ocId as a query parameter
                                 window.location.href = "/online-complaint/detail?num=" + ocId;
                             } else {
                                 alert("비밀번호가 일치하지 않습니다.");

@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var loadAction = document.getElementById('searchForm').getAttribute('data-load-action');
 
     if (loadAction === '/police-complaint/load-latest') {
-        // Fetch the latest results when the page is first loaded
         fetchLatestResults();
     }
 
@@ -11,12 +10,10 @@ document.addEventListener('DOMContentLoaded', function () {
         return fetch('/police-complaint/latest-results')
             .then(response => response.json())
             .then(data => {
-                // Update the search results on the page
                 updateSearchResults(data);
                 attachRowClickListener();
             })
             .catch(error => {
-                // Handle any errors that occur during the request
                 console.error('에러: ', error);
             });
     }
@@ -44,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         .then(data => {
                             console.log("Response:", data);
                             if (data.valid) {
-                                // Redirect to the new HTML page with the data
                                 window.location.href = "/police-complaint/detail?num=" + pcId;
                             } else {
                                 alert("비밀번호가 일치하지 않습니다.");
@@ -62,19 +58,14 @@ document.addEventListener('DOMContentLoaded', function () {
         var tbody = document.getElementById("tbody");
         tbody.innerHTML = ""; // Clear existing content
 
-        // Loop through the latest results and create table rows
         for (var i = 0; i < results.length; i++) {
             var result = results[i];
 
-            // Create and populate each table row
             var row = document.createElement("tr");
 
-            // Set the height of the table row
-            row.style.height = "2.5em"; // Adjust the height value as needed
-            // Set the font size of the table row
+            row.style.height = "2.5em";
             row.style.fontSize = "15px";
 
-            // Create and populate each table cell
             var idCell = document.createElement("td");
             idCell.textContent = result.pcId;
             row.appendChild(idCell);

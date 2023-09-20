@@ -21,6 +21,14 @@
       <li><a href="#요구-분석">요구 분석</a></li>
       <li><a href="#흐름도">흐름도</a></li>
    </ul>
+   <li><a href="#주요-기능">주요 기능</a></li>
+   <ul>
+      <li><a href="#게시판">비공개 상담 신청 게시판 목록 표시 제한</a></li>
+      <li><a href="#상세보기">비밀번호로 글 상세보기 접속 및 답변 유무에 따른 처리</a></li>
+      <li><a href="#검색">게시판 제목 검색</a></li>
+      <li><a href="#폼">비공개 상담 폼 제출 제한</a></li>
+      <li><a href="#채팅">익명 채팅</a></li>
+   </ul>
    <li><a href="#보완사항">보완사항</a></li>
    <li><a href="#개발-후기">개발 후기</a></li>
    <li><a href="#바로가기">바로가기</a></li>
@@ -61,7 +69,25 @@ Git, Github, IntelliJ IDEA, Figma, ERD Cloud, Google Docs
 
 <h2 id="개발-과정">✒️ 개발 과정</h2>
 <h3 id="개발-일정">✔개발 일정</h3>
-<img src="https://github.com/beccajoe/S.O.S/assets/123378408/b664f299-18d6-463d-a8c8-daba620d855b" alt="개발 일정">
+<ul>
+   <li>1차: 2023년 5월 24일 ~ 6월 5일<br>
+      <img src="https://github.com/beccajoe/S.O.S/assets/123378408/b664f299-18d6-463d-a8c8-daba620d855b" alt="개발 일정"></li>
+   <li>2차: 2023년 9월 6일 ~ 9월 20일<br>
+      <b>개선사항</b>
+      <ul>
+         <li>빌드를 Maven에서 Gradle Kotlin으로 변경<br>
+         Gradle Kotlin DSL은 Maven보다 강력하고 유연한 빌드 스크립트를 제공합니다. Kotlin DSL을 사용하면 빌드 스크립트를 더 간결하게 작성할 수 있으며, 더 다양한 빌드 옵션을 활용할 수 있습니다.
+         </li>
+         <li>Java 8에서 20으로 업그레이드<br>
+          Java 8에서 Java 20으로 업그레이드하면 최신 Java 기능과 개선 사항을 활용할 수 있습니다. 이렇게 하면 보안 및 성능 이점을 얻을 수 있으며, 최신 라이브러리 및 도구와의 호환성도 향상됩니다.
+         </li>
+         <li>관리자 회원 웹페이지 추가<br>
+         회원가입 비밀번호 요구사항 강화, 관리자 형태에 따른 게시판 목록 표시 및 답변 폼 제출 활성화
+         </li>
+      </ul>
+   </li>
+</ul>
+
 <h3 id="업무-분담">✔업무 분담</h3>
     <ul>
       <li>💁‍♀️조하연 (팀장): 메인, 신고, 비공개 온라인 상담, 방문 상담, 상담사 연결, 로그인, 정보</li>
@@ -73,6 +99,44 @@ Git, Github, IntelliJ IDEA, Figma, ERD Cloud, Google Docs
 <img src="https://github.com/beccajoe/S.O.S/assets/123378408/c4cd815a-98f3-4a31-9407-b4583616e4bf" alt="흐름도 (회원가입, 로그인 없이)">
 <img src="https://github.com/beccajoe/S.O.S/assets/123378408/1e614095-69f9-44e9-b23d-34b9e6ee40b6" alt="흐름도 (일반 회원)">
 
+<h2 id="주요-기능">✒️ 주요 기능</h2>
+<h3 id="게시판">✔비공개 상담 신청 게시판 목록 표시 제한</h3>
+ <ul>
+   <li>작성자 이름 부분 숨김처리 및 제목 길이 표시 제한<br>
+      <img src="https://github.com/beccajoe/S.O.S/assets/123378408/52cb643d-c45a-461f-a2a4-bb118a0b6099">
+   </li>
+   <li>관리자 회원 형태에 따른 목록 표시 제한<br>
+      <img src="https://github.com/beccajoe/S.O.S/assets/123378408/38b347ae-270a-462c-96aa-050b75243f1f">
+   </li>
+ </ul>
+<h3 id="상세보기">✔비밀번호로 글 상세보기 접속 및 답변 유무에 따른 처리</h3>
+ <ul>
+   <li>비밀번호로 글 상세보기 접속<br>
+      <img src="https://github.com/beccajoe/S.O.S/assets/123378408/026af3bf-9f95-4ca3-9031-e8bb2bf3e7db">
+   </li>
+   <li>답변 유무에 따른 처리<br>
+      <img src="https://github.com/beccajoe/S.O.S/assets/123378408/e10272ac-7f0b-4914-92c7-f8be5f4a41c4">
+   </li>
+ </ul>
+ <h3 id="검색">✔게시판 제목 검색</h3>
+  <ul>
+   <li>비공개 상담 및 신고 게시판 목록 검색<br>
+      <img src="https://github.com/beccajoe/S.O.S/assets/123378408/c609cd88-c33d-405f-94fb-02b9bfa64875">
+   </li>
+  </ul>
+<h3 id="폼">✔비공개 상담 폼 제출 제한</h3>
+   <ul>
+      <li>연락처 및 비밀번호 형태 및 길이 제한<br>
+         <img src="https://github.com/beccajoe/S.O.S/assets/123378408/51e97c8c-3273-41df-9ecb-ea42e1001c09">
+      </li>
+  </ul>
+<h3 id="채팅">✔익명 채팅</h3>
+   <ul>
+      <li>익명 채팅<br>
+         <img src="https://github.com/beccajoe/S.O.S/assets/123378408/f32ef005-b1d5-4b90-9bf3-b443f3c0b8a2">
+      </li>
+  </ul>
+  
 <h2 id="보완사항">✒️ 보완사항</h2>
    <ul>
       <li><b>마스터 관리자</b><br>

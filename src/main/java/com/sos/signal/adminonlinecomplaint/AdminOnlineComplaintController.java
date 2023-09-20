@@ -84,7 +84,8 @@ public class AdminOnlineComplaintController {
 
     @PostMapping("/online-complaint-comment-form/admin/p/submit")
     public String submitPAdminOnlineComplaintCommentForm(
-            @RequestParam("a_pw") String aPw,
+            @RequestParam("aEmail") String aEmail,
+            @RequestParam("aPw") String aPw,
             @RequestParam("ocResponseContent") String ocResponseContent,
             @RequestParam("ocId") Integer ocId,
             HttpServletRequest request
@@ -92,7 +93,16 @@ public class AdminOnlineComplaintController {
         HttpSession session = request.getSession();
         Integer aId = (Integer) session.getAttribute("aId");
 
-        boolean passwordMatch = adminService.verifyAdminPassword(aId, aPw);
+
+        if (aId == null) {
+            aId = adminService.getAdminIdByEmail(aEmail);
+
+            if (aId == null) {
+                return "redirect:/online-complaint-comment-form/admin/p";
+            }
+        }
+
+        boolean passwordMatch = adminService.verifyAdminPassword(aEmail, aPw);
 
         if (!passwordMatch) {
             return "redirect:/online-complaint-comment-form/admin/p";
@@ -183,7 +193,8 @@ public class AdminOnlineComplaintController {
 
     @PostMapping("/online-complaint-comment-form/admin/c/submit")
     public String submitCAdminOnlineComplaintCommentForm(
-            @RequestParam("a_pw") String aPw,
+            @RequestParam("aEmail") String aEmail,
+            @RequestParam("aPw") String aPw,
             @RequestParam("ocResponseContent") String ocResponseContent,
             @RequestParam("ocId") Integer ocId,
             HttpServletRequest request
@@ -191,7 +202,15 @@ public class AdminOnlineComplaintController {
         HttpSession session = request.getSession();
         Integer aId = (Integer) session.getAttribute("aId");
 
-        boolean passwordMatch = adminService.verifyAdminPassword(aId, aPw);
+        if (aId == null) {
+            aId = adminService.getAdminIdByEmail(aEmail);
+
+            if (aId == null) {
+                return "redirect:/online-complaint-comment-form/admin/p";
+            }
+        }
+
+        boolean passwordMatch = adminService.verifyAdminPassword(aEmail, aPw);
 
         if (!passwordMatch) {
             return "redirect:/online-complaint-comment-form/admin/c";
@@ -284,7 +303,8 @@ public class AdminOnlineComplaintController {
 
     @PostMapping("/online-complaint-comment-form/admin/l/submit")
     public String submitLAdminOnlineComplaintCommentForm(
-            @RequestParam("a_pw") String aPw,
+            @RequestParam("aEmail") String aEmail,
+            @RequestParam("aPw") String aPw,
             @RequestParam("ocResponseContent") String ocResponseContent,
             @RequestParam("ocId") Integer ocId,
             HttpServletRequest request
@@ -292,7 +312,15 @@ public class AdminOnlineComplaintController {
         HttpSession session = request.getSession();
         Integer aId = (Integer) session.getAttribute("aId");
 
-        boolean passwordMatch = adminService.verifyAdminPassword(aId, aPw);
+        if (aId == null) {
+            aId = adminService.getAdminIdByEmail(aEmail);
+
+            if (aId == null) {
+                return "redirect:/online-complaint-comment-form/admin/p";
+            }
+        }
+
+        boolean passwordMatch = adminService.verifyAdminPassword(aEmail, aPw);
 
         if (!passwordMatch) {
             return "redirect:/online-complaint-comment-form/admin/l";

@@ -98,6 +98,7 @@
     </div>
 </div>
 <form action="/online-complaint-comment-form/admin/p/submit" method="POST">
+    <input type="hidden" name="ocId" th:value="${complaint.ocId}">
     <table class="c_table">
         <thead>
         <tr>
@@ -106,9 +107,17 @@
         </thead>
         <tbody>
         <tr>
+            <td class="c_form_title">이메일<b>*</b></td>
+            <td colspan="4">
+                <input type="email" name="aEmail" class="c_form_input"
+                       placeholder="이메일을 입력해주세요."
+                       required>
+            </td>
+        </tr>
+        <tr>
             <td class="c_form_title">비밀번호<b>*</b></td>
             <td colspan="4">
-                <input type="password" name="a_pw" class="c_form_input"
+                <input type="password" name="aPw" class="c_form_input"
                        placeholder="비밀번호를 입력해주세요."
                        required minlength="8" maxlength="16"
                        pattern="^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$">

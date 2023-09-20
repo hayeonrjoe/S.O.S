@@ -12,18 +12,18 @@ public class AdminService {
         this.adminRepository = adminRepository;
     }
 
-    public boolean verifyAdminPassword(Integer aId, String password) {
-        Admin admin = adminRepository.findByaId(aId);
+    public boolean verifyAdminPassword(String aEmail, String password) {
+        Admin admin = adminRepository.findByaEmail(aEmail);
         return admin != null && admin.getAPw().equals(password);
     }
 
-    public String getAdminType(Integer aId) {
-        String adminType = adminRepository.findAdminTypeByaId(aId);
+    public Integer getAdminIdByEmail(String aEmail) {
+        Admin admin = adminRepository.findByaEmail(aEmail);
 
-        return adminType;
+        if (admin != null) {
+            return admin.getAId();
+        } else {
+            return null;
+        }
     }
-
-
-
-
 }

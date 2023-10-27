@@ -31,7 +31,6 @@
    </ul>
    <li><a href="#보완사항">보완사항</a></li>
    <li><a href="#개발-후기">개발 후기</a></li>
-   <li><a href="#바로가기">바로가기</a></li>
 </ol>
 
 <h2 id="프로젝트-소개">✒️ 프로젝트 소개</h2>
@@ -156,13 +155,6 @@ Git, Github, IntelliJ IDEA, Figma, ERD Cloud, Google Docs
 <br>
 <a href="https://github.com/Jangchaeyun"><img src="https://img.shields.io/badge/장채윤-1290FF?style=flat-square&logo=GitHub&logoColor=white"/></a>
 <p>이번 프로젝트를 개발하면서 기술적으로 부족한 부분을 알게 되고 이 부분을 공부하면서 개발하다보니 실력이 한단계 더 성장하였습니다. 또한 오류가 발생한 부분을 해결하기 위해 노력하다 보니 문제 해결 능력이 더 향상되었습니다.</p>
-
-<h2 id="바로가기">✒️ 바로가기</h2>
-   <ul>
-      <li><a href="https://www.figma.com/file/p0kaRPJ08NNBBgxcLBpOOv/S.O.S?type=design&node-id=0%3A1&mode=design&t=oRqc2xS4Up2XEWuL-1">화면 설계</a></li>
-      <li><a href="https://www.erdcloud.com/d/pZb55awWhQWFtBWSP">DB 설계</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1wsQ1I91-3093bL4U9pUn4HAIjl_XbZJV?usp=sharing">구글 드라이브</li>
-   </ul>
 
 ---------------------------------
 
